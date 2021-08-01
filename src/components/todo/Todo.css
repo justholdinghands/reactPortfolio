@@ -1,0 +1,153 @@
+.todo * {
+  padding: 0;
+  margin: 0;
+}
+
+.todo li {
+  list-style-type: none;
+  color: var(--text-clr);
+  width: 100%;
+}
+
+.todo h1 {
+  font: 7rem var(--h1-font-style);
+  color: var(--accent-clr);
+}
+
+.todo form {
+  display: flex;
+  flex-direction: row;
+  justify-content: stretch;
+  align-items: center;
+  height: 5rem;
+  width: 100%;
+  background-color: var(--pale-clr);
+}
+
+.todo #checkAllBtn {
+  font-size: xx-large;
+  height: 0.5em;
+  width: 5rem;
+  transform: rotate(90deg);
+  border: 0;
+  background-color: var(--pale-clr);
+  color: var(--faded-clr);
+  cursor: pointer;
+}
+
+.todo #filter {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  width: 50vw;
+}
+
+.todo #filter > ul {
+  display: flex;
+  flex-direction: row;
+}
+
+.todo #filter > ul > li {
+  margin: 0.5rem;
+  padding: 0.5rem;
+}
+
+.todo #filter > ul > li > button {
+  border: 0;
+  margin: 0.5rem;
+  padding: 0.5rem;
+  background-color: var(--base-clr);
+  color: var(--text-clr);
+}
+
+.todo #filter > ul > li > button:hover {
+  cursor: pointer;
+}
+
+.todo #numOfTasks {
+  padding-top: 1em;
+  padding-left: 0.5em;
+}
+
+.todo .task {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+  height: 5vh;
+  border: 0.5px solid var(--faded-clr);
+  background-color: var(--pale-clr);
+}
+
+.todo #input {
+  width: 80%;
+  height: 100%;
+  border: 0;
+  background-color: var(--pale-clr);
+}
+
+.todo input[type="checkbox"] {
+  width: 2em;
+  height: 2em;
+  background-color: white;
+  border-radius: 50%;
+  margin: 0.5em;
+  vertical-align: middle;
+  border: 1px solid #ddd;
+  -webkit-appearance: none;
+  outline: none;
+  cursor: pointer;
+}
+
+.todo input[type="checkbox"]:checked {
+  background-color: var(--accent-clr);
+}
+
+.todo input::placeholder {
+  color: var(--faded-clr);
+  font-size: x-large;
+  font-style: italic;
+}
+
+.todo .selected {
+  border: var(--faded-clr) 2px solid !important;
+  border-radius: 10%;
+}
+
+.todo #block {
+  width: 50%;
+  padding: 1rem;
+  background-color: var(--pale-clr);
+  border: 2px solid var(--faded-clr);
+}
+
+.todo#container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background-color: var(--base-clr);
+}
+
+.todo .strikethrough {
+  text-decoration: line-through;
+}
+
+.todo .destroy {
+  width: 1em;
+  height: 1em;
+  border: 0;
+  color: var(--pale-clr);
+  background-color: var(--pale-clr);
+  vertical-align: middle;
+  outline: none;
+  cursor: pointer;
+  font-size: x-large;
+  text-decoration: none !important;
+}
+
+.todo .task:hover .destroy {
+  color: #7b7777;
+  text-decoration: none !important;
+}
