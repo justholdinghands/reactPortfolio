@@ -1,8 +1,8 @@
 .counter * {
   padding: 0;
   margin: 0;
-  color: var(--txt-clr);
-  font: var(--volkorn-normal);
+  color: var(--cnt_primary);
+  font: var(--cnt_font_primary);
 }
 
 .counter ::-webkit-scrollbar {
@@ -44,11 +44,11 @@
 }
 
 .counter .plus-btn {
-  background-color: var(--plus-btn-clr);
+  background-color: var(--cnt_plus);
 }
 
 .counter .minus-btn {
-  background-color: var(--minus-btn-clr);
+  background-color: var(--cnt_minus);
 }
 
 .counter #pink-axo {
