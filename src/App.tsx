@@ -2,8 +2,8 @@ import "./App.css";
 import { Component } from "react";
 import { Link, Route, BrowserRouter as Router, Switch } from "react-router-dom";
 import { createBrowserHistory } from "history";
-import Counter from "./components/counter/Counter";
-import Hackertyper from "./components/hackertyper/Hackertyper";
+// import Counter from "./components/counter/Counter";
+// import Hackertyper from "./components/hackertyper/Hackertyper";
 import Todo from "./components/todo/Todo";
 
 type State = {
