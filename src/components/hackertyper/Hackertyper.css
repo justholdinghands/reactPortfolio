@@ -3,9 +3,9 @@
 }
 
 .hackertyper#container {
-  background-color: var(--ht-bkg-clr);
-  color: var(--font-clr);
-  font-family: var(--font-stl);
+  background-color: var(--ht_bkg);
+  color: var(--ht_primary);
+  font-family: var(--ht_font);
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -38,13 +38,13 @@
   height: 4em;
   width: 14em;
   font-size: large;
-  background-color: var(--ht-bkg-clr);
-  color: var(--font-clr);
-  border: 1px solid var(--hover-clr);
+  background-color: var(--ht_bkg);
+  color: var(--ht_primary);
+  border: 1px solid var(--ht_hover);
 }
 
 .hackertyper button:hover {
-  background-color: var(--hover-clr);
+  background-color: var(--ht_hover);
   cursor: pointer;
 }
 
@@ -53,15 +53,15 @@
 }
 
 .hackertyper #access-denied {
-  border: 0.5vh solid var(--denied-clr);
-  background-color: var(--bkg-denied-clr);
-  color: var(--denied-clr);
+  border: 0.5vh solid var(--ht_denied);
+  background-color: var(--ht_bkg_denied);
+  color: var(--ht_denied);
 }
 
 .hackertyper #access-granted {
-  border: 0.5vh solid var(--font-clr);
-  background-color: var(--bkg-granted-clr);
-  color: var(--font-clr);
+  border: 0.5vh solid var(--ht_primary);
+  background-color: var(--ht_bkg_granted);
+  color: var(--ht_primary);
 }
 
 .hackertyper .popup {

@@ -8,21 +8,21 @@
   --volkorn-normal: normal 1.5em/150% "Vollkorn", serif;
 
   /*ht*/
-  --ht-bkg-clr: #000000;
-  --font-clr: #00ff00;
-  --hover-clr: #009100;
-  --bkg-granted-clr: #585858;
-  --denied-clr: #fd3131;
-  --bkg-denied-clr: #5a0000;
-  --font-stl: mono;
+  --ht_bkg: #000000;
+  --ht_primary: #00ff00;
+  --ht_hover: #009100;
+  --ht_bkg_granted: #585858;
+  --ht_denied: #fd3131;
+  --ht_bkg_denied: #5a0000;
+  --ht_font: mono;
 
   /*todo*/
-  --accent-clr: #ead7d7;
-  --base-clr: #f5f5f5;
-  --faded-clr: #e6e6e6;
-  --text-clr: #7b7777;
-  --pale-clr: #ffffff;
-  --h1-font-style: "Helvetica Neue", Helvetica, Arial, sans-serif;
+  --todo_accent: #ead7d7;
+  --todo_base: #f5f5f5;
+  --todo_faded: #e6e6e6;
+  --todo_primary: #7b7777;
+  --todo_pale: #ffffff;
+  --todo_h1_font: "Helvetica Neue", Helvetica, Arial, sans-serif;
 }
 
 nav ul {
@@ -30,7 +30,7 @@ nav ul {
   flex-direction: row;
   justify-content: space-around;
   list-style-type: none;
-  font: bold 1.8em/150% var(--font-stl);
+  font: bold 1.8em/150% var(--ht_font);
 }
 
 nav ul li a {
