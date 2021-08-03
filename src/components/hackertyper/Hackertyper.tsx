@@ -2,7 +2,7 @@ import "./Hackertyper.css";
 import { codeDemo } from "./code";
 import { theme } from "../../theme";
 import React, { Component } from "react";
-import Welcome from "./components/Welcome";
+import Welcome from "./Welcome";
 import styled from "styled-components";
 
 //styled-components definition
@@ -14,6 +14,10 @@ const DivContainer = styled.div`
   flex-direction: column;
   justify-content: center;
   align-items: center;
+
+  ::-webkit-scrollbar {
+    width: 0;
+  }
 `;
 
 const DivTerminal = styled.div`
@@ -21,6 +25,10 @@ const DivTerminal = styled.div`
   width: 100%;
   white-space: pre;
   line-height: 2rem;
+
+  ::-webkit-scrollbar {
+    width: 0;
+  }
 `;
 
 const DivPopDenied = styled.div`
@@ -71,6 +79,13 @@ type Props = {
   className?: string;
 };
 
+const keyCodes = {
+  ALT: 18,
+  CAPS: 20,
+  ESC: 27,
+  BACKSPACE: 8,
+};
+
 export default class Hackertyper extends Component<Props, State> {
   constructor(props) {
     super(props);
@@ -85,7 +100,7 @@ export default class Hackertyper extends Component<Props, State> {
       altCnt: 0,
       clCnt: 0,
     };
-    this.isStart = this.isStart.bind(this);
+    this.startGame = this.startGame.bind(this);
   }
 
   componentDidMount() {
@@ -99,11 +114,10 @@ export default class Hackertyper extends Component<Props, State> {
       });
     }
 
-    if (e.keyCode === 18) {
-      // ALT
-      this.setState({
-        altCnt: this.state.altCnt + 1,
-      });
+    if (e.keyCode === keyCodes.ALT) {
+      this.setState((prevState) => ({
+        altCnt: prevState.altCnt + 1,
+      }));
       if (this.state.altCnt === 2) {
         this.setState({
           isGranted: true,
@@ -112,11 +126,10 @@ export default class Hackertyper extends Component<Props, State> {
           clCnt: 0,
         });
       }
-    } else if (e.keyCode === 20) {
-      // CAPS-LOCK
-      this.setState({
-        clCnt: this.state.clCnt + 1,
-      });
+    } else if (e.keyCode === keyCodes.CAPS) {
+      this.setState((prevState) => ({
+        clCnt: prevState.clCnt + 1,
+      }));
       if (this.state.clCnt === 3) {
         this.setState({
           isDenied: true,
@@ -125,8 +138,7 @@ export default class Hackertyper extends Component<Props, State> {
           altCnt: 0,
         });
       }
-    } else if (e.keyCode === 27) {
-      // ESC
+    } else if (e.keyCode === keyCodes.ESC) {
       this.setState({
         isDenied: false,
         isGranted: false,
@@ -140,53 +152,48 @@ export default class Hackertyper extends Component<Props, State> {
       });
     }
 
-    if (e.keyCode === 8) {
-      // BACKSPACE
+    if (e.keyCode === keyCodes.BACKSPACE) {
       var i = this.state.position - 3 < 0 ? 0 : this.state.position - 3;
-      this.setState({
+      this.setState((prevState) => ({
         code: codeDemo.substring(0, i),
-        position: i,
-      });
+        position: prevState.position - 3 < 0 ? 0 : prevState.position - 3,
+      }));
     } else if (e.keyCode !== 18 && e.keyCode !== 20 && e.keyCode !== 27) {
-      this.setState({
-        code: codeDemo.substring(0, this.state.position + 3),
+      this.setState((prevState) => ({
+        code: codeDemo.substring(0, prevState.position + 3),
         position:
-          codeDemo.length >= this.state.position + 3
-            ? this.state.position + 3
+          codeDemo.length >= prevState.position + 3
+            ? prevState.position + 3
             : 0,
-      });
+      }));
       window.scrollTo(0, document.body.scrollHeight);
     }
   };
 
-  isStart = () => {
+  startGame = () => {
     this.setState({
       isWelcome: false,
     });
   };
 
   render() {
-    var showWelcome = this.state.isWelcome;
+    var isWelcome = this.state.isWelcome;
     return (
       <DivContainer id="container" className="hackertyper">
-        {showWelcome ? (
-          <Welcome isStart={this.isStart}></Welcome>
+        {isWelcome ? (
+          <Welcome startGame={this.startGame}></Welcome>
         ) : (
           <DivTerminal id="terminal">{this.state.code}</DivTerminal>
         )}
-        {this.state.isDenied ? (
+        {this.state.isDenied && (
           <DivPopDenied className="popup" id="access-denied">
             ACCESS DENIED
           </DivPopDenied>
-        ) : (
-          ""
         )}
-        {this.state.isGranted ? (
+        {this.state.isGranted && (
           <DivPopGranted className="popup" id="access-granted">
             ACCESS GRANTED
           </DivPopGranted>
-        ) : (
-          ""
         )}
       </DivContainer>
     );

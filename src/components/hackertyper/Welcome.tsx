@@ -1,4 +1,4 @@
-import { theme } from "../../../theme";
+import { theme } from "../../theme";
 import React, { Component } from "react";
 import styled from "styled-components";
 
@@ -39,7 +39,7 @@ const Button = styled.button`
 `;
 
 type Props = {
-  isStart: () => void;
+  startGame: () => void;
 };
 
 export default class Welcome extends Component<Props> {
@@ -56,7 +56,7 @@ How to get access denied in hacker typer?
 Hit CAPS LOCK 3 for "Access Denied"
 How can I clear access granted or access denied?
 Hit ESCAPE to clear "Access Denied/Granted"`}</P>
-        <Button id="start-btn" onClick={this.props.isStart}>
+        <Button id="start-btn" onClick={this.props.startGame}>
           Start HackerTyping...
         </Button>
       </DivWelcome>
