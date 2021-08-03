@@ -1,7 +1,165 @@
 import "./Todo.css";
 import { Task } from "./Task";
+import { theme } from "../../theme";
 import React, { Component } from "react";
 import styled, { css } from "styled-components";
+
+const DivContainer = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background-color: ${theme.todo_base};
+
+  * {
+    padding: 0;
+    margin: 0;
+  }
+`;
+
+const H1 = styled.h1`
+  font: 7rem ${theme.todo_h1_font};
+  color: ${theme.todo_accent};
+`;
+
+const DivBlock = styled.div`
+  width: 50%;
+  padding: 1rem;
+  background-color: ${theme.todo_pale};
+  border: 2px solid ${theme.todo_faded};
+`;
+
+const ButtonCheckAll = styled.button`
+  font-size: xx-large;
+  height: 0.5em;
+  width: 5rem;
+  transform: rotate(90deg);
+  border: 0;
+  background-color: ${theme.todo_pale};
+  color: ${theme.todo_faded};
+  cursor: pointer;
+`;
+
+const InputTask = styled.input`
+  width: 80%;
+  height: 100%;
+  border: 0;
+  background-color: ${theme.todo_pale};
+
+  ::placeholder {
+    color: ${theme.todo_faded};
+    font-size: x-large;
+    font-style: italic;
+  }
+`;
+
+const Input = styled.input`
+  width: 2em;
+  height: 2em;
+  background-color: white;
+  border-radius: 50%;
+  margin: 0.5em;
+  vertical-align: middle;
+  border: 1px solid #ddd;
+  -webkit-appearance: none;
+  outline: none;
+  cursor: pointer;
+
+  :checked {
+    background-color: ${theme.todo_accent};
+  }
+`;
+
+const Form = styled.form`
+  display: flex;
+  flex-direction: row;
+  justify-content: stretch;
+  align-items: center;
+  height: 5rem;
+  width: 100%;
+  background-color: ${theme.todo_pale};
+`;
+
+const DivFilter = styled.div`
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  width: 50vw;
+`;
+
+const UlFiltered = styled.ul`
+  display: flex;
+  flex-direction: row;
+`;
+
+const LiFiltered = styled.li`
+  list-style-type: none;
+  color: ${theme.todo_primary};
+  width: 100%;
+  margin: 0.5rem;
+  padding: 0.5rem;
+  list-style-type: none;
+  color: ${theme.todo_primary};
+  width: 100%;
+`;
+const ButtonFiltered = styled.button<{ selected: string }>`
+  border: 0;
+  margin: 0.5rem;
+  padding: 0.5rem;
+  background-color: ${theme.todo_base};
+  color: ${theme.todo_primary};
+  border-radius: 10%;
+
+  border: ${(props) =>
+    props.selected ? `${theme.todo_faded}` + " 2px solid" : "white"}; // :D
+
+  :hover {
+    cursor: pointer;
+  }
+`;
+
+const DivTask = styled.div<{ strikethrough: string }>`
+  text-decoration: ${(props) =>
+    props.strikethrough ? "line-through" : "none"};
+`;
+
+const DivNumOfTasks = styled.div`
+  padding-top: 1em;
+  padding-left: 0.5em;
+`;
+
+const TaskLi = styled.li`
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+  height: 5vh;
+  border: 0.5px solid ${theme.todo_faded};
+  background-color: ${theme.todo_pale};
+  list-style-type: none;
+  color: ${theme.todo_primary};
+  width: 100%;
+  list-style-type: none;
+`;
+
+const ButtonDestroy = styled.button`
+  width: 1em;
+  height: 1em;
+  border: 0;
+  color: ${theme.todo_pale};
+  background-color: ${theme.todo_pale};
+  vertical-align: middle;
+  outline: none;
+  cursor: pointer;
+  font-size: x-large;
+  text-decoration: none !important;
+
+  :hover {
+    color: #7b7777;
+    text-decoration: none !important;
+  }
+`;
 
 type State = {
   tasks: Task[];
@@ -31,8 +189,6 @@ export default class Todo extends Component<Props, State> {
     this.showActive = this.showActive.bind(this);
     this.showInactive = this.showInactive.bind(this);
     this.showAll = this.showAll.bind(this);
-    // this.makeEditable = this.makeEditable.bind(this);
-    // this.editValue = this.editValue.bind(this);
   }
 
   addToArr(event) {
@@ -65,7 +221,6 @@ export default class Todo extends Component<Props, State> {
     deletedArr = deletedArr.filter((item) => {
       return item.id !== i;
     });
-    // deletedArr.splice(i, 1);
     this.setState({
       tasks: deletedArr,
     });
@@ -110,28 +265,8 @@ export default class Todo extends Component<Props, State> {
     });
   }
 
-  // makeEditable(e) {
-  //   e.target.contentEditable = "true";
-  // }
-
-  // editValue(e,i) {
-  //   console.log(e.currentTarget.textContent)
-  //   var newArr = this.state.tasks;
-  //   newArr[i].name = e.currentTarget.innerText;
-  //   this.setState({
-  //     tasks: newArr
-  //   })
-  // }else {}
-
   render() {
-    // var striked = document.querySelectorAll('input[checked="true"][type="checkbox"]');
-    // striked.forEach((item)=>{
-    //   item.style.textDecoration="line-through";
-    // })
-    // console.log(striked)
-
     let filteredArr: Task[];
-    let listItems: NodeListOf<Element>;
 
     if (this.state.isActive) {
       filteredArr = this.state.tasks.filter((item) => !item.status);
@@ -139,36 +274,21 @@ export default class Todo extends Component<Props, State> {
       filteredArr = this.state.tasks.filter((item) => item.status);
     } else {
       filteredArr = this.state.tasks;
-
-      //  do <li>:  </li>onInput={(e) => this.editValue(e,index)} onClick={this.makeEditable}
     }
 
-    // listItems = filteredArr.map((task, index) => {
-    //   return (
-    //     <li className={"task"} key={task.name + index}>
-    //       <input
-    //         className="round-checkbox"
-    //         type="checkbox"
-    //         onChange={() => this.isChecked(task.id)}
-    //         checked={task.status}
-    //       ></input>
-    //       <div className={task.status ? "strikethrough" : ""}>{task.name}</div>
-    //       <button className="destroy" onClick={() => this.deleteFnc(task.id)}>
-    //         x
-    //       </button>
-    //     </li> //default - All
-    //   );
-    // });
-
     return (
-      <div id="container" className="todo">
-        <h1>todos</h1>
-        <div id="block">
-          <form onSubmit={this.addToArr}>
-            <button id="checkAllBtn" type="button" onClick={this.checkAll}>
+      <DivContainer id="container" className="todo">
+        <H1>todos</H1>
+        <DivBlock id="block">
+          <Form onSubmit={this.addToArr}>
+            <ButtonCheckAll
+              id="checkAllBtn"
+              type="button"
+              onClick={this.checkAll}
+            >
               ❯
-            </button>
-            <input
+            </ButtonCheckAll>
+            <InputTask
               type="text"
               onChange={this.addTask}
               value={this.state.value}
@@ -176,69 +296,67 @@ export default class Todo extends Component<Props, State> {
               placeholder="What needs to be done?"
               id="input"
             />
-          </form>
+          </Form>
           <ul>
             {filteredArr.map((task, index) => {
               return (
-                <li className={"task"} key={task.name + index}>
-                  <input
+                <TaskLi className={"task"} key={task.name + index}>
+                  <Input
                     className="round-checkbox"
                     type="checkbox"
                     onChange={() => this.isChecked(task.id)}
                     checked={task.status}
-                  ></input>
-                  <div className={task.status ? "strikethrough" : ""}>
+                  ></Input>
+                  <DivTask strikethrough={task.status ? "true" : ""}>
                     {task.name}
-                  </div>
-                  <button
+                  </DivTask>
+                  <ButtonDestroy
                     className="destroy"
                     onClick={() => this.deleteFnc(task.id)}
                   >
                     x
-                  </button>
-                </li> //default - All
+                  </ButtonDestroy>
+                </TaskLi> //default - All
               );
             })}
           </ul>
-          <div id="numOfTasks">
+          <DivNumOfTasks id="numOfTasks">
             {this.state.tasks.filter((elem) => {
               return !elem.status;
             }).length + " items left"}
-          </div>
-        </div>
-        <div id="filter">
-          <ul>
-            <li>
-              <button
-                className={
-                  !this.state.isActive && !this.state.isCompleted
-                    ? "selected"
-                    : ""
+          </DivNumOfTasks>
+        </DivBlock>
+        <DivFilter id="filter">
+          <UlFiltered>
+            <LiFiltered>
+              <ButtonFiltered
+                selected={
+                  !this.state.isActive && !this.state.isCompleted ? "true" : ""
                 }
                 onClick={this.showAll}
               >
                 All
-              </button>
-            </li>
-            <li>
-              <button
-                className={this.state.isActive ? "selected" : ""}
+              </ButtonFiltered>
+            </LiFiltered>
+            <LiFiltered>
+              <ButtonFiltered
+                selected={this.state.isActive ? "true" : ""}
                 onClick={this.showActive}
               >
                 Active
-              </button>
-            </li>
-            <li>
-              <button
-                className={this.state.isCompleted ? "selected" : ""}
+              </ButtonFiltered>
+            </LiFiltered>
+            <LiFiltered>
+              <ButtonFiltered
+                selected={this.state.isCompleted ? "true" : ""}
                 onClick={this.showInactive}
               >
                 Completed
-              </button>
-            </li>
-          </ul>
-        </div>
-      </div>
+              </ButtonFiltered>
+            </LiFiltered>
+          </UlFiltered>
+        </DivFilter>
+      </DivContainer>
     );
   }
 }
