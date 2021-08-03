@@ -18,11 +18,6 @@ const P = styled.p`
   width: 100%;
 `;
 
-const Div = styled.div`
-  white-space: pre;
-  line-height: 2rem;
-`;
-
 const Button = styled.button`
   margin-top: 5rem;
   height: 4em;
