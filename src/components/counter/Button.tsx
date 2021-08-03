@@ -3,9 +3,9 @@ import React, { Component } from "react";
 import styled from "styled-components";
 
 type Props = {
-  whatClass: string;
+  className: string;
   text: string;
-  func: () => void;
+  onClick: () => void;
   bkg: string;
 };
 
@@ -35,10 +35,13 @@ const ButtonStyled = styled.button<ButtonProps>`
 
 export default class Button extends Component<Props> {
   render() {
-    let { whatClass, text, func, bkg } = this.props;
     return (
-      <ButtonStyled className={whatClass} onClick={func} bkg={bkg}>
-        {text}
+      <ButtonStyled
+        className={this.props.className}
+        onClick={this.props.onClick}
+        bkg={this.props.bkg}
+      >
+        {this.props.text}
       </ButtonStyled>
     );
   }

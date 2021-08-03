@@ -80,15 +80,15 @@ export default class App extends Component<Props, State> {
   }
 
   plus = () => {
-    this.setState({
-      count: this.state.count + 1,
-    });
+    this.setState((prevState) => ({
+      count: prevState.count + 1,
+    }));
   };
 
   minus = () => {
-    this.setState({
-      count: this.state.count - 1,
-    });
+    this.setState((prevState) => ({
+      count: prevState.count - 1,
+    }));
   };
 
   render() {
@@ -106,15 +106,15 @@ export default class App extends Component<Props, State> {
           </DivTalk>
           <DivBtns id="btns-div">
             <Button
-              whatClass="plus-btn"
-              func={() => this.plus()}
+              className="plus-btn"
+              onClick={() => this.plus()}
               text="+"
               bkg="plus"
             ></Button>
             {count}
             <Button
-              whatClass="minus-btn"
-              func={() => this.minus()}
+              className="minus-btn"
+              onClick={() => this.minus()}
               text="-"
               bkg="minus"
             ></Button>

@@ -5,6 +5,7 @@ export const theme = {
   cnt_minus: "#ff8b5d",
   cnt_font_secondary: "normal 1.2em/150% 'Poppins', sans-serif",
   cnt_font_primary: "normal 1.5em/150% 'Vollkorn', serif",
+  cnt_bkg: "#79bac2",
 
   /*ht*/
   ht_bkg: "#000000",
@@ -16,6 +17,7 @@ export const theme = {
   ht_font: "mono",
 
   /*todo*/
+  todo_bkg: "#f5f5f5",
   todo_accent: "#ead7d7",
   todo_base: "#f5f5f5",
   todo_faded: "#e6e6e6",
