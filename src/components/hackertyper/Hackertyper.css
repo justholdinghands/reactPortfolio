@@ -1,4 +1,4 @@
-.hackertyper ::-webkit-scrollbar {
+/* .hackertyper ::-webkit-scrollbar {
   width: 0;
 }
 
@@ -30,7 +30,7 @@
 .hackertyper div {
   white-space: pre;
   line-height: 2rem;
-  /* overflow: scroll;   */
+  overflow: scroll;  
 }
 
 .hackertyper button {
@@ -75,4 +75,4 @@
   align-items: center;
   font-size: 3vw;
   font-weight: bolder;
-}
+} */

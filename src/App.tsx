@@ -1,16 +1,33 @@
-import "./App.css";
+// import "./App.css";
 import { Component } from "react";
 import { Link, Route, BrowserRouter as Router, Switch } from "react-router-dom";
-import { createBrowserHistory } from "history";
+import { theme } from "./theme";
 // import Counter from "./components/counter/Counter";
 import Hackertyper from "./components/hackertyper/Hackertyper";
-import Todo from "./components/todo/Todo";
+import styled from "styled-components";
+// import Todo from "./components/todo/Todo";
+
+const DivRender = styled.div`
+  display: flex;
+  flex-direction: column;
+  justify-content: start;
+  height: 100vh;
+  width: 97vw;
+  white-space: pre;
+  line-height: 2rem;
+`;
+
+const UlNav = styled.ul`
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+  list-style-type: none;
+  font: bold 1.8em/150% ${theme.ht_font};
+`;
 
 type State = {
   color: string;
 };
-
-const history = createBrowserHistory();
 
 export default class App extends Component<{}, State> {
   constructor(props) {
@@ -35,11 +52,15 @@ export default class App extends Component<{}, State> {
   render() {
     return (
       <Router>
-        <div id="divRender">
+        <DivRender id="divRender">
           <nav>
-            <ul>
+            <UlNav>
               <li>
-                <Link to="/counter" onClick={() => this.changeColor("#79bac2")}>
+                <Link
+                  to="/counter"
+                  onClick={() => this.changeColor("#79bac2")}
+                  style={{ textDecoration: "none" }}
+                >
                   Counter
                 </Link>
               </li>
@@ -47,16 +68,21 @@ export default class App extends Component<{}, State> {
                 <Link
                   to="/hackertyper"
                   onClick={() => this.changeColor("#000000")}
+                  style={{ textDecoration: "none" }}
                 >
                   Hacker Typer
                 </Link>
               </li>
               <li>
-                <Link to="/todo" onClick={() => this.changeColor("#f5f5f5")}>
+                <Link
+                  to="/todo"
+                  onClick={() => this.changeColor("#f5f5f5")}
+                  style={{ textDecoration: "none" }}
+                >
                   To Do List
                 </Link>
               </li>
-            </ul>
+            </UlNav>
           </nav>
 
           <Switch>
@@ -72,7 +98,7 @@ export default class App extends Component<{}, State> {
               <h1>Future TODO</h1>
             </Route>
           </Switch>
-        </div>
+        </DivRender>
       </Router>
     );
   }

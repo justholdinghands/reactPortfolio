@@ -1,7 +1,59 @@
 import "./Hackertyper.css";
 import { codeDemo } from "./code";
+import { theme } from "../../theme";
 import React, { Component } from "react";
 import Welcome from "./components/Welcome";
+import styled from "styled-components";
+
+//styled-components definition
+const DivContainer = styled.div`
+  background-color: ${theme.ht_bkg};
+  color: ${theme.ht_primary};
+  font-family: ${theme.ht_font};
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+`;
+
+const DivTerminal = styled.div`
+  padding-left: 5em;
+  width: 100%;
+  white-space: pre;
+  line-height: 2rem;
+`;
+
+const DivPopDenied = styled.div`
+  display: flex;
+  position: fixed;
+  height: 15vh;
+  width: 30vw;
+  top: 40%;
+  left: 35%;
+  justify-content: center;
+  align-items: center;
+  font-size: 3vw;
+  font-weight: bolder;
+  border: 0.5vh solid ${theme.ht_denied};
+  background-color: ${theme.ht_bkg_denied};
+  color: ${theme.ht_denied};
+`;
+
+const DivPopGranted = styled.div`
+  display: flex;
+  position: fixed;
+  height: 15vh;
+  width: 30vw;
+  top: 40%;
+  left: 35%;
+  justify-content: center;
+  align-items: center;
+  font-size: 3vw;
+  font-weight: bolder;
+  border: 0.5vh solid ${theme.ht_primary};
+  background-color: ${theme.ht_bkg_granted};
+  color: ${theme.ht_primary};
+`;
 
 type State = {
   code: string;
@@ -113,37 +165,30 @@ export default class Hackertyper extends Component<Props, State> {
     });
   };
 
-  //   counter = (e) => {
-  // this.setState({
-  //   cnt: this.cnt + 1,
-  //   key: e,
-  // });
-  //   };
-
   render() {
     var showWelcome = this.state.isWelcome;
     return (
-      <div id="container" className="hackertyper">
+      <DivContainer id="container" className="hackertyper">
         {showWelcome ? (
           <Welcome isStart={this.isStart}></Welcome>
         ) : (
-          <div id="terminal">{this.state.code}</div>
+          <DivTerminal id="terminal">{this.state.code}</DivTerminal>
         )}
         {this.state.isDenied ? (
-          <div className="popup" id="access-denied">
+          <DivPopDenied className="popup" id="access-denied">
             ACCESS DENIED
-          </div>
+          </DivPopDenied>
         ) : (
           ""
         )}
         {this.state.isGranted ? (
-          <div className="popup" id="access-granted">
+          <DivPopGranted className="popup" id="access-granted">
             ACCESS GRANTED
-          </div>
+          </DivPopGranted>
         ) : (
           ""
         )}
-      </div>
+      </DivContainer>
     );
   }
 }
