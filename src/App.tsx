@@ -1,5 +1,6 @@
 import "./App.css";
 import { Link, Route, BrowserRouter as Router, Switch } from "react-router-dom";
+import TicTacToe from "./components/tictactoe/Tictactoe";
 
 export default function App() {
   return (
@@ -16,6 +17,9 @@ export default function App() {
             <li>
               <Link to="/todo">To Do List</Link>
             </li>
+            <li>
+              <Link to="/tictactoe">Tic-Tac-Toe</Link>
+            </li>
           </ul>
         </nav>
 
@@ -28,6 +32,9 @@ export default function App() {
           </Route>
           <Route path="/todo">
             <div>todos</div>
+          </Route>
+          <Route path="/tictactoe">
+            <TicTacToe></TicTacToe>
           </Route>
         </Switch>
       </div>
