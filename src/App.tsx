@@ -1,11 +1,8 @@
-// import "./App.css";
 import { Component } from "react";
 import { Link, Route, BrowserRouter as Router, Switch } from "react-router-dom";
 import { theme } from "./theme";
-// import Counter from "./components/counter/Counter";
 import Hackertyper from "./components/hackertyper/Hackertyper";
 import styled from "styled-components";
-// import Todo from "./components/todo/Todo";
 
 const DivRender = styled.div`
   display: flex;
