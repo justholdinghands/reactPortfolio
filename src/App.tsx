@@ -22,7 +22,7 @@ const UlNav = styled.ul`
   flex-direction: row;
   justify-content: space-around;
   list-style-type: none;
-  font: bold 1.8em/150% ${theme.ht_font};
+  font: bold 1.8em/150% ${theme.hackertyper.font};
 `;
 
 type State = {
@@ -32,7 +32,7 @@ type State = {
 export default class App extends Component<{}, State> {
   constructor(props) {
     super(props);
-    this.state = { color: "#FFFFFF" };
+    this.state = { color: theme.todo.pale };
   }
 
   changeColor = (color) => {
@@ -41,11 +41,11 @@ export default class App extends Component<{}, State> {
 
   componentDidMount() {
     if (document.location.pathname === "/counter") {
-      document.body.style.backgroundColor = "#79bac2";
+      document.body.style.backgroundColor = theme.counter.background;
     } else if (document.location.pathname === "/hackertyper") {
-      document.body.style.backgroundColor = "#000000";
+      document.body.style.backgroundColor = theme.hackertyper.background;
     } else if (document.location.pathname === "/todo") {
-      document.body.style.backgroundColor = "#f5f5f5";
+      document.body.style.backgroundColor = theme.todo.background;
     }
   }
 
@@ -58,7 +58,7 @@ export default class App extends Component<{}, State> {
               <li>
                 <Link
                   to="/counter"
-                  onClick={() => this.changeColor("#79bac2")}
+                  onClick={() => this.changeColor(theme.counter.background)}
                   style={{ textDecoration: "none" }}
                 >
                   Counter
@@ -67,7 +67,7 @@ export default class App extends Component<{}, State> {
               <li>
                 <Link
                   to="/hackertyper"
-                  onClick={() => this.changeColor("#000000")}
+                  onClick={() => this.changeColor(theme.hackertyper.background)}
                   style={{ textDecoration: "none" }}
                 >
                   Hacker Typer
@@ -76,7 +76,7 @@ export default class App extends Component<{}, State> {
               <li>
                 <Link
                   to="/todo"
-                  onClick={() => this.changeColor("#f5f5f5")}
+                  onClick={() => this.changeColor(theme.todo.background)}
                   style={{ textDecoration: "none" }}
                 >
                   To Do List

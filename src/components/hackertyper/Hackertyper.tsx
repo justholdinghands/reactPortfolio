@@ -1,4 +1,3 @@
-import "./Hackertyper.css";
 import { codeDemo } from "./code";
 import { theme } from "../../theme";
 import React, { Component } from "react";
@@ -7,9 +6,9 @@ import styled from "styled-components";
 
 //styled-components definition
 const DivContainer = styled.div`
-  background-color: ${theme.ht_bkg};
-  color: ${theme.ht_primary};
-  font-family: ${theme.ht_font};
+  background-color: ${theme.hackertyper.background};
+  color: ${theme.hackertyper.primary};
+  font-family: ${theme.hackertyper.font};
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -42,9 +41,9 @@ const DivPopDenied = styled.div`
   align-items: center;
   font-size: 3vw;
   font-weight: bolder;
-  border: 0.5vh solid ${theme.ht_denied};
-  background-color: ${theme.ht_bkg_denied};
-  color: ${theme.ht_denied};
+  border: 0.5vh solid ${theme.hackertyper.denied};
+  background-color: ${theme.hackertyper.background_denied};
+  color: ${theme.hackertyper.denied};
 `;
 
 const DivPopGranted = styled.div`
@@ -58,9 +57,9 @@ const DivPopGranted = styled.div`
   align-items: center;
   font-size: 3vw;
   font-weight: bolder;
-  border: 0.5vh solid ${theme.ht_primary};
-  background-color: ${theme.ht_bkg_granted};
-  color: ${theme.ht_primary};
+  border: 0.5vh solid ${theme.hackertyper.primary};
+  background-color: ${theme.hackertyper.background_granted};
+  color: ${theme.hackertyper.primary};
 `;
 
 type State = {
@@ -85,6 +84,13 @@ const keyCodes = {
   ESC: 27,
   BACKSPACE: 8,
 };
+
+const pressXTimes = {
+  pressCAPS: 2,
+  pressALT: 3,
+};
+
+const stepSize = 3;
 
 export default class Hackertyper extends Component<Props, State> {
   constructor(props) {
@@ -118,7 +124,7 @@ export default class Hackertyper extends Component<Props, State> {
       this.setState((prevState) => ({
         altCnt: prevState.altCnt + 1,
       }));
-      if (this.state.altCnt === 2) {
+      if (this.state.altCnt === pressXTimes.pressCAPS) {
         this.setState({
           isGranted: true,
           isDenied: false,
@@ -130,7 +136,7 @@ export default class Hackertyper extends Component<Props, State> {
       this.setState((prevState) => ({
         clCnt: prevState.clCnt + 1,
       }));
-      if (this.state.clCnt === 3) {
+      if (this.state.clCnt === pressXTimes.pressALT) {
         this.setState({
           isDenied: true,
           isGranted: false,
@@ -153,17 +159,23 @@ export default class Hackertyper extends Component<Props, State> {
     }
 
     if (e.keyCode === keyCodes.BACKSPACE) {
-      var i = this.state.position - 3 < 0 ? 0 : this.state.position - 3;
+      let i =
+        this.state.position - stepSize < 0 ? 0 : this.state.position - stepSize;
       this.setState((prevState) => ({
         code: codeDemo.substring(0, i),
-        position: prevState.position - 3 < 0 ? 0 : prevState.position - 3,
-      }));
-    } else if (e.keyCode !== 18 && e.keyCode !== 20 && e.keyCode !== 27) {
-      this.setState((prevState) => ({
-        code: codeDemo.substring(0, prevState.position + 3),
         position:
-          codeDemo.length >= prevState.position + 3
-            ? prevState.position + 3
+          prevState.position - stepSize < 0 ? 0 : prevState.position - stepSize,
+      }));
+    } else if (
+      e.keyCode !== keyCodes.ALT &&
+      e.keyCode !== keyCodes.CAPS &&
+      e.keyCode !== keyCodes.ESC
+    ) {
+      this.setState((prevState) => ({
+        code: codeDemo.substring(0, prevState.position + stepSize),
+        position:
+          codeDemo.length >= prevState.position + stepSize
+            ? prevState.position + stepSize
             : 0,
       }));
       window.scrollTo(0, document.body.scrollHeight);
@@ -177,7 +189,7 @@ export default class Hackertyper extends Component<Props, State> {
   };
 
   render() {
-    var isWelcome = this.state.isWelcome;
+    let isWelcome = this.state.isWelcome;
     return (
       <DivContainer id="container" className="hackertyper">
         {isWelcome ? (
