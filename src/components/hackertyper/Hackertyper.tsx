@@ -1,5 +1,4 @@
 import "./Hackertyper.css";
-// import { codeDemo } from "./code";
 import { theme } from "./../../theme";
 import React, { Component } from "react";
 import Welcome from "./Welcome";
@@ -8,9 +7,9 @@ import styled from "styled-components";
 let codeDemo = "";
 
 const DivContainer = styled.div`
-  background-color: ${theme.ht_background};
-  color: ${theme.ht_font};
-  font-family: ${theme.ht_font};
+  background-color: ${theme.hackertyper.background};
+  color: ${theme.hackertyper.font};
+  font-family: ${theme.hackertyper.font};
   display: flex;
   flex-direction: column;
   justify-content: center;

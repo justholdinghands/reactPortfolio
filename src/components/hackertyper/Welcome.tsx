@@ -26,9 +26,9 @@ const Button = styled.button`
   height: 4em;
   width: 14em;
   font-size: large;
-  background-color: ${theme.ht_background};
-  color: ${theme.ht_primary};
-  border: 1px solid ${theme.ht_hover};
+  background-color: ${theme.hackertyper.background};
+  color: ${theme.hackertyper.primary};
+  border: 1px solid ${theme.hackertyper.hover};
 `;
 
 export default class Welcome extends Component<Props> {

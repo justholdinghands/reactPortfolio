@@ -1,4 +1,5 @@
 import { theme } from "./../../theme";
+import { withRouter } from "react-router";
 import Button from "./Button";
 import React, { Component } from "react";
 import pinkAxo from "./imgs/pink-axo-vertical.gif";
@@ -18,8 +19,8 @@ const DivMain = styled.div`
   * {
     padding: 0;
     margin: 0;
-    color: ${theme.count_primary};
-    font: ${theme.count_font_primary};
+    color: ${theme.counter.primary};
+    font: ${theme.counter.font_primary};
   }
 
   display: flex;
@@ -70,7 +71,7 @@ const ImgPAxo = styled.img`
   height: 150px;
 `;
 
-export default class App extends Component<Props, State> {
+export default class Counter extends Component<Props, State> {
   constructor(props) {
     super(props);
     this.state = {

@@ -18,19 +18,19 @@ const ButtonStyled = styled.button<ButtonProps>`
   box-shadow: 0 5px 6px -6px black;
   background: ${(props) =>
     props.background === "plus"
-      ? theme.count_plus
+      ? theme.counter.plus
       : props.background === "minus"
-      ? theme.count_minus
+      ? theme.counter.minus
       : ""};
 
   :hover {
-    box-shadow: 0 5px 6px -6px ${theme.ht_background},
-      inset 0 0 150px -80px ${theme.ht_background};
+    box-shadow: 0 5px 6px -6px ${theme.hackertyper.background},
+      inset 0 0 150px -80px ${theme.hackertyper.background};
     cursor: pointer;
   }
 
   :active {
-    box-shadow: inset 0 0 200px -70px ${theme.ht_background};
+    box-shadow: inset 0 0 200px -70px ${theme.hackertyper.background};
   }
 `;
 
