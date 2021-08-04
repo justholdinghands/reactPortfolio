@@ -1,5 +1,5 @@
 import "./Todo.css";
-import { Task } from "./Task";
+// import { Task } from "./Task";
 import { theme } from "../../theme";
 import React, { Component } from "react";
 import styled, { css } from "styled-components";
@@ -171,6 +171,12 @@ type State = {
 
 type Props = {};
 
+type Task = {
+  status: boolean;
+  name: string;
+  id: number;
+};
+
 export default class Todo extends Component<Props, State> {
   constructor(props) {
     super(props);
@@ -191,12 +197,20 @@ export default class Todo extends Component<Props, State> {
     this.showAll = this.showAll.bind(this);
   }
 
-  addToArr(event) {
+  addToArr(event: React.FormEvent<HTMLFormElement>) {
     event.preventDefault();
-    var newTask = new Task(false, this.state.value, this.state.idInc); // active == false
-    var arr = this.state.tasks;
-    arr.push(newTask);
-    this.setState({ tasks: arr, value: "", idInc: this.state.idInc + 1 });
+    this.setState((prevState) => {
+      var newTask = {
+        status: false,
+        name: prevState.value,
+        id: prevState.idInc,
+      }; // active == false
+      return {
+        tasks: [...prevState.tasks, newTask],
+        value: "",
+        idInc: prevState.idInc + 1,
+      };
+    });
   }
 
   addTask(event) {
@@ -216,31 +230,47 @@ export default class Todo extends Component<Props, State> {
     });
   }
 
-  deleteFnc(i) {
-    var deletedArr = this.state.tasks;
-    deletedArr = deletedArr.filter((item) => {
-      return item.id !== i;
-    });
-    this.setState({
-      tasks: deletedArr,
+  deleteFnc(i: number) {
+    this.setState((prevState) => {
+      var deletedArr = prevState.tasks;
+      deletedArr = deletedArr.filter((item) => {
+        return item.id !== i;
+      });
+      return {
+        tasks: deletedArr,
+      };
     });
   }
 
   checkAll(): void {
-    var checkAllArr: Task[];
-    if (this.state.tasks.every((each) => each.status === true)) {
-      checkAllArr = this.state.tasks.map((i) => {
-        i.status = false;
-        return i;
-      });
-    } else {
-      checkAllArr = this.state.tasks.map((i) => {
-        i.status = true;
-        return i;
-      });
-    }
-    this.setState({
-      tasks: checkAllArr,
+    // var checkAllArr: Task[];
+    // if (this.state.tasks.every((each) => each.status === true)) {
+    //   checkAllArr = this.state.tasks.map((i) => {
+    //     i.status = false;
+    //     return i;
+    //   });
+    // } else {
+    //   checkAllArr = this.state.tasks.map((i) => {
+    //     i.status = true;
+    //     return i;
+    //   });
+    // }
+    this.setState((prevState) => {
+      var checkAllArr: Task[];
+      if (prevState.tasks.every((each) => each.status === true)) {
+        checkAllArr = prevState.tasks.map((i) => {
+          i.status = false;
+          return i;
+        });
+      } else {
+        checkAllArr = prevState.tasks.map((i) => {
+          i.status = true;
+          return i;
+        });
+      }
+      return {
+        tasks: checkAllArr,
+      };
     });
   }
 
@@ -280,7 +310,7 @@ export default class Todo extends Component<Props, State> {
       <DivContainer id="container" className="todo">
         <H1>todos</H1>
         <DivBlock id="block">
-          <Form onSubmit={this.addToArr}>
+          <Form onSubmit={(e) => this.addToArr(e)}>
             <ButtonCheckAll
               id="checkAllBtn"
               type="button"
