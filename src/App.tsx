@@ -1,6 +1,8 @@
 import { Component } from "react";
 import { Link, Route, BrowserRouter as Router, Switch } from "react-router-dom";
+import { createGlobalStyle } from "styled-components";
 import { theme } from "./theme";
+import { withRouter } from "react-router";
 import Hackertyper from "./components/hackertyper/Hackertyper";
 import styled from "styled-components";
 
@@ -22,60 +24,41 @@ const UlNav = styled.ul`
   font: bold 1.8em/150% ${theme.hackertyper.font};
 `;
 
-type State = {
-  color: string;
-};
-
-export default class App extends Component<{}, State> {
+const GlobalStyle = createGlobalStyle<{ bgcolor: string }>`
+  body {
+    background-color: ${(props) =>
+      props.bgcolor === "/counter"
+        ? theme.counter.background
+        : props.bgcolor === "/hackertyper"
+        ? theme.hackertyper.background
+        : props.bgcolor === "/todo"
+        ? theme.todo.background
+        : ""};
+}`;
+class App extends Component<{ location: any }> {
   constructor(props) {
     super(props);
-    this.state = { color: theme.todo.pale };
-  }
-
-  changeColor = (color) => {
-    document.body.style.backgroundColor = color;
-  };
-
-  componentDidMount() {
-    if (document.location.pathname === "/counter") {
-      document.body.style.backgroundColor = theme.counter.background;
-    } else if (document.location.pathname === "/hackertyper") {
-      document.body.style.backgroundColor = theme.hackertyper.background;
-    } else if (document.location.pathname === "/todo") {
-      document.body.style.backgroundColor = theme.todo.background;
-    }
   }
 
   render() {
     return (
-      <Router>
+      <div>
+        <GlobalStyle bgcolor={this.props.location.pathname} />
         <DivRender id="divRender">
           <nav>
             <UlNav>
               <li>
-                <Link
-                  to="/counter"
-                  onClick={() => this.changeColor(theme.counter.background)}
-                  style={{ textDecoration: "none" }}
-                >
+                <Link to="/counter" style={{ textDecoration: "none" }}>
                   Counter
                 </Link>
               </li>
               <li>
-                <Link
-                  to="/hackertyper"
-                  onClick={() => this.changeColor(theme.hackertyper.background)}
-                  style={{ textDecoration: "none" }}
-                >
+                <Link to="/hackertyper" style={{ textDecoration: "none" }}>
                   Hacker Typer
                 </Link>
               </li>
               <li>
-                <Link
-                  to="/todo"
-                  onClick={() => this.changeColor(theme.todo.background)}
-                  style={{ textDecoration: "none" }}
-                >
+                <Link to="/todo" style={{ textDecoration: "none" }}>
                   To Do List
                 </Link>
               </li>
@@ -96,7 +79,9 @@ export default class App extends Component<{}, State> {
             </Route>
           </Switch>
         </DivRender>
-      </Router>
+      </div>
     );
   }
 }
+
+export default withRouter(App);
