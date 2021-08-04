@@ -1,15 +1,16 @@
 import "./Hackertyper.css";
 // import { codeDemo } from "./code";
+import { theme } from "./../../theme";
 import React, { Component } from "react";
-import Welcome from "./components/Welcome";
+import Welcome from "./Welcome";
 import styled from "styled-components";
 
 let codeDemo = "";
 
 const DivContainer = styled.div`
-  background-color: var(--ht_bkg);
-  color: var(--ht_primary);
-  font-family: var(--ht_font);
+  background-color: ${theme.ht_background};
+  color: ${theme.ht_font};
+  font-family: ${theme.ht_font};
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -37,12 +38,12 @@ type State = {
   code: string;
   position: number;
   isWelcome: boolean;
-  cnt: number;
+  count: number;
   key: string;
   isDenied: boolean;
   isGranted: boolean;
-  altCnt: number;
-  clCnt: number;
+  altcount: number;
+  clcount: number;
 };
 
 type Props = {
@@ -55,12 +56,12 @@ export default class Hackertyper extends Component<Props, State> {
       code: "",
       position: 0,
       isWelcome: true,
-      cnt: 0,
+      count: 0,
       key: "",
       isDenied: false,
       isGranted: false,
-      altCnt: 0,
-      clCnt: 0,
+      altcount: 0,
+      clcount: 0,
     };
     this.isStart = this.isStart.bind(this);
   }
@@ -79,27 +80,27 @@ export default class Hackertyper extends Component<Props, State> {
     if (e.keyCode === 18) {
       // ALT
       this.setState({
-        altCnt: this.state.altCnt + 1,
+        altcount: this.state.altcount + 1,
       });
-      if (this.state.altCnt === 2) {
+      if (this.state.altcount === 2) {
         this.setState({
           isGranted: true,
           isDenied: false,
-          altCnt: 0,
-          clCnt: 0,
+          altcount: 0,
+          clcount: 0,
         });
       }
     } else if (e.keyCode === 20) {
       // CAPS-LOCK
       this.setState({
-        clCnt: this.state.clCnt + 1,
+        clcount: this.state.clcount + 1,
       });
-      if (this.state.clCnt === 3) {
+      if (this.state.clcount === 3) {
         this.setState({
           isDenied: true,
           isGranted: false,
-          clCnt: 0,
-          altCnt: 0,
+          clcount: 0,
+          altcount: 0,
         });
       }
     } else if (e.keyCode === 27) {
@@ -107,13 +108,13 @@ export default class Hackertyper extends Component<Props, State> {
       this.setState({
         isDenied: false,
         isGranted: false,
-        altCnt: 0,
-        clCnt: 0,
+        altcount: 0,
+        clcount: 0,
       });
     } else {
       this.setState({
-        altCnt: 0,
-        clCnt: 0,
+        altcount: 0,
+        clcount: 0,
       });
     }
 

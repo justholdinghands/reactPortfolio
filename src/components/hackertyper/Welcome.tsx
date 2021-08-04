@@ -1,3 +1,4 @@
+import { theme } from "../../theme";
 import React, { Component } from "react";
 import styled from "styled-components";
 
@@ -25,9 +26,9 @@ const Button = styled.button`
   height: 4em;
   width: 14em;
   font-size: large;
-  background-color: var(--ht_bkg);
-  color: var(--ht_primary);
-  border: 1px solid var(--ht_hover);
+  background-color: ${theme.ht_background};
+  color: ${theme.ht_primary};
+  border: 1px solid ${theme.ht_hover};
 `;
 
 export default class Welcome extends Component<Props> {

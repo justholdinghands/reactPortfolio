@@ -1,4 +1,3 @@
-import "./Counter.css";
 import { theme } from "./../../theme";
 import Button from "./Button";
 import React, { Component } from "react";
@@ -19,8 +18,8 @@ const DivMain = styled.div`
   * {
     padding: 0;
     margin: 0;
-    color: ${theme.cnt_primary};
-    font: ${theme.cnt_font_primary};
+    color: ${theme.count_primary};
+    font: ${theme.count_font_primary};
   }
 
   display: flex;
@@ -107,16 +106,16 @@ export default class App extends Component<Props, State> {
           <DivBtns id="btns-div">
             <Button
               className="plus-btn"
-              onClick={() => this.plus()}
+              onClick={this.plus}
               text="+"
-              bkg="plus"
+              background="plus"
             ></Button>
             {count}
             <Button
               className="minus-btn"
-              onClick={() => this.minus()}
+              onClick={this.minus}
               text="-"
-              bkg="minus"
+              background="minus"
             ></Button>
           </DivBtns>
         </DivCount>
