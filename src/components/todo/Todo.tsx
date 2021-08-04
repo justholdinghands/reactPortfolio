@@ -1,5 +1,3 @@
-import "./Todo.css";
-// import { Task } from "./Task";
 import { theme } from "../../theme";
 import React, { Component } from "react";
 import styled, { css } from "styled-components";
@@ -55,11 +53,11 @@ const InputTask = styled.input`
 const Input = styled.input`
   width: 2em;
   height: 2em;
-  background-color: white;
+  background-color: ${theme.todo_white};
   border-radius: 50%;
   margin: 0.5em;
   vertical-align: middle;
-  border: 1px solid #ddd;
+  border: 1px solid ${theme.todo_faded};
   -webkit-appearance: none;
   outline: none;
   cursor: pointer;
@@ -156,7 +154,7 @@ const ButtonDestroy = styled.button`
   text-decoration: none !important;
 
   :hover {
-    color: #7b7777;
+    color: ${theme.todo_primary};
     text-decoration: none !important;
   }
 `;
@@ -243,31 +241,31 @@ export default class Todo extends Component<Props, State> {
   }
 
   checkAll(): void {
-    // var checkAllArr: Task[];
-    // if (this.state.tasks.every((each) => each.status === true)) {
-    //   checkAllArr = this.state.tasks.map((i) => {
-    //     i.status = false;
-    //     return i;
-    //   });
-    // } else {
-    //   checkAllArr = this.state.tasks.map((i) => {
-    //     i.status = true;
-    //     return i;
-    //   });
-    // }
+    var checkAllArr: Task[];
+    if (this.state.tasks.every((each) => each.status === true)) {
+      checkAllArr = this.state.tasks.map((i) => {
+        i.status = false;
+        return i;
+      });
+    } else {
+      checkAllArr = this.state.tasks.map((i) => {
+        i.status = true;
+        return i;
+      });
+    }
     this.setState((prevState) => {
-      var checkAllArr: Task[];
-      if (prevState.tasks.every((each) => each.status === true)) {
-        checkAllArr = prevState.tasks.map((i) => {
-          i.status = false;
-          return i;
-        });
-      } else {
-        checkAllArr = prevState.tasks.map((i) => {
-          i.status = true;
-          return i;
-        });
-      }
+      //   var checkAllArr: Task[];
+      //   if (prevState.tasks.every((each) => each.status === true)) {
+      //     checkAllArr = prevState.tasks.map((i) => {
+      //       i.status = false;
+      //       return i;
+      //     });
+      //   } else {
+      //     checkAllArr = prevState.tasks.map((i) => {
+      //       i.status = true;
+      //       return i;
+      //     });
+      //   }
       return {
         tasks: checkAllArr,
       };

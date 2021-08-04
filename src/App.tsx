@@ -1,9 +1,6 @@
-// import "./App.css";
 import { Component } from "react";
 import { Link, Route, BrowserRouter as Router, Switch } from "react-router-dom";
 import { theme } from "./theme";
-// import Counter from "./components/counter/Counter";
-// import Hackertyper from "./components/hackertyper/Hackertyper";
 import Todo from "./components/todo/Todo";
 import styled from "styled-components";
 
@@ -32,7 +29,7 @@ type State = {
 export default class App extends Component<{}, State> {
   constructor(props) {
     super(props);
-    this.state = { color: "#FFFFFF" };
+    this.state = { color: theme.todo_white };
   }
 
   changeColor = (color) => {
@@ -41,11 +38,11 @@ export default class App extends Component<{}, State> {
 
   componentDidMount() {
     if (document.location.pathname === "/counter") {
-      document.body.style.backgroundColor = "#79bac2";
+      document.body.style.backgroundColor = `${theme.count_background}`;
     } else if (document.location.pathname === "/hackertyper") {
-      document.body.style.backgroundColor = "#000000";
+      document.body.style.backgroundColor = `${theme.ht_background}`;
     } else if (document.location.pathname === "/todo") {
-      document.body.style.backgroundColor = "#f5f5f5";
+      document.body.style.backgroundColor = `${theme.todo_background}`;
     }
   }
 
@@ -58,7 +55,7 @@ export default class App extends Component<{}, State> {
               <li>
                 <Link
                   to="/counter"
-                  onClick={() => this.changeColor("#79bac2")}
+                  onClick={() => this.changeColor(`${theme.count_background}`)}
                   style={{ textDecoration: "none" }}
                 >
                   Counter
@@ -67,7 +64,7 @@ export default class App extends Component<{}, State> {
               <li>
                 <Link
                   to="/hackertyper"
-                  onClick={() => this.changeColor("#000000")}
+                  onClick={() => this.changeColor(`${theme.ht_background}`)}
                   style={{ textDecoration: "none" }}
                 >
                   Hacker Typer
@@ -76,7 +73,7 @@ export default class App extends Component<{}, State> {
               <li>
                 <Link
                   to="/todo"
-                  onClick={() => this.changeColor("#f5f5f5")}
+                  onClick={() => this.changeColor(`${theme.todo_background}`)}
                   style={{ textDecoration: "none" }}
                 >
                   To Do List
