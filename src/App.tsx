@@ -3,18 +3,9 @@ import { Link, Route, BrowserRouter as Router, Switch } from "react-router-dom";
 import { createGlobalStyle } from "styled-components";
 import { theme } from "./theme";
 import { withRouter } from "react-router";
+import Counter from "./components/counter/Counter";
 import Hackertyper from "./components/hackertyper/Hackertyper";
 import styled from "styled-components";
-
-const DivRender = styled.div`
-  display: flex;
-  flex-direction: column;
-  justify-content: start;
-  height: 100vh;
-  width: 97vw;
-  white-space: pre;
-  line-height: 2rem;
-`;
 
 const UlNav = styled.ul`
   display: flex;
@@ -34,7 +25,13 @@ const GlobalStyle = createGlobalStyle<{ bgcolor: string }>`
         : props.bgcolor === "/todo"
         ? theme.todo.background
         : ""};
-}`;
+    display: flex;
+    flex-direction: column;
+    justify-content: start;
+    height: 100vh;
+    width: 97vw;
+  }`;
+
 class App extends Component<{ location: any }> {
   constructor(props) {
     super(props);
@@ -44,7 +41,7 @@ class App extends Component<{ location: any }> {
     return (
       <div>
         <GlobalStyle bgcolor={this.props.location.pathname} />
-        <DivRender id="divRender">
+        <div id="divRender">
           <nav>
             <UlNav>
               <li>
@@ -67,8 +64,7 @@ class App extends Component<{ location: any }> {
 
           <Switch>
             <Route path="/counter">
-              {/* <Counter></Counter> */}
-              <h1>Future Counter</h1>
+              <Counter></Counter>
             </Route>
             <Route path="/hackertyper">
               <Hackertyper></Hackertyper>
@@ -78,7 +74,7 @@ class App extends Component<{ location: any }> {
               <h1>Future TODO</h1>
             </Route>
           </Switch>
-        </DivRender>
+        </div>
       </div>
     );
   }
