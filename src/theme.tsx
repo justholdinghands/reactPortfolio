@@ -25,4 +25,13 @@ export const theme = {
     h1_font: "'Helvetica Neue', Helvetica, Arial, sans-serif",
     background: "#f5f5f5",
   },
+
+  tictactoe: {
+    primary: "#756155",
+    secondary: "#6d3a2b",
+    border: "#fff9e0",
+    background: "#806d6a",
+    text_color: "#cabdb1",
+    font: '"Cabin Sketch", cursive',
+  },
 };
