@@ -4,6 +4,7 @@ import { createGlobalStyle } from "styled-components";
 import { theme } from "./theme";
 import { withRouter } from "react-router";
 import Counter from "./components/counter/Counter";
+import Hackertyper from "./components/hackertyper/Hackertyper";
 import styled from "styled-components";
 
 const UlNav = styled.ul`
@@ -29,8 +30,8 @@ const GlobalStyle = createGlobalStyle<{ bgcolor: string }>`
     justify-content: start;
     height: 100vh;
     width: 97vw;
-  }
-`;
+  }`;
+
 class App extends Component<{ location: any }> {
   constructor(props) {
     super(props);
@@ -66,8 +67,7 @@ class App extends Component<{ location: any }> {
               <Counter></Counter>
             </Route>
             <Route path="/hackertyper">
-              {/* <Hackertyper></Hackertyper> */}
-              <h1>Future HackerTyper</h1>
+              <Hackertyper></Hackertyper>
             </Route>
             <Route path="/todo">
               {/* <Todo>todos</Todo> */}
