@@ -202,7 +202,7 @@ export default class Todo extends Component<Props, State> {
         status: false,
         name: prevState.value,
         id: prevState.idInc,
-      }; // active == false
+      };
       return {
         tasks: [...prevState.tasks, newTask],
         value: "",
@@ -216,49 +216,27 @@ export default class Todo extends Component<Props, State> {
   }
 
   isChecked(i) {
-    this.setState((prevState) => {
-      const newArr = JSON.parse(JSON.stringify(prevState.tasks));
-      const pos = newArr.map((e) => e.id).indexOf(i);
-      newArr[pos].status = !newArr[pos].status;
-      return {
-        tasks: newArr,
-      };
-    });
+    this.setState((prevState) => ({
+      tasks: prevState.tasks.map((task) =>
+        task.id === i ? { ...task, status: !task.status } : task
+      ),
+    }));
   }
 
   deleteFnc(i: number) {
-    this.setState((prevState) => {
-      let deletedArr = prevState.tasks;
-      deletedArr = deletedArr.filter((item) => {
-        return item.id !== i;
-      });
-      return {
-        tasks: deletedArr,
-      };
-    });
+    this.setState((prevState) => ({
+      tasks: prevState.tasks.filter((item) => item.id !== i),
+    }));
   }
 
-  checkAll(): void {
-    this.setState((prevState) => {
-      let checkAllArr = JSON.parse(JSON.stringify(prevState.tasks));
-      const isEachTaskChecked = checkAllArr.every(
-        (each) => each.status === true
-      );
-      if (isEachTaskChecked) {
-        checkAllArr = checkAllArr.map((i) => {
-          i.status = false;
-          return i;
-        });
-      } else {
-        checkAllArr = checkAllArr.map((i) => {
-          i.status = true;
-          return i;
-        });
-      }
-      return {
-        tasks: checkAllArr,
-      };
-    });
+  checkAll() {
+    this.setState((prevState) => ({
+      tasks: prevState.tasks.map((task) =>
+        prevState.tasks.every((each) => each.status === true)
+          ? { ...task, status: false }
+          : { ...task, status: true }
+      ),
+    }));
   }
 
   showActive() {
