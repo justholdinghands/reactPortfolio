@@ -198,7 +198,7 @@ export default class Todo extends Component<Props, State> {
   addToArr(event: React.FormEvent<HTMLFormElement>) {
     event.preventDefault();
     this.setState((prevState) => {
-      var newTask = {
+      const newTask = {
         status: false,
         name: prevState.value,
         id: prevState.idInc,
@@ -216,21 +216,19 @@ export default class Todo extends Component<Props, State> {
   }
 
   isChecked(i) {
-    var newArr = this.state.tasks;
-    var pos = newArr
-      .map(function (e) {
-        return e.id;
-      })
-      .indexOf(i);
-    newArr[pos].status = !newArr[pos].status;
-    this.setState({
-      tasks: newArr,
+    this.setState((prevState) => {
+      const newArr = JSON.parse(JSON.stringify(prevState.tasks));
+      const pos = newArr.map((e) => e.id).indexOf(i);
+      newArr[pos].status = !newArr[pos].status;
+      return {
+        tasks: newArr,
+      };
     });
   }
 
   deleteFnc(i: number) {
     this.setState((prevState) => {
-      var deletedArr = prevState.tasks;
+      let deletedArr = prevState.tasks;
       deletedArr = deletedArr.filter((item) => {
         return item.id !== i;
       });
@@ -241,31 +239,22 @@ export default class Todo extends Component<Props, State> {
   }
 
   checkAll(): void {
-    var checkAllArr: Task[];
-    if (this.state.tasks.every((each) => each.status === true)) {
-      checkAllArr = this.state.tasks.map((i) => {
-        i.status = false;
-        return i;
-      });
-    } else {
-      checkAllArr = this.state.tasks.map((i) => {
-        i.status = true;
-        return i;
-      });
-    }
     this.setState((prevState) => {
-      //   var checkAllArr: Task[];
-      //   if (prevState.tasks.every((each) => each.status === true)) {
-      //     checkAllArr = prevState.tasks.map((i) => {
-      //       i.status = false;
-      //       return i;
-      //     });
-      //   } else {
-      //     checkAllArr = prevState.tasks.map((i) => {
-      //       i.status = true;
-      //       return i;
-      //     });
-      //   }
+      let checkAllArr = JSON.parse(JSON.stringify(prevState.tasks));
+      const isEachTaskChecked = checkAllArr.every(
+        (each) => each.status === true
+      );
+      if (isEachTaskChecked) {
+        checkAllArr = checkAllArr.map((i) => {
+          i.status = false;
+          return i;
+        });
+      } else {
+        checkAllArr = checkAllArr.map((i) => {
+          i.status = true;
+          return i;
+        });
+      }
       return {
         tasks: checkAllArr,
       };
