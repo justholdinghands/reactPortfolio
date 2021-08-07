@@ -215,7 +215,7 @@ export default class Todo extends Component<Props, State> {
     this.setState({ value: event.target.value });
   }
 
-  isChecked(i) {
+  isChecked(i: number) {
     this.setState((prevState) => ({
       tasks: prevState.tasks.map((task) =>
         task.id === i ? { ...task, status: !task.status } : task
