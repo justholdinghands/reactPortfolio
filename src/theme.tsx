@@ -21,9 +21,10 @@ export const theme = {
     base: "#f5f5f5",
     faded: "#e6e6e6",
     primary: "#7b7777",
-    pale: "#ffffff",
+    pale: "#f1ffff",
     h1_font: "'Helvetica Neue', Helvetica, Arial, sans-serif",
     background: "#f5f5f5",
+    white: "#FFFFFF",
   },
 
   tictactoe: {

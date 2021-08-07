@@ -5,6 +5,8 @@ import { theme } from "./theme";
 import { withRouter } from "react-router";
 import Counter from "./components/counter/Counter";
 import Hackertyper from "./components/hackertyper/Hackertyper";
+import Todo from "./components/todo/Todo";
+
 import styled from "styled-components";
 
 const UlNav = styled.ul`
@@ -70,8 +72,7 @@ class App extends Component<{ location: any }> {
               <Hackertyper></Hackertyper>
             </Route>
             <Route path="/todo">
-              {/* <Todo>todos</Todo> */}
-              <h1>Future TODO</h1>
+              <Todo></Todo>
             </Route>
           </Switch>
         </div>
