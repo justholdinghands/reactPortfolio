@@ -6,7 +6,7 @@ const DivContainer = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
-  background-color: ${theme.todo_base};
+  background-color: ${theme.todo.base};
 
   * {
     padding: 0;
@@ -15,15 +15,15 @@ const DivContainer = styled.div`
 `;
 
 const H1 = styled.h1`
-  font: 7rem ${theme.todo_h1_font};
-  color: ${theme.todo_accent};
+  font: 7rem ${theme.todo.h1_font};
+  color: ${theme.todo.accent};
 `;
 
 const DivBlock = styled.div`
   width: 50%;
   padding: 1rem;
-  background-color: ${theme.todo_pale};
-  border: 2px solid ${theme.todo_faded};
+  background-color: ${theme.todo.pale};
+  border: 2px solid ${theme.todo.faded};
 `;
 
 const ButtonCheckAll = styled.button`
@@ -32,8 +32,8 @@ const ButtonCheckAll = styled.button`
   width: 5rem;
   transform: rotate(90deg);
   border: 0;
-  background-color: ${theme.todo_pale};
-  color: ${theme.todo_faded};
+  background-color: ${theme.todo.pale};
+  color: ${theme.todo.faded};
   cursor: pointer;
 `;
 
@@ -41,10 +41,10 @@ const InputTask = styled.input`
   width: 80%;
   height: 100%;
   border: 0;
-  background-color: ${theme.todo_pale};
+  background-color: ${theme.todo.pale};
 
   ::placeholder {
-    color: ${theme.todo_faded};
+    color: ${theme.todo.faded};
     font-size: x-large;
     font-style: italic;
   }
@@ -53,17 +53,17 @@ const InputTask = styled.input`
 const Input = styled.input`
   width: 2em;
   height: 2em;
-  background-color: ${theme.todo_white};
+  background-color: ${theme.todo.white};
   border-radius: 50%;
   margin: 0.5em;
   vertical-align: middle;
-  border: 1px solid ${theme.todo_faded};
+  border: 1px solid ${theme.todo.faded};
   -webkit-appearance: none;
   outline: none;
   cursor: pointer;
 
   :checked {
-    background-color: ${theme.todo_accent};
+    background-color: ${theme.todo.accent};
   }
 `;
 
@@ -74,7 +74,7 @@ const Form = styled.form`
   align-items: center;
   height: 5rem;
   width: 100%;
-  background-color: ${theme.todo_pale};
+  background-color: ${theme.todo.pale};
 `;
 
 const DivFilter = styled.div`
@@ -92,24 +92,24 @@ const UlFiltered = styled.ul`
 
 const LiFiltered = styled.li`
   list-style-type: none;
-  color: ${theme.todo_primary};
+  color: ${theme.todo.primary};
   width: 100%;
   margin: 0.5rem;
   padding: 0.5rem;
   list-style-type: none;
-  color: ${theme.todo_primary};
+  color: ${theme.todo.primary};
   width: 100%;
 `;
 const ButtonFiltered = styled.button<{ selected: string }>`
   border: 0;
   margin: 0.5rem;
   padding: 0.5rem;
-  background-color: ${theme.todo_base};
-  color: ${theme.todo_primary};
+  background-color: ${theme.todo.base};
+  color: ${theme.todo.primary};
   border-radius: 10%;
 
   border: ${(props) =>
-    props.selected ? `${theme.todo_faded}` + " 2px solid" : "white"}; // :D
+    props.selected ? `${theme.todo.faded}` + " 2px solid" : "white"}; // :D
 
   :hover {
     cursor: pointer;
@@ -133,10 +133,10 @@ const TaskLi = styled.li`
   align-items: center;
   width: 100%;
   height: 5vh;
-  border: 0.5px solid ${theme.todo_faded};
-  background-color: ${theme.todo_pale};
+  border: 0.5px solid ${theme.todo.faded};
+  background-color: ${theme.todo.pale};
   list-style-type: none;
-  color: ${theme.todo_primary};
+  color: ${theme.todo.primary};
   width: 100%;
   list-style-type: none;
 `;
@@ -145,8 +145,8 @@ const ButtonDestroy = styled.button`
   width: 1em;
   height: 1em;
   border: 0;
-  color: ${theme.todo_pale};
-  background-color: ${theme.todo_pale};
+  color: ${theme.todo.pale};
+  background-color: ${theme.todo.pale};
   vertical-align: middle;
   outline: none;
   cursor: pointer;
@@ -154,7 +154,7 @@ const ButtonDestroy = styled.button`
   text-decoration: none !important;
 
   :hover {
-    color: ${theme.todo_primary};
+    color: ${theme.todo.primary};
     text-decoration: none !important;
   }
 `;
