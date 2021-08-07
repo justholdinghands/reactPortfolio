@@ -3,8 +3,8 @@ import { Link, Route, BrowserRouter as Router, Switch } from "react-router-dom";
 import { createGlobalStyle } from "styled-components";
 import { theme } from "./theme";
 import { withRouter } from "react-router";
-// import Counter from "./components/counter/Counter";
-// import Hackertyper from "./components/hackertyper/Hackertyper";
+import Counter from "./components/counter/Counter";
+import Hackertyper from "./components/hackertyper/Hackertyper";
 import Todo from "./components/todo/Todo";
 
 import styled from "styled-components";
@@ -65,13 +65,14 @@ class App extends Component<{ location: any }> {
           </nav>
 
           <Switch>
-            <Route path="/counter">{/* <Counter></Counter> */}</Route>
+            <Route path="/counter">
+              <Counter></Counter>
+            </Route>
             <Route path="/hackertyper">
-              {/* <Hackertyper></Hackertyper> */}
+              <Hackertyper></Hackertyper>
             </Route>
             <Route path="/todo">
-              <Todo>todos</Todo>
-              <h1>Future TODO</h1>
+              <Todo></Todo>
             </Route>
           </Switch>
         </div>
