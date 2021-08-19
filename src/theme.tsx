@@ -36,4 +36,14 @@ export const theme = {
     font_primary: '"Cabin Sketch", cursive',
     font_secondary: "monospace",
   },
+
+  pexeso: {
+    primary: "#33ff3d",
+    secondary: "#2b6d6d",
+    notFlipped: "#1747a0",
+    background: "#5a815c",
+    text_color: "#bcb1ca",
+    font_primary: '"Cabin Sketch", cursive',
+    font_secondary: "monospace",
+  },
 };
