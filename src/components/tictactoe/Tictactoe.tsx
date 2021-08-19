@@ -1,39 +1,41 @@
 import { ChangeEvent, Component } from "react";
+import { checkDiagonals, checkRows, transpose } from "./GameLogic";
 import { theme } from "../../theme";
 import styled from "styled-components";
 
-// styles
 export const DivInput = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
+  width: 5vw;
+  height: 20vh;
 `;
-
 export const DivWrapSettings = styled.div`
   display: flex;
   flex-direction: row;
   align-items: center;
-  justify-content: center;
+  justify-content: space-between;
+  width: 30vw;
 `;
 export const DivResult = styled.div`
   display: flex;
-  justify-content: center;
+  justify-content: flex-start;
   align-items: center;
-  width: 50vw;
+  width: 20vw;
   height: 20vh;
-  font: 5em/0 ${theme.tictactoe.font_primary};
-  color: ${theme.tictactoe.text_color};
+  font: 5em/0 ${theme.tictactoe.fontPrimary};
+  color: ${theme.tictactoe.textColor};
   background: ${theme.tictactoe.background};
 `;
 
 export const DivTurn = styled.div`
   display: flex;
-  justify-content: center;
+  justify-content: flex-start;
   align-items: center;
-  width: 50vw;
+  width: 20vw;
   height: 20vh;
-  font: 5em/0 ${theme.tictactoe.font_primary};
-  color: ${theme.tictactoe.text_color};
+  font: 5em/0 ${theme.tictactoe.fontPrimary};
+  color: ${theme.tictactoe.textColor};
   background: ${theme.tictactoe.background};
 `;
 
@@ -50,7 +52,7 @@ export const InputBoardSize = styled.input`
   width: 20vw;
   background-color: ${theme.tictactoe.secondary};
   color: ${theme.tictactoe.primary};
-  font: 5vh/0 ${theme.tictactoe.font_secondary};
+  font: 5vh/0 ${theme.tictactoe.fontSecondary};
   border: none;
 `;
 
@@ -59,15 +61,20 @@ export const Box = styled.button`
   width: 10vw;
   background-color: ${theme.tictactoe.box};
   color: ${theme.tictactoe.secondary};
-  font: 4vw/0 ${theme.tictactoe.font_primary};
+  font: 4vw/0 ${theme.tictactoe.fontPrimary};
 `;
 
-// logic
+export type BoardValues = "X" | "O" | null;
+export const PLAYER_X = "X";
+export const PLAYER_O = "O";
+export const maxDynamicSize = 5;
+export const winningLine = 5;
+
 type State = {
   size: number;
-  boardMatrix: string[][];
+  boardMatrix: BoardValues[][];
   xTurn: boolean;
-  winner: string;
+  winner: BoardValues;
   gameOver: boolean;
   clickedXtimes: number;
 };
@@ -75,48 +82,60 @@ type State = {
 type Props = {
   className?: string;
 };
+
 export default class Tictactoe extends Component<Props, State> {
-  constructor(props) {
-    super(props);
-    this.state = {
-      size: 0,
-      boardMatrix: [],
-      xTurn: true,
-      winner: "",
-      gameOver: false,
-      clickedXtimes: 0,
-    };
-  }
+  state = {
+    size: 0,
+    boardMatrix: [],
+    xTurn: true,
+    winner: null,
+    gameOver: false,
+    clickedXtimes: 0,
+  };
+
+  initializeBoardMatrix = (value: string) => {
+    return [...Array(Number(value))].map(() => Array(Number(value)).fill(null));
+  };
 
   setSize = (e: ChangeEvent<HTMLInputElement>) => {
     this.setState((_p) => ({
       xTurn: true,
-      winner: "",
+      winner: null,
       gameOver: false,
       clickedXtimes: 0,
       size: Number(e.target.value),
-      boardMatrix: [...Array(Number(e.target.value))].map(() =>
-        Array(Number(e.target.value)).fill(" ")
-      ),
+      boardMatrix: this.initializeBoardMatrix(e.target.value),
     }));
   };
 
-  move = (row: number, column: number) => {
+  move = (rowIndex: number, columnIndex: number) => {
     if (
-      this.state.boardMatrix[row][column] === " " &&
+      this.state.boardMatrix[rowIndex][columnIndex] === null &&
       this.state.gameOver === false
     ) {
       this.setState(
         (prevState) => {
-          let newMatrix = [...[...prevState.boardMatrix]];
-          newMatrix[row][column] = prevState.xTurn ? "X" : "O";
           return {
-            boardMatrix: newMatrix,
+            boardMatrix: prevState.boardMatrix.map((arr, i) =>
+              arr.map((element, j) =>
+                i === rowIndex && j === columnIndex
+                  ? prevState.xTurn
+                    ? PLAYER_X
+                    : PLAYER_O
+                  : element
+              )
+            ),
             xTurn: !prevState.xTurn,
           };
         },
         () => {
-          this.checkWin();
+          let whoWon = this.checkWin();
+          if (whoWon) {
+            this.setState((_p) => ({
+              gameOver: true,
+              winner: whoWon,
+            }));
+          }
         }
       );
       this.clickCounter();
@@ -125,41 +144,17 @@ export default class Tictactoe extends Component<Props, State> {
 
   checkDraw = () => {
     if (this.state.clickedXtimes === this.state.size * this.state.size) {
-      this.setState((_p) => ({ gameOver: true }));
+      this.setState({ gameOver: true });
     }
   };
 
-  checkWin = (): string | false => {
+  checkWin = () => {
     this.checkDraw();
     return (
-      this.checkRows(this.state.boardMatrix) ||
-      this.checkRows(this.transpose(this.state.boardMatrix)) ||
-      this.checkRows(this.checkDiagonals(this.state.boardMatrix))
+      checkRows(this.state.boardMatrix, this.state.size) ||
+      checkRows(transpose(this.state.boardMatrix), this.state.size) ||
+      checkRows(checkDiagonals(this.state.boardMatrix), this.state.size)
     );
-  };
-
-  checkRows = (boardMatrix: string[][]): string | false => {
-    let winningLength = this.state.size > 5 ? 5 : this.state.size;
-    let count = 1;
-    for (let i = 0; i < boardMatrix.length; i++) {
-      for (let j = 0; j < boardMatrix[i].length - 1; j++) {
-        if (
-          boardMatrix[i][j] !== " " &&
-          boardMatrix[i][j] === boardMatrix[i][j + 1]
-        ) {
-          count++;
-          if (winningLength === count) {
-            this.setState((_p) => ({ gameOver: true }));
-            this.setState((_p) => ({ winner: boardMatrix[i][j] }));
-            return boardMatrix[i][j];
-          }
-        } else {
-          count = 1;
-        }
-      }
-      count = 1;
-    }
-    return false;
   };
 
   clickCounter = () =>
@@ -167,45 +162,17 @@ export default class Tictactoe extends Component<Props, State> {
       clickedXtimes: prevState.clickedXtimes + 1,
     }));
 
-  transpose = (m: string[][]): string[][] =>
-    m[0].map((_, i) => m.map((x) => x[i]));
-
-  checkDiagonals = (arr: string[][]): string[][] => {
-    let positiveSlope: string[] = [];
-    let negativeSlope: string[] = [];
-    let finalArr: string[][] = [];
-    for (var i = 0; i < arr.length * 2; i++) {
-      for (var j = 0; j <= i; j++) {
-        var k = i - j;
-        if (k < arr.length && j < arr.length) {
-          positiveSlope.push(arr[k][j]);
-        }
-        var h = arr.length - j - 1;
-        if (k < arr.length && h < arr.length && h >= 0) {
-          negativeSlope.push(arr[k][h]);
-        }
-      }
-      finalArr.push(positiveSlope);
-      finalArr.push(negativeSlope);
-      positiveSlope = [];
-      negativeSlope = [];
-    }
-    return finalArr;
-  };
-
   render() {
     return (
       <DivWrapper>
         <DivWrapSettings>
           {!this.state.gameOver && (
-            <DivTurn>Turn: {this.state.xTurn ? "X" : "O"}</DivTurn>
+            <DivTurn>Turn: {this.state.xTurn ? PLAYER_X : PLAYER_O}</DivTurn>
           )}
           {this.state.gameOver && (
-            <div>
-              <DivResult>
-                {this.state.winner ? this.state.winner + " wins" : "Draw"}
-              </DivResult>
-            </div>
+            <DivResult>
+              {this.state.winner ? this.state.winner + " wins" : "Draw"}
+            </DivResult>
           )}
           <DivInput>
             <InputBoardSize
@@ -219,13 +186,13 @@ export default class Tictactoe extends Component<Props, State> {
         </DivWrapSettings>
         <table>
           <tbody>
-            {[...Array(this.state.size)].map((_, row) => {
+            {Array.from({ length: this.state.size }, (_, rowIndex) => {
               return (
-                <tr key={row}>
-                  {[...Array(this.state.size)].map((_, column) => (
-                    <td key={column}>
-                      <Box onClick={() => this.move(row, column)}>
-                        {this.state.boardMatrix[row][column]}
+                <tr key={rowIndex}>
+                  {Array.from({ length: this.state.size }, (_, columnIndex) => (
+                    <td key={columnIndex}>
+                      <Box onClick={() => this.move(rowIndex, columnIndex)}>
+                        {this.state.boardMatrix[rowIndex][columnIndex]}
                       </Box>
                     </td>
                   ))}

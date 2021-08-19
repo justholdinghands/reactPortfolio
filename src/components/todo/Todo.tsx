@@ -15,7 +15,7 @@ const DivContainer = styled.div`
 `;
 
 const H1 = styled.h1`
-  font: 7rem ${theme.todo.h1_font};
+  font: 7rem ${theme.todo.h1Font};
   color: ${theme.todo.accent};
 `;
 

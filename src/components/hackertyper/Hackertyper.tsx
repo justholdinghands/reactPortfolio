@@ -42,7 +42,7 @@ const DivPopDenied = styled.div`
   font-size: 3vw;
   font-weight: bolder;
   border: 0.5vh solid ${theme.hackertyper.denied};
-  background-color: ${theme.hackertyper.background_denied};
+  background-color: ${theme.hackertyper.backgroundDenied};
   color: ${theme.hackertyper.denied};
 `;
 
@@ -58,7 +58,7 @@ const DivPopGranted = styled.div`
   font-size: 3vw;
   font-weight: bolder;
   border: 0.5vh solid ${theme.hackertyper.primary};
-  background-color: ${theme.hackertyper.background_granted};
+  background-color: ${theme.hackertyper.backgroundGranted};
   color: ${theme.hackertyper.primary};
 `;
 

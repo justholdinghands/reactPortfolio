@@ -20,7 +20,7 @@ const DivMain = styled.div`
     padding: 0;
     margin: 0;
     color: ${theme.counter.primary};
-    font: ${theme.counter.font_primary};
+    font: ${theme.counter.fontPrimary};
   }
 
   display: flex;
