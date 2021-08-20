@@ -6,7 +6,6 @@ import styled from "styled-components";
 export const Table = styled.table`
   height: 100%;
   width: 50%;
-  border: blue 2px solid;
 `;
 
 export const DivInput = styled.div`
@@ -52,7 +51,6 @@ export const DivWrapper = styled.div`
   justify-content: space-between;
   height: 85.3vh;
   width: 99.6vw;
-  border: 3px violet solid;
 `;
 
 export const InputBoardSize = styled.input`
@@ -71,7 +69,7 @@ export const Box = styled.button`
   min-width: 100%;
   background-color: ${theme.tictactoe.box};
   color: ${theme.tictactoe.secondary};
-  font: 500%/0 ${theme.tictactoe.fontPrimary};
+  font: 100%/0 ${theme.tictactoe.fontPrimary};
 `;
 
 export const PLAYER_X = "X" as const;
