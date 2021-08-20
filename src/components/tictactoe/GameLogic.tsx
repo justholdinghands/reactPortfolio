@@ -1,9 +1,17 @@
-import { BoardValues, maxDynamicSize, winningLine } from "./Tictactoe";
+import { boardValues, maxDynamicSize, winningLine } from "./Tictactoe";
 
+/**
+ * Checks for 5 matching box values in a row
+ *  If entered playing board size bigger than maxDynamicSize - check for winningLine number of consecutive identical values
+ *  Else the number of consecutive identical values is the same as size
+ * @param boardMatrix filled with values
+ * @param size of one dimension of the boardMatrix - defined by user
+ * @returns winning player ("X" | "O") or null if draw
+ */
 export const checkRows = (
-  boardMatrix: BoardValues[][],
+  boardMatrix: boardValues[][],
   size: number
-): BoardValues => {
+): boardValues => {
   let winningLength = size > maxDynamicSize ? winningLine : size;
   let count = 1;
   for (let i = 0; i < boardMatrix.length; i++) {
@@ -25,10 +33,16 @@ export const checkRows = (
   return null;
 };
 
-export const checkDiagonals = (arr: BoardValues[][]): BoardValues[][] => {
-  let positiveSlope: BoardValues[] = [];
-  let negativeSlope: BoardValues[] = [];
-  let finalArr: BoardValues[][] = [];
+/**
+ * To check for consecutive identical values in positive and negative diagonals
+ * Transforms original matrix so that it can be checked by checkRows function
+ * @param arr == boardMatrix filled with values
+ * @returns new matrix containing positive and negative slopes of the original matrix in rows (so that the new matrix can be checked by checkRows)
+ */
+export const checkDiagonals = <Type,>(arr: Type[][]) => {
+  let positiveSlope: Type[] = [];
+  let negativeSlope: Type[] = [];
+  let finalArr: Type[][] = [];
   for (var i = 0; i < arr.length * 2; i++) {
     for (var j = 0; j <= i; j++) {
       var k = i - j;
@@ -48,6 +62,12 @@ export const checkDiagonals = (arr: BoardValues[][]): BoardValues[][] => {
   return finalArr;
 };
 
+/**
+ * To check for consecutive identical values in columns
+ * Transforms original matrix so it can be checked by checkRows function
+ * @param m boardMatrix filled with values
+ * @returns transformed matrix
+ */
 /** inspiration: https://stackoverflow.com/questions/17428587/transposing-a-2d-array-in-javascript */
-export const transpose = (m: BoardValues[][]): BoardValues[][] =>
+export const transpose = <Type,>(m: Type[][]) =>
   m[0].map((_, i) => m.map((x) => x[i]));

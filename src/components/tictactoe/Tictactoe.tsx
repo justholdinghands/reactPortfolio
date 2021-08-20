@@ -3,6 +3,12 @@ import { checkDiagonals, checkRows, transpose } from "./GameLogic";
 import { theme } from "../../theme";
 import styled from "styled-components";
 
+export const Table = styled.table`
+  height: 100%;
+  width: 50%;
+  border: blue 2px solid;
+`;
+
 export const DivInput = styled.div`
   display: flex;
   justify-content: center;
@@ -44,7 +50,9 @@ export const DivWrapper = styled.div`
   flex-direction: column;
   align-items: center;
   justify-content: space-between;
-  height: 80vh;
+  height: 85.3vh;
+  width: 99.6vw;
+  border: 3px violet solid;
 `;
 
 export const InputBoardSize = styled.input`
@@ -57,30 +65,36 @@ export const InputBoardSize = styled.input`
 `;
 
 export const Box = styled.button`
-  height: 10vw;
-  width: 10vw;
+  padding: 0;
+  margin: 0;
+  min-height: 100%;
+  min-width: 100%;
   background-color: ${theme.tictactoe.box};
   color: ${theme.tictactoe.secondary};
-  font: 4vw/0 ${theme.tictactoe.fontPrimary};
+  font: 500%/0 ${theme.tictactoe.fontPrimary};
 `;
 
-export type BoardValues = "X" | "O" | null;
-export const PLAYER_X = "X";
-export const PLAYER_O = "O";
+export const PLAYER_X = "X" as const;
+export const PLAYER_O = "O" as const;
+export type boardValues = typeof PLAYER_X | typeof PLAYER_O | null;
 export const maxDynamicSize = 5;
 export const winningLine = 5;
 
 type State = {
   size: number;
-  boardMatrix: BoardValues[][];
+  boardMatrix: boardValues[][];
   xTurn: boolean;
-  winner: BoardValues;
+  winner: boardValues;
   gameOver: boolean;
   clickedXtimes: number;
 };
 
 type Props = {
   className?: string;
+};
+
+const initializeBoardMatrix = (size: number) => {
+  return Array.from({ length: size }, () => Array(size).fill(null));
 };
 
 export default class Tictactoe extends Component<Props, State> {
@@ -93,10 +107,6 @@ export default class Tictactoe extends Component<Props, State> {
     clickedXtimes: 0,
   };
 
-  initializeBoardMatrix = (value: string) => {
-    return [...Array(Number(value))].map(() => Array(Number(value)).fill(null));
-  };
-
   setSize = (e: ChangeEvent<HTMLInputElement>) => {
     this.setState((_p) => ({
       xTurn: true,
@@ -104,7 +114,7 @@ export default class Tictactoe extends Component<Props, State> {
       gameOver: false,
       clickedXtimes: 0,
       size: Number(e.target.value),
-      boardMatrix: this.initializeBoardMatrix(e.target.value),
+      boardMatrix: initializeBoardMatrix(Number(e.target.value)),
     }));
   };
 
@@ -129,7 +139,7 @@ export default class Tictactoe extends Component<Props, State> {
           };
         },
         () => {
-          let whoWon = this.checkWin();
+          const whoWon = this.checkWin();
           if (whoWon) {
             this.setState((_p) => ({
               gameOver: true,
@@ -184,23 +194,28 @@ export default class Tictactoe extends Component<Props, State> {
             />
           </DivInput>
         </DivWrapSettings>
-        <table>
+        <Table>
           <tbody>
-            {Array.from({ length: this.state.size }, (_, rowIndex) => {
-              return (
-                <tr key={rowIndex}>
-                  {Array.from({ length: this.state.size }, (_, columnIndex) => (
-                    <td key={columnIndex}>
-                      <Box onClick={() => this.move(rowIndex, columnIndex)}>
-                        {this.state.boardMatrix[rowIndex][columnIndex]}
-                      </Box>
-                    </td>
-                  ))}
-                </tr>
-              );
-            })}
+            {this.state.boardMatrix.map(
+              (boardRow: boardValues[], rowIndex: number) => {
+                return (
+                  <tr key={rowIndex}>
+                    {boardRow.map(
+                      (element: boardValues, columnIndex: number) => (
+                        <td
+                          key={columnIndex}
+                          onClick={() => this.move(rowIndex, columnIndex)}
+                        >
+                          <Box>{element}</Box>
+                        </td>
+                      )
+                    )}
+                  </tr>
+                );
+              }
+            )}
           </tbody>
-        </table>
+        </Table>
       </DivWrapper>
     );
   }
