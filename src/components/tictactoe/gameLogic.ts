@@ -1,4 +1,4 @@
-import { boardValues, maxDynamicSize, winningLine } from "./Tictactoe";
+import { BoardValues, maxDynamicSize, winningLine } from "./Tictactoe";
 
 /**
  * Checks for 5 matching box values in a row
@@ -9,9 +9,9 @@ import { boardValues, maxDynamicSize, winningLine } from "./Tictactoe";
  * @returns winning player ("X" | "O") or null if draw
  */
 export const checkRows = (
-  boardMatrix: boardValues[][],
+  boardMatrix: BoardValues[][],
   size: number
-): boardValues => {
+): BoardValues => {
   let winningLength = size > maxDynamicSize ? winningLine : size;
   let count = 1;
   for (let i = 0; i < boardMatrix.length; i++) {
@@ -39,7 +39,7 @@ export const checkRows = (
  * @param arr == boardMatrix filled with values
  * @returns new matrix containing positive and negative slopes of the original matrix in rows (so that the new matrix can be checked by checkRows)
  */
-export const checkDiagonals = <Type,>(arr: Type[][]) => {
+export const checkDiagonals = <Type>(arr: Type[][]) => {
   let positiveSlope: Type[] = [];
   let negativeSlope: Type[] = [];
   let finalArr: Type[][] = [];
@@ -67,7 +67,7 @@ export const checkDiagonals = <Type,>(arr: Type[][]) => {
  * Transforms original matrix so it can be checked by checkRows function
  * @param m boardMatrix filled with values
  * @returns transformed matrix
+ * inspiration: https://stackoverflow.com/questions/17428587/transposing-a-2d-array-in-javascript
  */
-/** inspiration: https://stackoverflow.com/questions/17428587/transposing-a-2d-array-in-javascript */
-export const transpose = <Type,>(m: Type[][]) =>
+export const transpose = <Type>(m: Type[][]) =>
   m[0].map((_, i) => m.map((x) => x[i]));

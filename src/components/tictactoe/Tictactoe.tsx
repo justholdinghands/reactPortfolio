@@ -1,5 +1,5 @@
 import { ChangeEvent, Component } from "react";
-import { checkDiagonals, checkRows, transpose } from "./GameLogic";
+import { checkDiagonals, checkRows, transpose } from "./gameLogic";
 import { theme } from "../../theme";
 import styled from "styled-components";
 
@@ -74,15 +74,15 @@ export const Box = styled.button`
 
 export const PLAYER_X = "X" as const;
 export const PLAYER_O = "O" as const;
-export type boardValues = typeof PLAYER_X | typeof PLAYER_O | null;
+export type BoardValues = typeof PLAYER_X | typeof PLAYER_O | null;
 export const maxDynamicSize = 5;
 export const winningLine = 5;
 
 type State = {
   size: number;
-  boardMatrix: boardValues[][];
+  boardMatrix: BoardValues[][];
   xTurn: boolean;
-  winner: boardValues;
+  winner: BoardValues;
   gameOver: boolean;
   clickedXtimes: number;
 };
@@ -92,21 +92,26 @@ type Props = {
 };
 
 const initializeBoardMatrix = (size: number) => {
-  return Array.from({ length: size }, () => Array(size).fill(null));
+  return Array.from({ length: size }, () =>
+    Array.from({ length: size }, () => null)
+  );
 };
 
 export default class Tictactoe extends Component<Props, State> {
-  state = {
-    size: 0,
-    boardMatrix: [],
-    xTurn: true,
-    winner: null,
-    gameOver: false,
-    clickedXtimes: 0,
-  };
+  constructor(props) {
+    super(props);
+    this.state = {
+      size: 0,
+      boardMatrix: [],
+      xTurn: true,
+      winner: null,
+      gameOver: false,
+      clickedXtimes: 0,
+    };
+  }
 
   setSize = (e: ChangeEvent<HTMLInputElement>) => {
-    this.setState((_p) => ({
+    this.setState(() => ({
       xTurn: true,
       winner: null,
       gameOver: false,
@@ -124,13 +129,13 @@ export default class Tictactoe extends Component<Props, State> {
       this.setState(
         (prevState) => {
           return {
-            boardMatrix: prevState.boardMatrix.map((arr, i) =>
-              arr.map((element, j) =>
+            boardMatrix: prevState.boardMatrix.map((row, i) =>
+              row.map((cell, j) =>
                 i === rowIndex && j === columnIndex
                   ? prevState.xTurn
                     ? PLAYER_X
                     : PLAYER_O
-                  : element
+                  : cell
               )
             ),
             xTurn: !prevState.xTurn,
@@ -170,6 +175,8 @@ export default class Tictactoe extends Component<Props, State> {
       clickedXtimes: prevState.clickedXtimes + 1,
     }));
 
+  avoidLeadingZero = () => Number(this.state.size).toString();
+
   render() {
     return (
       <DivWrapper>
@@ -179,14 +186,14 @@ export default class Tictactoe extends Component<Props, State> {
           )}
           {this.state.gameOver && (
             <DivResult>
-              {this.state.winner ? this.state.winner + " wins" : "Draw"}
+              {this.state.winner ? `${this.state.winner} wins` : "Draw"}
             </DivResult>
           )}
           <DivInput>
             <InputBoardSize
               type="number"
               onChange={this.setSize}
-              value={Number(this.state.size).toString()}
+              value={this.avoidLeadingZero()}
               min="2"
               max="50"
             />
@@ -194,24 +201,20 @@ export default class Tictactoe extends Component<Props, State> {
         </DivWrapSettings>
         <Table>
           <tbody>
-            {this.state.boardMatrix.map(
-              (boardRow: boardValues[], rowIndex: number) => {
-                return (
-                  <tr key={rowIndex}>
-                    {boardRow.map(
-                      (element: boardValues, columnIndex: number) => (
-                        <td
-                          key={columnIndex}
-                          onClick={() => this.move(rowIndex, columnIndex)}
-                        >
-                          <Box>{element}</Box>
-                        </td>
-                      )
-                    )}
-                  </tr>
-                );
-              }
-            )}
+            {this.state.boardMatrix.map((boardRow, rowIndex) => {
+              return (
+                <tr key={rowIndex}>
+                  {boardRow.map((cell, columnIndex) => (
+                    <td
+                      key={columnIndex}
+                      onClick={() => this.move(rowIndex, columnIndex)}
+                    >
+                      <Box>{cell}</Box>
+                    </td>
+                  ))}
+                </tr>
+              );
+            })}
           </tbody>
         </Table>
       </DivWrapper>
