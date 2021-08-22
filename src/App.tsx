@@ -5,7 +5,7 @@ import { theme } from "./theme";
 import { withRouter } from "react-router";
 import Counter from "./components/counter/Counter";
 import Hackertyper from "./components/hackertyper/Hackertyper";
-import TicTacToe from "./components/tictactoe/Tictactoe";
+import TicTacToe from "./components/tictactoe/tictactoe";
 import Todo from "./components/todo/Todo";
 import styled from "styled-components";
 

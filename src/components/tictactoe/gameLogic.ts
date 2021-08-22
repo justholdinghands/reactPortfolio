@@ -1,4 +1,4 @@
-import { BoardValues, maxDynamicSize, winningLine } from "./Tictactoe";
+import { BoardValues, maxDynamicSize, winningLine } from "./tictactoe";
 
 /**
  * Checks for 5 matching box values in a row

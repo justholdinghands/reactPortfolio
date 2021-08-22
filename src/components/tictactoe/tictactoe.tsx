@@ -98,27 +98,24 @@ const initializeBoardMatrix = (size: number) => {
 };
 
 export default class Tictactoe extends Component<Props, State> {
-  constructor(props) {
-    super(props);
-    this.state = {
-      size: 0,
-      boardMatrix: [],
-      xTurn: true,
-      winner: null,
-      gameOver: false,
-      clickedXtimes: 0,
-    };
-  }
+  state = {
+    size: 0,
+    boardMatrix: [],
+    xTurn: true,
+    winner: null,
+    gameOver: false,
+    clickedXtimes: 0,
+  } as State;
 
   setSize = (e: ChangeEvent<HTMLInputElement>) => {
-    this.setState(() => ({
+    this.setState({
       xTurn: true,
       winner: null,
       gameOver: false,
       clickedXtimes: 0,
       size: Number(e.target.value),
       boardMatrix: initializeBoardMatrix(Number(e.target.value)),
-    }));
+    });
   };
 
   move = (rowIndex: number, columnIndex: number) => {
@@ -144,10 +141,10 @@ export default class Tictactoe extends Component<Props, State> {
         () => {
           const whoWon = this.checkWin();
           if (whoWon) {
-            this.setState((_p) => ({
+            this.setState({
               gameOver: true,
               winner: whoWon,
-            }));
+            });
           }
         }
       );
