@@ -5,8 +5,8 @@ import { theme } from "./theme";
 import { withRouter } from "react-router";
 import Counter from "./components/counter/Counter";
 import Hackertyper from "./components/hackertyper/Hackertyper";
+import TicTacToe from "./components/tictactoe/tictactoe";
 import Todo from "./components/todo/Todo";
-
 import styled from "styled-components";
 
 const UlNav = styled.ul`
@@ -26,6 +26,8 @@ const GlobalStyle = createGlobalStyle<{ bgcolor: string }>`
         ? theme.hackertyper.background
         : props.bgcolor === "/todo"
         ? theme.todo.background
+        : props.bgcolor === "/tictactoe"
+        ? theme.tictactoe.background
         : ""};
     display: flex;
     flex-direction: column;
@@ -61,6 +63,11 @@ class App extends Component<{ location: any }> {
                   To Do List
                 </Link>
               </li>
+              <li>
+                <Link to="/tictactoe" style={{ textDecoration: "none" }}>
+                  Tic Tac Toe
+                </Link>
+              </li>
             </UlNav>
           </nav>
 
@@ -73,6 +80,9 @@ class App extends Component<{ location: any }> {
             </Route>
             <Route path="/todo">
               <Todo></Todo>
+            </Route>
+            <Route path="/tictactoe">
+              <TicTacToe></TicTacToe>
             </Route>
           </Switch>
         </div>
