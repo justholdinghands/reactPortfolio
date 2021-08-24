@@ -30,8 +30,8 @@ export const theme = {
   tictactoe: {
     primary: "#ff8133",
     secondary: "#0b454d",
-    box: "#5f3d33a7",
-    background: "#a1604664",
+    box: "#7a9ddd",
+    background: "#d1d1d1",
     textColor: "#ffffff",
     fontPrimary: '"Cabin Sketch", cursive',
     fontSecondary: "monospace",
