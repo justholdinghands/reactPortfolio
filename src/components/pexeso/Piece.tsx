@@ -40,7 +40,6 @@ type Props = {
 };
 
 const Piece = (props: Props) => {
-  const [isFlipped, setFlip] = useState(false);
   return (
     <ButtonPiece
       guessed={props.isGuessed}

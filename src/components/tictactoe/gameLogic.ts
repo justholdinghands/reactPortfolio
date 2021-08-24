@@ -1,8 +1,4 @@
-<<<<<<< HEAD
 import { BoardValues, maxDynamicSize, winningLine } from "./tictactoe";
-=======
-import { BoardValues, maxDynamicSize, winningLine } from "./Tictactoe";
->>>>>>> pexeso
 
 /**
  * Checks for 5 matching box values in a row
