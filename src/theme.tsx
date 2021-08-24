@@ -46,4 +46,13 @@ export const theme = {
     fontPrimary: "'Delius Swash Caps', cursive",
     fontSecondary: "monospace",
   },
+
+  blog: {
+    primary: "#33f8ff",
+    secondary: "#e4acb1",
+    background: "#495cb8",
+    textColor: "#df4f5b",
+    fontPrimary: "'Delius Swash Caps', cursive",
+    fontSecondary: "monospace",
+  },
 };
