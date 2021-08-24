@@ -30,10 +30,20 @@ export const theme = {
   tictactoe: {
     primary: "#ff8133",
     secondary: "#0b454d",
-    box: "#7a9ddd",
-    background: "#d1d1d1",
+    box: "#5f3d33a7",
+    background: "#a1604664",
     textColor: "#ffffff",
     fontPrimary: '"Cabin Sketch", cursive',
+    fontSecondary: "monospace",
+  },
+
+  pexeso: {
+    primary: "#33ff3d",
+    flipped: "#2b6d6d",
+    notFlipped: "#6d83ac",
+    background: "#212746",
+    textColor: "#bcb1ca",
+    fontPrimary: "'Delius Swash Caps', cursive",
     fontSecondary: "monospace",
   },
 };
