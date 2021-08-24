@@ -15,8 +15,8 @@ const PWinMessage = styled.p`
   text-align: center;
   width: 100vw;
   height: 0vh;
-  font: 5em/0 ${theme.pexeso.fontPrimary};
-  color: ${theme.pexeso.textColor};
+  font: 5em/0 ${theme.memoryGame.fontPrimary};
+  color: ${theme.memoryGame.textColor};
 `;
 
 type Props = {
@@ -76,7 +76,7 @@ const randomSort = (array: Card[]) => {
   return array.sort(() => 0.5 - Math.random());
 };
 
-const Pexeso = (props: Props) => {
+const MemoryGame = (props: Props) => {
   const [numberOfTries, setNumberOfTries] = useState<number>(0);
 
   const [flipTimeout, setFlipTimeout] =
@@ -174,4 +174,4 @@ const Pexeso = (props: Props) => {
   );
 };
 
-export default Pexeso;
+export default MemoryGame;

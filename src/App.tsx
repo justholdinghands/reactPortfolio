@@ -5,7 +5,7 @@ import { theme } from "./theme";
 import { withRouter } from "react-router";
 import Counter from "./components/counter/Counter";
 import Hackertyper from "./components/hackertyper/Hackertyper";
-import Pexeso from "./components/pexeso/Pexeso";
+import MemoryGame from "./components/memoryGame/MemoryGame";
 import TicTacToe from "./components/tictactoe/tictactoe";
 import Todo from "./components/todo/Todo";
 import styled from "styled-components";
@@ -29,8 +29,8 @@ const GlobalStyle = createGlobalStyle<{ bgcolor: string }>`
         ? theme.todo.background
         : props.bgcolor === "/tictactoe"
         ? theme.tictactoe.background
-        : props.bgcolor === "/pexeso"
-        ? theme.pexeso.background
+        : props.bgcolor === "/memoryGame"
+        ? theme.memoryGame.background
         : ""};
     display: flex;
     flex-direction: column;
@@ -72,8 +72,8 @@ class App extends Component<{ location: any }> {
                 </Link>
               </li>
               <li>
-                <Link to="/pexeso" style={{ textDecoration: "none" }}>
-                  Pexeso
+                <Link to="/memoryGame" style={{ textDecoration: "none" }}>
+                  Memory Game
                 </Link>
               </li>
             </UlNav>
@@ -92,8 +92,8 @@ class App extends Component<{ location: any }> {
             <Route path="/tictactoe">
               <TicTacToe></TicTacToe>
             </Route>
-            <Route path="/pexeso">
-              <Pexeso></Pexeso>
+            <Route path="/memoryGame">
+              <MemoryGame></MemoryGame>
             </Route>
           </Switch>
         </div>
