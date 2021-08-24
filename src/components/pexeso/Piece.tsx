@@ -2,16 +2,32 @@ import { Component, useState } from "react";
 import { theme } from "../../theme";
 import styled from "styled-components";
 
-const ButtonPiece = styled.button<{
+const ButtonPiece = styled.div<{
   flipped: boolean;
   image: string;
   guessed: boolean;
 }>`
+  margin: 0;
+  padding: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
   height: 20vh;
-  width: 23vw;
-  background: ${(props) => (props.guessed ? "red" : "")};
-  /* background: ${(props) =>
-    props.flipped ? props.image : theme.pexeso.notFlipped}; */
+  width: 20vw;
+  font: 2vw/0 ${theme.pexeso.fontPrimary};
+  color: ${theme.pexeso.textColor};
+  border: ${theme.pexeso.background} 2px solid;
+  border-radius: 5%;
+  background: ${(props) =>
+    props.guessed ? theme.pexeso.background : theme.pexeso.notFlipped};
+`;
+
+const Img = styled.img`
+  width: 100%;
+  height: 100%;
+  z-index: 1;
+  background-size: cover;
+  border-radius: 5%;
 `;
 
 type Props = {
@@ -24,7 +40,7 @@ type Props = {
 };
 
 const Piece = (props: Props) => {
-  // const [isFlipped, setFlip] = useState(false);
+  const [isFlipped, setFlip] = useState(false);
   return (
     <ButtonPiece
       guessed={props.isGuessed}
@@ -32,10 +48,8 @@ const Piece = (props: Props) => {
       onClick={props.onClick}
       image={props.image}
     >
-      {props.name}
-      {props.isFlippedNow && (
-        <img width="100%" height="100%" src={props.image} />
-      )}
+      {(props.isFlippedNow && <Img src={props.image} />) ||
+        (!props.isGuessed && "Turbellaria")}
     </ButtonPiece>
   );
 };

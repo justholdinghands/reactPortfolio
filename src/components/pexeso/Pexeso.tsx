@@ -1,15 +1,24 @@
-import { Component, useEffect, useState } from "react";
-import { faLessThanEqual } from "@fortawesome/free-solid-svg-icons";
-import { pipeline } from "stream";
+import { Component, useEffect, useRef, useState } from "react";
 import { theme } from "../../theme";
 import Piece from "./Piece";
 import styled from "styled-components";
-//styles
+
 const DivWrapper = styled.div`
-  border: red 2px solid;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-wrap: wrap;
+  height: 0vh;
 `;
 
-//logic
+const PWinMessage = styled.p`
+  text-align: center;
+  width: 100vw;
+  height: 0vh;
+  font: 5em/0 ${theme.pexeso.fontPrimary};
+  color: ${theme.pexeso.textColor};
+`;
+
 type Props = {
   className?: string;
 };
@@ -68,18 +77,27 @@ const randomSort = (array: Card[]) => {
 };
 
 const Pexeso = (props: Props) => {
+  const [numberOfTries, setNumberOfTries] = useState<number>(0);
+
+  const [flipTimeout, setFlipTimeout] =
+    useState<ReturnType<typeof setTimeout>>();
+
   const [matrix, setMatrix] = useState<Card[]>(
     randomSort([...cards, ...cards])
   );
 
   const [guessedArr, setGuessedArr] = useState<Card[]>([]);
 
-  // const [flippedNowArr, setflippedNowArr] = useState<Card[]>([]);
+  const [flippedNowArr, setflippedNowArr] = useState<Card[]>([]);
 
   useEffect(() => {
     const flipped = matrix.filter((piece) => piece.flippedNow);
     if (flipped.length === 2) {
-      setTimeout(checkMatch, 2000);
+      setFlipTimeout(
+        setTimeout(() => {
+          checkMatch();
+        }, 200)
+      );
     }
   }, [matrix]);
 
@@ -89,7 +107,7 @@ const Pexeso = (props: Props) => {
     if (flipped[0].name === flipped[1].name) {
       setGuessedArr((p) => [...p, ...flipped]);
       setMatrix((p) => p.map((piece) => ({ ...piece, flippedNow: false })));
-      // setflippedNowArr([]);
+      setflippedNowArr([]);
     } else {
       setTimeout(
         () =>
@@ -97,26 +115,33 @@ const Pexeso = (props: Props) => {
         500
       );
     }
+    setNumberOfTries((p) => p + 1);
+  };
+
+  const checkWin = () => {
+    return guessedArr.length === matrix.length;
   };
 
   const flip = (index: number) => {
     const flipped = matrix.filter((piece) => piece.flippedNow);
-    if (flipped.length === 1) {
-      // setflippedNowArr((p) => [...p, matrix[index]]);
-      setMatrix((p) =>
-        p.map((piece, i) =>
-          i === index ? { ...piece, flippedNow: true } : { ...piece }
-        )
-      );
-    } else {
-      // setflippedNowArr([matrix[index]]);
-      setMatrix((p) =>
-        p.map((piece, i) =>
-          i === index
-            ? { ...piece, flippedNow: true }
-            : { ...piece, flippedNow: false }
-        )
-      );
+    if (guessedArr.length !== matrix.length) {
+      if (flipped.length === 1) {
+        setflippedNowArr((p) => [...p, matrix[index]]);
+        setMatrix((p) =>
+          p.map((piece, i) =>
+            i === index ? { ...piece, flippedNow: true } : { ...piece }
+          )
+        );
+      } else {
+        setflippedNowArr([matrix[index]]);
+        setMatrix((p) =>
+          p.map((piece, i) =>
+            i === index
+              ? { ...piece, flippedNow: true }
+              : { ...piece, flippedNow: false }
+          )
+        );
+      }
     }
   };
 
@@ -125,11 +150,11 @@ const Pexeso = (props: Props) => {
     return guessedArr.some((piece) => card.name === piece.name);
   };
 
-  console.log(matrix);
-  console.log(guessedArr);
-
   return (
     <DivWrapper>
+      {checkWin() && (
+        <PWinMessage>You won in {numberOfTries} tries!</PWinMessage>
+      )}
       {matrix.map((e, index) => {
         return (
           <Piece
@@ -139,7 +164,9 @@ const Pexeso = (props: Props) => {
             image={e.image}
             isFlippedNow={matrix[index].flippedNow}
             isGuessed={checkGuessed(index)}
-            onClick={() => flip(index)}
+            onClick={() => {
+              checkGuessed(index) ? "" : flip(index);
+            }}
           ></Piece>
         );
       })}

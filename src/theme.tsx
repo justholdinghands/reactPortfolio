@@ -39,11 +39,11 @@ export const theme = {
 
   pexeso: {
     primary: "#33ff3d",
-    secondary: "#2b6d6d",
-    notFlipped: "#1747a0",
+    flipped: "#2b6d6d",
+    notFlipped: "#6d83ac",
     background: "#212746",
     textColor: "#bcb1ca",
-    fontPrimary: '"Cabin Sketch", cursive',
+    fontPrimary: "'Delius Swash Caps', cursive",
     fontSecondary: "monospace",
   },
 };
