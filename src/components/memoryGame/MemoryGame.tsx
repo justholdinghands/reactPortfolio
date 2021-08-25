@@ -30,6 +30,8 @@ type Card = {
   flippedNow: boolean;
 };
 
+const flipTime = 500;
+
 const cards: Card[] = [
   {
     name: "a",
@@ -87,13 +89,17 @@ const MemoryGame = (props: Props) => {
 
   const [flippedNowArr, setflippedNowArr] = useState<Card[]>([]);
 
+  const closeAllCards = () => {
+    setMatrix((p) => p.map((piece) => ({ ...piece, flippedNow: false })));
+  };
+
   useEffect(() => {
     const flipped = matrix.filter((piece) => piece.flippedNow);
     if (flipped.length === 2) {
       setFlipTimeout(
         setTimeout(() => {
           checkMatch();
-        }, 500)
+        }, flipTime)
       );
     }
   }, [matrix]);
@@ -103,14 +109,10 @@ const MemoryGame = (props: Props) => {
 
     if (flipped[0].name === flipped[1].name) {
       setGuessedArr((p) => [...p, ...flipped]);
-      setMatrix((p) => p.map((piece) => ({ ...piece, flippedNow: false })));
+      closeAllCards();
       setflippedNowArr([]);
     } else {
-      setTimeout(
-        () =>
-          setMatrix((p) => p.map((piece) => ({ ...piece, flippedNow: false }))),
-        500
-      );
+      setTimeout(() => closeAllCards(), flipTime);
     }
     setNumberOfTries((p) => p + 1);
   };
@@ -125,9 +127,10 @@ const MemoryGame = (props: Props) => {
       if (flipped.length === 1) {
         setflippedNowArr((p) => [...p, matrix[index]]);
         setMatrix((p) =>
-          p.map((piece, i) =>
-            i === index ? { ...piece, flippedNow: true } : { ...piece }
-          )
+          p.map((piece, i) => ({
+            ...piece,
+            flippedNow: i === index ? true : piece.flippedNow,
+          }))
         );
       } else {
         setflippedNowArr([matrix[index]]);
