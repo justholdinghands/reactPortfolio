@@ -1,3 +1,4 @@
+import { Blog } from "./components/blog/Blog";
 import { Component } from "react";
 import { Link, Route, BrowserRouter as Router, Switch } from "react-router-dom";
 import { createGlobalStyle } from "styled-components";
@@ -76,6 +77,11 @@ class App extends Component<{ location: any }> {
                   Pexeso
                 </Link>
               </li>
+              <li>
+                <Link to="/blog" style={{ textDecoration: "none" }}>
+                  Blog
+                </Link>
+              </li>
             </UlNav>
           </nav>
 
@@ -94,6 +100,9 @@ class App extends Component<{ location: any }> {
             </Route>
             <Route path="/pexeso">
               <Pexeso></Pexeso>
+            </Route>
+            <Route path="/blog">
+              <Blog></Blog>
             </Route>
           </Switch>
         </div>
