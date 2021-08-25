@@ -1,4 +1,5 @@
 import { Component, useEffect, useRef, useState } from "react";
+import { randomSort } from "./arrayUtils";
 import { theme } from "../../theme";
 import Piece from "./Piece";
 import styled from "styled-components";
@@ -72,12 +73,8 @@ const cards: Card[] = [
   },
 ];
 
-const randomSort = (array: Card[]) => {
-  return array.sort(() => 0.5 - Math.random());
-};
-
 const MemoryGame = (props: Props) => {
-  const [numberOfTries, setNumberOfTries] = useState<number>(0);
+  const [numberOfTries, setNumberOfTries] = useState(0);
 
   const [flipTimeout, setFlipTimeout] =
     useState<ReturnType<typeof setTimeout>>();
@@ -96,7 +93,7 @@ const MemoryGame = (props: Props) => {
       setFlipTimeout(
         setTimeout(() => {
           checkMatch();
-        }, 200)
+        }, 500)
       );
     }
   }, [matrix]);
@@ -135,11 +132,7 @@ const MemoryGame = (props: Props) => {
       } else {
         setflippedNowArr([matrix[index]]);
         setMatrix((p) =>
-          p.map((piece, i) =>
-            i === index
-              ? { ...piece, flippedNow: true }
-              : { ...piece, flippedNow: false }
-          )
+          p.map((piece, i) => ({ ...piece, flippedNow: i === index }))
         );
       }
     }
