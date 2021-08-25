@@ -36,4 +36,14 @@ export const theme = {
     fontPrimary: '"Cabin Sketch", cursive',
     fontSecondary: "monospace",
   },
+
+  memoryGame: {
+    primary: "#33ff3d",
+    flipped: "#2b6d6d",
+    notFlipped: "#6d83ac",
+    background: "#212746",
+    textColor: "#bcb1ca",
+    fontPrimary: "'Delius Swash Caps', cursive",
+    fontSecondary: "monospace",
+  },
 };
