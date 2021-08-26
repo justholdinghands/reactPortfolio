@@ -48,10 +48,10 @@ export const theme = {
   },
 
   blog: {
-    primary: "#33f8ff",
-    secondary: "#e4acb1",
-    background: "#495cb8",
-    textColor: "#df4f5b",
+    primary: "#7984b8",
+    secondary: "#7a3700",
+    background: "#3502027b",
+    textColor: "#b4a588",
     fontPrimary: "'Delius Swash Caps', cursive",
     fontSecondary: "monospace",
   },

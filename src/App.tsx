@@ -1,12 +1,21 @@
+import { Article } from "./components/blog/Article";
 import { Blog } from "./components/blog/Blog";
-import { Component } from "react";
-import { Link, Route, BrowserRouter as Router, Switch } from "react-router-dom";
+import { Component, useState } from "react";
+import { CreateArticle } from "./components/blog/CreateArticle";
+import {
+  Link,
+  Route,
+  RouteComponentProps,
+  BrowserRouter as Router,
+  Switch,
+} from "react-router-dom";
 import { createGlobalStyle } from "styled-components";
 import { theme } from "./theme";
 import { withRouter } from "react-router";
 import Counter from "./components/counter/Counter";
 import Hackertyper from "./components/hackertyper/Hackertyper";
 import Pexeso from "./components/pexeso/Pexeso";
+import React from "react";
 import TicTacToe from "./components/tictactoe/tictactoe";
 import Todo from "./components/todo/Todo";
 import styled from "styled-components";
@@ -40,11 +49,14 @@ const GlobalStyle = createGlobalStyle<{ bgcolor: string }>`
     width: 97vw;
   }`;
 
-class App extends Component<{ location: any }> {
+type appProps = {
+  routeProps: RouteComponentProps<{}>;
+  location: any;
+};
+class App extends Component<RouteComponentProps<{ location: any }>> {
   constructor(props) {
     super(props);
   }
-
   render() {
     return (
       <div>

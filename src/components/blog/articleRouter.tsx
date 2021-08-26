@@ -1,41 +1,16 @@
 import { Article } from "./Article";
 import { Blog, BlogContext } from "./Blog";
+import { CreateArticle } from "./CreateArticle";
 import { Link, Route, BrowserRouter as Router, Switch } from "react-router-dom";
 import { useContext } from "react";
+import styled from "styled-components";
 
-const URL_BASE = "";
+const URL_BASE = "/";
 
-export function ArticleRouter() {
-  const { blogs } = useContext(BlogContext);
-  return (
-    <Router>
-      <div>
-        <nav>
-          <link>
-            <div>
-              <Link to={URL_BASE}>All Posts</Link>
-            </div>
-            <div>
-              <Link to={URL_BASE + "NewPost"}>New Post</Link>
-            </div>
-          </link>
-        </nav>
+const NavWrapper = styled.nav`
+  display: flex;
+  flex-direction: row;
+  justify-content: space-evenly;
+`;
 
-        <Switch>
-          <Route path={URL_BASE + "NewPost"}>{/* <NewPost /> */}</Route>
-          {blogs.map((blog, index) => (
-            <Route
-              key={index}
-              path={URL_BASE + "Article/" + blog.blog.articleURL + "-"}
-            >
-              <Article blog={blog.blog} />
-            </Route>
-          ))}
-          <Route path={URL_BASE}>
-            <Blog />
-          </Route>
-        </Switch>
-      </div>
-    </Router>
-  );
-}
+export function ArticleRouter() {}
