@@ -1,5 +1,5 @@
 import { Article } from "./components/blog/Article";
-import { Blog } from "./components/blog/Blog";
+import { BlogComponent } from "./components/blog/Blog";
 import { Component, useState } from "react";
 import { CreateArticle } from "./components/blog/CreateArticle";
 import {
@@ -114,7 +114,7 @@ class App extends Component<RouteComponentProps<{ location: any }>> {
               <Pexeso></Pexeso>
             </Route>
             <Route path="/blog">
-              <Blog></Blog>
+              <BlogComponent></BlogComponent>
             </Route>
           </Switch>
         </div>

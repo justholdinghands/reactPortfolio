@@ -12,7 +12,7 @@ const P = styled.p`
   color: #6b3737;
 `;
 
-type Blog = {
+export type Blog = {
   blog: {
     author: string;
     title: string;
@@ -24,15 +24,15 @@ type Blog = {
 
 type BlogContextValue = {
   blogs: Blog[];
-  setBlogs: React.Dispatch<React.SetStateAction<Blog[]>>;
+  addBlog: React.Dispatch<React.SetStateAction<Blog[]>>;
 };
 
 export const BlogContext = React.createContext<BlogContextValue>(null as any);
 
 export const BASE_URL = "/blog/";
 
-export const Blog = () => {
-  const [blogs, setBlogs] = useState<Blog[]>([
+export const BlogComponent = () => {
+  const [blogs, addBlog] = useState<Blog[]>([
     {
       blog: {
         author: "Andrej",
@@ -101,8 +101,15 @@ export const Blog = () => {
     },
   ]);
 
+  useEffect(() => {
+    addBlog(JSON.parse(localStorage.getItem("blogs") as string));
+  }, []);
+  useEffect(() => {
+    localStorage.setItem("blogs", JSON.stringify(blogs));
+  }, [blogs]);
+
   return (
-    <BlogContext.Provider value={{ blogs, setBlogs }}>
+    <BlogContext.Provider value={{ blogs, addBlog }}>
       <NavWrapper>
         <div>
           <Link to={`${BASE_URL}AllPosts`}>All posts</Link>

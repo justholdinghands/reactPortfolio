@@ -1,6 +1,10 @@
 import { ArticleRouter } from "./articleRouter";
+import { Blog } from "./Blog";
+import { BlogContext } from "./Blog";
 import { theme } from "../../theme";
-import { useState } from "react";
+import { useContext, useState } from "react";
+import { useHistory } from "react-router-dom";
+import moment from "moment";
 import styled from "styled-components";
 
 const DivWrapper = styled.div`
@@ -8,44 +12,46 @@ const DivWrapper = styled.div`
   height: 50vh;
 `;
 
-type Blog = {
-  blog: {
-    author: string;
-    title: string;
-    text: string;
-    date: string;
-    articleURL: string;
-  };
-};
-
 type Props = {};
-
-type articleState = {
-  author: string;
-  title: string;
-  body: string;
-};
 
 export const CreateArticle = (_props: Props) => {
   const [articleState, setArticleState] = useState({
-    author: "",
-    title: "",
-    body: "",
-  } as articleState);
+    blog: { author: "", title: "", text: "", date: "", articleURL: "" },
+  } as Blog);
+  const blogContext = useContext(BlogContext);
+  const history = useHistory();
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    blogContext.addBlog((p) => [
+      ...p,
+      {
+        blog: {
+          ...articleState.blog,
+          date: moment().format("DD. MM. YYYY"),
+        },
+      },
+    ]);
+    history.push("/blog/AllPosts");
+  };
   const changeAttr = (e, attrToChange) =>
-    setArticleState((p) => ({ ...p, [attrToChange]: e.target.value }));
+    setArticleState((p) => {
+      return {
+        blog: {
+          ...p.blog,
+          [attrToChange]: e.target.value,
+          articleURL:
+            p.blog.title.replace(" ", "-") + Math.floor(Math.random() * 1000),
+        },
+      };
+    });
   return (
     <DivWrapper>
-      <form
-        onSubmit={(e) => {
-          e.preventDefault();
-        }}
-      >
+      <form onSubmit={(e) => handleSubmit(e)}>
         <label id="Author">
-          Author
           <input
             type="text"
-            value={articleState.author}
+            required
+            value={articleState.blog.author}
             onChange={(e) => changeAttr(e, "author")}
           />
         </label>
@@ -53,16 +59,17 @@ export const CreateArticle = (_props: Props) => {
           Title
           <input
             type="text"
-            value={articleState.title}
+            required
+            value={articleState.blog.title}
             onChange={(e) => changeAttr(e, "title")}
           />
         </label>
         <label id="Body">
           Body
-          <input
-            type="text"
-            value={articleState.body}
-            onChange={(e) => changeAttr(e, "body")}
+          <textarea
+            required
+            value={articleState.blog.text}
+            onChange={(e) => changeAttr(e, "text")}
           />
         </label>
         <button>Submit Article</button>
