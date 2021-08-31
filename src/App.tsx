@@ -53,11 +53,6 @@ const GlobalStyle = createGlobalStyle<{ bgcolor: string }>`
     height: 100vh;
     width: 97vw;
   }`;
-
-type appProps = {
-  routeProps: RouteComponentProps<{}>;
-  location: any;
-};
 class App extends Component<RouteComponentProps<{ location: any }>> {
   constructor(props) {
     super(props);
