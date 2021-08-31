@@ -1,5 +1,11 @@
 import { Component } from "react";
-import { Link, Route, BrowserRouter as Router, Switch } from "react-router-dom";
+import {
+  Link,
+  Route,
+  RouteComponentProps,
+  BrowserRouter as Router,
+  Switch,
+} from "react-router-dom";
 import { createGlobalStyle } from "styled-components";
 import { theme } from "./theme";
 import { withRouter } from "react-router";
@@ -39,7 +45,7 @@ const GlobalStyle = createGlobalStyle<{ bgcolor: string }>`
     width: 97vw;
   }`;
 
-class App extends Component<{ location: any }> {
+class App extends Component<RouteComponentProps<{ location: any }>> {
   constructor(props) {
     super(props);
   }
