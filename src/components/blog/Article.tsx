@@ -1,5 +1,4 @@
 import { BASE_URL } from "./Blog";
-import { Component, useEffect, useRef, useState } from "react";
 import { Link } from "react-router-dom";
 import { theme } from "../../theme";
 import marked from "marked";
@@ -9,17 +8,19 @@ const DivArticle = styled.div`
   display: flex;
   flex-direction: column;
   justify-content: space-between;
+  background: ${theme.blog.primary};
+  padding: 0.5em;
+  border-radius: 0.5em;
+  box-shadow: 12px 12px 2px 1px ${theme.blog.secondary};
   padding-bottom: 3em;
   overflow: hidden;
-  border: 2px solid blue;
   border-radius: 4px;
   -webkit-transition: all 0.3s ease;
   -o-transition: all 0.3s ease;
   transition: all 0.3s ease;
   border: solid 2px ${theme.blog.primary};
-  margin: 0.5em;
+  margin: 2em;
   width: 50vw;
-  height: 50vh;
 
   h1 {
     font-size: larger;
@@ -35,9 +36,10 @@ const DivTitle = styled.div`
   font-size: xx-large;
   line-height: 1em;
   padding: 0.2em;
-  background: ${theme.blog.secondary};
+  background: ${theme.blog.secondaryTextColor};
 `;
 const DivDate = styled.div`
+  padding: 0.5em;
   color: ${theme.blog.secondaryTextColor};
   font-size: x-large;
 `;
@@ -45,18 +47,17 @@ const DivDate = styled.div`
 const DivWrapAuthor = styled.div`
   display: flex;
   align-items: flex-end;
-  border: 2px white solid;
+  justify-content: flex-end;
 `;
 
 const DivAuthor = styled.div`
+  padding: 0.5em;
   color: ${theme.blog.secondaryTextColor};
   font-size: x-large;
 `;
 const DivBody = styled.div`
+  padding: 0.5em;
   font-size: small;
-  code {
-    overflow-x: visible;
-  }
 `;
 
 type Props = {

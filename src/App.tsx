@@ -45,7 +45,7 @@ const GlobalStyle = createGlobalStyle<{ bgcolor: string }>`
         : props.bgcolor === "/pexeso"
         ? theme.pexeso.background
         : blogRoutes.test(props.bgcolor)
-        ? theme.blog.primary
+        ? theme.blog.background
         : ""};
     display: flex;
     flex-direction: column;

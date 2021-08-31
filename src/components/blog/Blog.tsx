@@ -1,13 +1,13 @@
 import { Article } from "./Article";
-import { Component, useEffect, useRef, useState } from "react";
 import { CreateArticle } from "./CreateArticle";
 import { Link, Route, BrowserRouter as Router, Switch } from "react-router-dom";
 import { theme } from "../../theme";
+import { useEffect, useState } from "react";
 import React from "react";
 import styled from "styled-components";
 
 const DivCreate = styled.div`
-  height: 100%;
+  height: 100vh;
   background: ${theme.blog.background};
 `;
 
@@ -19,11 +19,17 @@ const NavWrapper = styled.nav`
   font: 2em ${theme.blog.fontPrimary};
   color: ${theme.blog.primaryTextColor};
   padding: 0.5em;
+  background: ${theme.blog.background};
+`;
+
+const NavDiv = styled.div`
   background: ${theme.blog.primary};
+  padding: 0.5em;
+  border-radius: 0.5em;
+  box-shadow: 12px 12px 2px 1px ${theme.blog.secondary};
 `;
 
 const DivFullWrapper = styled.div`
-  height: 100vh;
   width: 100vw;
   background: ${theme.blog.background};
 `;
@@ -38,30 +44,20 @@ const DivWrapper = styled.div`
   background: ${theme.blog.background};
 
   width: 100vw;
-  height: 100%;
   a {
     color: ${theme.blog.primaryTextColor};
     text-decoration: none;
   }
 `;
 
-const DivArticles = styled.div`
-  display: grid;
-  grid-gap: 1%;
-  grid-template-columns: repeat(auto-fit, minmax(50%, 2fr));
-  grid-auto-rows: 50%;
-  grid-auto-flow: dense;
-  padding-top: 5em;
-`;
+const DivArticles = styled.div``;
 
 export type Blog = {
-  blog: {
-    author: string;
-    title: string;
-    text: string;
-    date: string;
-    articleURL: string;
-  };
+  author: string;
+  title: string;
+  text: string;
+  date: string;
+  articleURL: string;
 };
 
 type BlogContextValue = {
@@ -88,13 +84,18 @@ export const BlogComponent = () => {
       <BlogContext.Provider value={{ blogs, addBlog }}>
         <DivWrapper>
           <NavWrapper>
-            <div>
+            <NavDiv>
               <Link to={`${BASE_URL}AllPosts`}>All posts</Link>
-            </div>
-            <div>
+            </NavDiv>
+            <NavDiv>
               <Link to={`${BASE_URL}NewPost`}>New Post</Link>
-            </div>
+            </NavDiv>
           </NavWrapper>
+          {blogs.map((blog, index) => (
+            <Route key={index} path={`${BASE_URL}${blog.articleURL}`}>
+              <Article blog={blog} fulltext={true} />
+            </Route>
+          ))}
           <Route path={`${BASE_URL}NewPost`}>
             <DivCreate>
               <CreateArticle></CreateArticle>
@@ -103,18 +104,12 @@ export const BlogComponent = () => {
           <Route path={`${BASE_URL}AllPosts`}>
             <DivArticles>
               {blogs.map((blog, index) => (
-                <Article key={index} blog={blog.blog} fulltext={false} />
+                <Article key={index} blog={blog} fulltext={false} />
               ))}
             </DivArticles>
-
-            {blogs.map((blog, index) => (
-              <Route key={index} path={`${BASE_URL}${blog.blog.articleURL}`}>
-                <Article blog={blog.blog} fulltext={true} />
-              </Route>
-            ))}
           </Route>
         </DivWrapper>
-      </BlogContext.Provider>
+      </BlogContext.Provider>{" "}
     </DivFullWrapper>
   );
 };
