@@ -16,7 +16,7 @@ const PWinMessage = styled.p`
   width: 100vw;
   height: 0vh;
   font: 5em/0 ${theme.pexeso.fontPrimary};
-  color: ${theme.pexeso.textColor};
+  color: ${theme.pexeso.primaryTextColor};
 `;
 
 type Props = {

@@ -29,7 +29,7 @@ export const DivResult = styled.div`
   width: 20vw;
   height: 20vh;
   font: 5em/0 ${theme.tictactoe.fontPrimary};
-  color: ${theme.tictactoe.textColor};
+  color: ${theme.tictactoe.primaryTextColor};
   background: ${theme.tictactoe.background};
 `;
 
@@ -40,7 +40,7 @@ export const DivTurn = styled.div`
   width: 20vw;
   height: 20vh;
   font: 5em/0 ${theme.tictactoe.fontPrimary};
-  color: ${theme.tictactoe.textColor};
+  color: ${theme.tictactoe.primaryTextColor};
   background: ${theme.tictactoe.background};
 `;
 

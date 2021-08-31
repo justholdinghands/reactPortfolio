@@ -28,6 +28,9 @@ const UlNav = styled.ul`
   font: bold 1.8em/150% ${theme.hackertyper.font};
 `;
 
+//prettier-ignore
+export const blogRoutes = new RegExp('^\/blog\/*.*$');
+
 const GlobalStyle = createGlobalStyle<{ bgcolor: string }>`
   body {
     background-color: ${(props) =>
@@ -41,6 +44,8 @@ const GlobalStyle = createGlobalStyle<{ bgcolor: string }>`
         ? theme.tictactoe.background
         : props.bgcolor === "/pexeso"
         ? theme.pexeso.background
+        : blogRoutes.test(props.bgcolor)
+        ? theme.blog.primary
         : ""};
     display: flex;
     flex-direction: column;

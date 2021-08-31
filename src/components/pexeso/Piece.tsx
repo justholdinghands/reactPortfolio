@@ -15,7 +15,7 @@ const ButtonPiece = styled.div<{
   height: 20vh;
   width: 20vw;
   font: 2vw/0 ${theme.pexeso.fontPrimary};
-  color: ${theme.pexeso.textColor};
+  color: ${theme.pexeso.primaryTextColor};
   border: ${theme.pexeso.background} 2px solid;
   border-radius: 5%;
   background: ${(props) =>

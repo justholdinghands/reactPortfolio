@@ -8,9 +8,30 @@ import moment from "moment";
 import styled from "styled-components";
 
 const DivWrapper = styled.div`
-  background: teal;
-  height: 50vh;
+  label {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+  }
+
+  textarea {
+    height: 50vh;
+  }
+
+  button {
+    margin-top: 1em;
+  }
+  padding: 3em;
+  overflow: hidden;
+  width: 80vw;
+  height: 100%;
 `;
+
+const P = styled.p`
+  font: 2em ${theme.blog.fontSecondary};
+`;
+
+const Form = styled.form``;
 
 type Props = {};
 
@@ -33,21 +54,23 @@ export const CreateArticle = (_props: Props) => {
     ]);
     history.push("/blog/AllPosts");
   };
+
   const changeAttr = (e, attrToChange) =>
     setArticleState((p) => {
       return {
         blog: {
           ...p.blog,
           [attrToChange]: e.target.value,
-          articleURL:
-            p.blog.title.replace(" ", "-") + Math.floor(Math.random() * 1000),
+          articleURL: p.blog.title + Math.floor(Math.random() * 1000),
         },
       };
     });
   return (
     <DivWrapper>
-      <form onSubmit={(e) => handleSubmit(e)}>
+      <P>Create a new article</P>
+      <Form onSubmit={(e) => handleSubmit(e)}>
         <label id="Author">
+          Author
           <input
             type="text"
             required
@@ -72,8 +95,8 @@ export const CreateArticle = (_props: Props) => {
             onChange={(e) => changeAttr(e, "text")}
           />
         </label>
-        <button>Submit Article</button>
-      </form>
+        <button type="submit">Submit</button>
+      </Form>
     </DivWrapper>
   );
 };
