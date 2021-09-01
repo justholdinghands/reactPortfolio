@@ -37,7 +37,7 @@ export const theme = {
     fontSecondary: "monospace",
   },
 
-  pexeso: {
+  memoryGame: {
     primary: "#33ff3d",
     flipped: "#2b6d6d",
     notFlipped: "#6d83ac",

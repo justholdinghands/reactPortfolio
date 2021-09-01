@@ -1,7 +1,5 @@
-import { Article } from "./components/blog/Article";
 import { BlogComponent } from "./components/blog/Blog";
 import { Component, useState } from "react";
-import { CreateArticle } from "./components/blog/CreateArticle";
 import {
   Link,
   Route,
@@ -14,8 +12,7 @@ import { theme } from "./theme";
 import { withRouter } from "react-router";
 import Counter from "./components/counter/Counter";
 import Hackertyper from "./components/hackertyper/Hackertyper";
-import Pexeso from "./components/pexeso/Pexeso";
-import React from "react";
+import MemoryGame from "./components/memoryGame/MemoryGame";
 import TicTacToe from "./components/tictactoe/tictactoe";
 import Todo from "./components/todo/Todo";
 import styled from "styled-components";
@@ -42,10 +39,10 @@ const GlobalStyle = createGlobalStyle<{ bgcolor: string }>`
         ? theme.todo.background
         : props.bgcolor === "/tictactoe"
         ? theme.tictactoe.background
-        : props.bgcolor === "/pexeso"
-        ? theme.pexeso.background
         : blogRoutes.test(props.bgcolor)
         ? theme.blog.background
+        : props.bgcolor === "/memoryGame"
+        ? theme.memoryGame.background
         : ""};
     display: flex;
     flex-direction: column;
@@ -53,11 +50,6 @@ const GlobalStyle = createGlobalStyle<{ bgcolor: string }>`
     height: 100vh;
     width: 97vw;
   }`;
-
-type appProps = {
-  routeProps: RouteComponentProps<{}>;
-  location: any;
-};
 class App extends Component<RouteComponentProps<{ location: any }>> {
   constructor(props) {
     super(props);
@@ -90,8 +82,8 @@ class App extends Component<RouteComponentProps<{ location: any }>> {
                 </Link>
               </li>
               <li>
-                <Link to="/pexeso" style={{ textDecoration: "none" }}>
-                  Pexeso
+                <Link to="/memoryGame" style={{ textDecoration: "none" }}>
+                  Memory Game
                 </Link>
               </li>
               <li>
@@ -115,8 +107,8 @@ class App extends Component<RouteComponentProps<{ location: any }>> {
             <Route path="/tictactoe">
               <TicTacToe></TicTacToe>
             </Route>
-            <Route path="/pexeso">
-              <Pexeso></Pexeso>
+            <Route path="/memoryGame">
+              <MemoryGame></MemoryGame>
             </Route>
             <Route path="/blog">
               <BlogComponent></BlogComponent>

@@ -14,12 +14,18 @@ const ButtonPiece = styled.div<{
   align-items: center;
   height: 20vh;
   width: 20vw;
+<<<<<<< HEAD:src/components/pexeso/Piece.tsx
   font: 2vw/0 ${theme.pexeso.fontPrimary};
   color: ${theme.pexeso.primaryTextColor};
   border: ${theme.pexeso.background} 2px solid;
+=======
+  font: 2vw/0 ${theme.memoryGame.fontPrimary};
+  color: ${theme.memoryGame.textColor};
+  border: ${theme.memoryGame.background} 2px solid;
+>>>>>>> 03fc82c0f00368a3ffa0a68809aec84bc7f13cc8:src/components/memoryGame/Piece.tsx
   border-radius: 5%;
   background: ${(props) =>
-    props.guessed ? theme.pexeso.background : theme.pexeso.notFlipped};
+    props.guessed ? theme.memoryGame.background : theme.memoryGame.notFlipped};
 `;
 
 const Img = styled.img`

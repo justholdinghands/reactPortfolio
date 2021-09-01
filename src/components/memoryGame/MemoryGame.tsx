@@ -1,4 +1,5 @@
 import { Component, useEffect, useRef, useState } from "react";
+import { randomSort } from "./arrayUtils";
 import { theme } from "../../theme";
 import Piece from "./Piece";
 import styled from "styled-components";
@@ -15,8 +16,13 @@ const PWinMessage = styled.p`
   text-align: center;
   width: 100vw;
   height: 0vh;
+<<<<<<< HEAD:src/components/pexeso/Pexeso.tsx
   font: 5em/0 ${theme.pexeso.fontPrimary};
   color: ${theme.pexeso.primaryTextColor};
+=======
+  font: 5em/0 ${theme.memoryGame.fontPrimary};
+  color: ${theme.memoryGame.textColor};
+>>>>>>> 03fc82c0f00368a3ffa0a68809aec84bc7f13cc8:src/components/memoryGame/MemoryGame.tsx
 `;
 
 type Props = {
@@ -28,6 +34,8 @@ type Card = {
   image: string;
   flippedNow: boolean;
 };
+
+const flipTime = 500;
 
 const cards: Card[] = [
   {
@@ -72,12 +80,8 @@ const cards: Card[] = [
   },
 ];
 
-const randomSort = (array: Card[]) => {
-  return array.sort(() => 0.5 - Math.random());
-};
-
-const Pexeso = (props: Props) => {
-  const [numberOfTries, setNumberOfTries] = useState<number>(0);
+const MemoryGame = (props: Props) => {
+  const [numberOfTries, setNumberOfTries] = useState(0);
 
   const [flipTimeout, setFlipTimeout] =
     useState<ReturnType<typeof setTimeout>>();
@@ -90,13 +94,17 @@ const Pexeso = (props: Props) => {
 
   const [flippedNowArr, setflippedNowArr] = useState<Card[]>([]);
 
+  const closeAllCards = () => {
+    setMatrix((p) => p.map((piece) => ({ ...piece, flippedNow: false })));
+  };
+
   useEffect(() => {
     const flipped = matrix.filter((piece) => piece.flippedNow);
     if (flipped.length === 2) {
       setFlipTimeout(
         setTimeout(() => {
           checkMatch();
-        }, 200)
+        }, flipTime)
       );
     }
   }, [matrix]);
@@ -106,14 +114,10 @@ const Pexeso = (props: Props) => {
 
     if (flipped[0].name === flipped[1].name) {
       setGuessedArr((p) => [...p, ...flipped]);
-      setMatrix((p) => p.map((piece) => ({ ...piece, flippedNow: false })));
+      closeAllCards();
       setflippedNowArr([]);
     } else {
-      setTimeout(
-        () =>
-          setMatrix((p) => p.map((piece) => ({ ...piece, flippedNow: false }))),
-        500
-      );
+      setTimeout(() => closeAllCards(), flipTime);
     }
     setNumberOfTries((p) => p + 1);
   };
@@ -128,18 +132,15 @@ const Pexeso = (props: Props) => {
       if (flipped.length === 1) {
         setflippedNowArr((p) => [...p, matrix[index]]);
         setMatrix((p) =>
-          p.map((piece, i) =>
-            i === index ? { ...piece, flippedNow: true } : { ...piece }
-          )
+          p.map((piece, i) => ({
+            ...piece,
+            flippedNow: i === index ? true : piece.flippedNow,
+          }))
         );
       } else {
         setflippedNowArr([matrix[index]]);
         setMatrix((p) =>
-          p.map((piece, i) =>
-            i === index
-              ? { ...piece, flippedNow: true }
-              : { ...piece, flippedNow: false }
-          )
+          p.map((piece, i) => ({ ...piece, flippedNow: i === index }))
         );
       }
     }
@@ -174,4 +175,4 @@ const Pexeso = (props: Props) => {
   );
 };
 
-export default Pexeso;
+export default MemoryGame;
