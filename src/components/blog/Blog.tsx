@@ -1,9 +1,8 @@
 import { Article } from "./Article";
 import { CreateArticle } from "./CreateArticle";
 import { Link, Route, BrowserRouter as Router, Switch } from "react-router-dom";
+import { genericContextBuilder } from "../../utils";
 import { theme } from "../../theme";
-import { useEffect, useState } from "react";
-import React from "react";
 import styled from "styled-components";
 import useLocalStorage from "use-local-storage";
 
@@ -61,21 +60,23 @@ export type Blog = {
   articleURL: string;
 };
 
-type BlogContextValue = {
-  blogs: Blog[];
-  addBlog: React.Dispatch<React.SetStateAction<Blog[]>>;
-};
-
-export const BlogContext = React.createContext<BlogContextValue>(null as any);
-
 export const BASE_URL = "/blog/";
 
-export const BlogComponent = () => {
+const useValue = () => {
   const [blogs, addBlog] = useLocalStorage("blogs", [] as Blog[]);
+  return {
+    blogs,
+    addBlog,
+  };
+};
 
+export const BlogContext = genericContextBuilder(useValue);
+
+export const BlogComponent = () => {
+  const context = useValue();
   return (
     <DivFullWrapper>
-      <BlogContext.Provider value={{ blogs, addBlog }}>
+      <BlogContext.Provider value={context}>
         <DivWrapper>
           <NavWrapper>
             <NavDiv>
@@ -85,9 +86,9 @@ export const BlogComponent = () => {
               <Link to={`${BASE_URL}NewPost`}>New Post</Link>
             </NavDiv>
           </NavWrapper>
-          {blogs.map((blog) => (
+          {context.blogs.map((blog) => (
             <Route
-              key={blog.articleURL}
+              key={`${blog.author}/${blog.articleURL}`}
               path={`${BASE_URL}${blog.author}/${blog.articleURL}`}
             >
               <Article blog={blog} fulltext={true} />
@@ -100,8 +101,12 @@ export const BlogComponent = () => {
           </Route>
           <Route path={`${BASE_URL}AllPosts`}>
             <DivArticles>
-              {blogs.map((blog) => (
-                <Article key={blog.articleURL} blog={blog} fulltext={false} />
+              {context.blogs.map((blog) => (
+                <Article
+                  key={`${blog.author}/${blog.articleURL}`}
+                  blog={blog}
+                  fulltext={false}
+                />
               ))}
             </DivArticles>
           </Route>

@@ -56,5 +56,6 @@ export const theme = {
     hoverTextColor: "#FFFFFF",
     fontPrimary: "'Roboto', sans-serif;",
     fontSecondary: "'Roboto', sans-serif;",
+    errorColor: "#ff0800",
   },
 };

@@ -1,9 +1,9 @@
 import { Blog } from "./Blog";
 import { BlogContext } from "./Blog";
+import { errorMessages } from "./errorMessages";
 import { theme } from "../../theme";
-import { useContext, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import { useHistory } from "react-router-dom";
-import moment from "moment";
 import slugify from "react-slugify";
 import styled from "styled-components";
 
@@ -16,11 +16,6 @@ const DivWrapper = styled.div`
     flex-direction: column;
     justify-content: center;
   }
-
-  textarea {
-    height: 50vh;
-  }
-
   button {
     margin-top: 1em;
   }
@@ -28,6 +23,29 @@ const DivWrapper = styled.div`
   overflow: hidden;
   width: 80vw;
   height: 100%;
+`;
+
+const Input = styled.input<{
+  valid: boolean;
+}>`
+  border: ${(props) =>
+    props.valid ? "0" : theme.blog.errorColor + " 2px solid"};
+  :focus {
+    outline: ${(props) =>
+      props.valid ? theme.blog.secondaryTextColor + " 2px solid" : "none"};
+  }
+`;
+
+const Textarea = styled.textarea<{
+  valid: boolean;
+}>`
+  height: 50vh;
+  border: ${(props) =>
+    props.valid ? "0" : theme.blog.errorColor + " 2px solid"};
+  :focus {
+    outline: ${(props) =>
+      props.valid ? theme.blog.secondaryTextColor + " 2px solid" : "none"};
+  }
 `;
 
 const Button = styled.button`
@@ -45,9 +63,9 @@ const P = styled.p`
   font: 2em ${theme.blog.fontSecondary};
 `;
 
-const Form = styled.form``;
-
-type articleAttributes = "author" | "title" | "text" | "articleURL";
+const PError = styled.p`
+  color: ${theme.blog.errorColor};
+`;
 
 export const CreateArticle = () => {
   const [articleState, setArticleState] = useState({
@@ -65,39 +83,45 @@ export const CreateArticle = () => {
 
   const history = useHistory();
 
-  const validate = () => {
+  useEffect(() => {
+    if (isUniqueUrl()) {
+      setUniqueErr("");
+    } else {
+      setUniqueErr(errorMessages.uniqueError);
+    }
+  }, [articleState.title, articleState.articleURL, articleState.author]);
+
+  const validateForm = () => {
     let validated = true;
     if (articleState.author) {
       setAuthorErr("");
     } else {
-      setAuthorErr("author cannot be empty");
       validated = false;
+      setAuthorErr(errorMessages.authorError);
     }
     if (articleState.title) {
       setTitleErr("");
     } else {
-      setTitleErr("title cannot be empty");
       validated = false;
+      setTitleErr(errorMessages.titleError);
     }
     if (articleState.text) {
       setTextErr("");
     } else {
-      setTextErr("text cannot be empty");
       validated = false;
+      setTextErr(errorMessages.bodyError);
     }
-    if (!isUniqueUrl(articleState.articleURL)) {
-      setUniqueErr("url is not unique");
+    if (!isUniqueUrl()) {
       validated = false;
+      setUniqueErr(errorMessages.uniqueError);
     }
     return validated;
   };
 
-  const isUniqueUrl = (url: string) => {
-    console.log(
-      !blogContext.blogs
-        .filter((blog) => blog.author === articleState.author)
-        .some((blog) => url === blog.articleURL)
-    );
+  const isUniqueUrl = () => {
+    let url = articleState.articleURL
+      ? slugify(articleState.articleURL)
+      : slugify(articleState.title);
     return !blogContext.blogs
       .filter((blog) => blog.author === articleState.author)
       .some((blog) => url === blog.articleURL);
@@ -105,7 +129,7 @@ export const CreateArticle = () => {
 
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    if (!validate()) {
+    if (!validateForm()) {
       return;
     }
     blogContext.addBlog((p) => [
@@ -121,94 +145,102 @@ export const CreateArticle = () => {
     history.push("/blog/AllPosts");
   };
 
-  const changeAttr = (
-    e:
-      | React.ChangeEvent<HTMLInputElement>
-      | React.ChangeEvent<HTMLTextAreaElement>,
-    attrToChange: articleAttributes
-  ) => {
+  const changeAuthor = (e: React.ChangeEvent<HTMLInputElement>) => {
+    if (e.target.value) {
+      setAuthorErr("");
+    } else {
+      setAuthorErr(errorMessages.authorError);
+    }
     setArticleState((p) => {
-      if (attrToChange === "articleURL" || attrToChange === "title") {
-        let url = articleState.articleURL
-          ? slugify(e.target.value)
-          : slugify(e.target.value);
-        console.log(url);
-        if (isUniqueUrl(url)) {
-          setUniqueErr("");
-        } else {
-          setUniqueErr("Url is not unique");
-        }
-      }
-
       return {
         ...p,
-        [attrToChange]: e.target.value,
+        author: e.target.value,
       };
     });
+  };
+
+  const changeTitle = (e: React.ChangeEvent<HTMLInputElement>) => {
     if (e.target.value) {
-      if (attrToChange === "author") {
-        setAuthorErr("");
-      }
-      if (attrToChange === "title") {
-        setTitleErr("");
-      }
-      if (attrToChange === "text") {
-        setTextErr("");
-      }
+      setTitleErr("");
     } else {
-      if (attrToChange === "author") {
-        setAuthorErr(attrToChange + " cannot be empty");
-      }
-      if (attrToChange === "title") {
-        setTitleErr(attrToChange + " cannot be empty");
-      }
-      if (attrToChange === "text") {
-        setTextErr(attrToChange + " cannot be empty");
-      }
+      setTitleErr(errorMessages.titleError);
     }
+    setArticleState((p) => {
+      return {
+        ...p,
+        title: e.target.value,
+      };
+    });
+  };
+
+  const changeUrl = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setArticleState((p) => {
+      return {
+        ...p,
+        articleURL: e.target.value,
+      };
+    });
+  };
+
+  const changeText = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
+    if (e.target.value) {
+      setTextErr("");
+    } else {
+      setTextErr(errorMessages.bodyError);
+    }
+    setArticleState((p) => {
+      return {
+        ...p,
+        text: e.target.value,
+      };
+    });
   };
   return (
     <DivWrapper>
       <P>Create a new article</P>
-      <Form onSubmit={(e) => handleSubmit(e)}>
+      <form onSubmit={(e) => handleSubmit(e)}>
         <label id="Author">
           Author
-          <input
+          <Input
+            valid={!authorErr ? true : false}
             type="text"
             value={articleState.author}
-            onChange={(e) => changeAttr(e, "author")}
+            onChange={(e) => changeAuthor(e)}
           />
-          {authorErr}
+          <PError>{authorErr}</PError>
         </label>
         <label id="Title">
           Title
-          <input
+          <Input
+            valid={!titleErr ? true : false}
             type="text"
             value={articleState.title}
-            onChange={(e) => changeAttr(e, "title")}
+            onChange={(e) => changeTitle(e)}
           />
-          {titleErr}
+          <PError>{titleErr}</PError>
         </label>
         <label id="Slug">
           Can I interest you in a custom URL?
-          <input
+          <Input
+            valid={!uniqueErr ? true : false}
             type="text"
             placeholder={slugify(articleState.title)}
             value={slugify(articleState.articleURL)}
-            onChange={(e) => changeAttr(e, "articleURL")}
+            onChange={(e) => changeUrl(e)}
           />
-          {uniqueErr}
+          <PError>{uniqueErr}</PError>
         </label>
         <label id="Body">
           Body
-          <textarea
+          <Textarea
+            valid={!textErr ? true : false}
             value={articleState.text}
-            onChange={(e) => changeAttr(e, "text")}
+            onChange={(e) => changeText(e)}
           />
-          {textErr}
+          <PError>{textErr}</PError>
         </label>
         <Button type="submit">Submit</Button>
-      </Form>
+      </form>
     </DivWrapper>
   );
 };
