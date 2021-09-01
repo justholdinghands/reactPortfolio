@@ -1,13 +1,16 @@
-import { ArticleRouter } from "./articleRouter";
 import { Blog } from "./Blog";
 import { BlogContext } from "./Blog";
 import { theme } from "../../theme";
 import { useContext, useState } from "react";
 import { useHistory } from "react-router-dom";
 import moment from "moment";
+import slugify from "react-slugify";
 import styled from "styled-components";
 
 const DivWrapper = styled.div`
+  background: ${theme.blog.secondary};
+  border-radius: 1em;
+  margin-top: 2em;
   label {
     display: flex;
     flex-direction: column;
@@ -27,42 +30,58 @@ const DivWrapper = styled.div`
   height: 100%;
 `;
 
+const Button = styled.button`
+  background: ${theme.blog.primary};
+  padding: 0.5em;
+  border-radius: 0.5em;
+  box-shadow: 2px 2px 1px 1px ${theme.blog.secondary};
+  :hover {
+    color: ${theme.blog.hoverTextColor};
+    background: ${theme.blog.background};
+  }
+`;
+
 const P = styled.p`
   font: 2em ${theme.blog.fontSecondary};
 `;
 
 const Form = styled.form``;
 
-type Props = {};
+type articleAttributes = "author" | "title" | "text";
 
-export const CreateArticle = (_props: Props) => {
+export const CreateArticle = () => {
   const [articleState, setArticleState] = useState({
-    blog: { author: "", title: "", text: "", date: "", articleURL: "" },
+    author: "",
+    title: "",
+    text: "",
+    date: "",
+    articleURL: "",
   } as Blog);
   const blogContext = useContext(BlogContext);
   const history = useHistory();
-  const handleSubmit = (e) => {
+  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     blogContext.addBlog((p) => [
       ...p,
       {
-        blog: {
-          ...articleState.blog,
-          date: moment().format("DD. MM. YYYY"),
-        },
+        ...articleState,
+        date: moment().format("DD. MM. YYYY"),
       },
     ]);
     history.push("/blog/AllPosts");
   };
 
-  const changeAttr = (e, attrToChange) =>
+  const changeAttr = (
+    e:
+      | React.ChangeEvent<HTMLInputElement>
+      | React.ChangeEvent<HTMLTextAreaElement>,
+    attrToChange: articleAttributes
+  ) =>
     setArticleState((p) => {
       return {
-        blog: {
-          ...p.blog,
-          [attrToChange]: e.target.value,
-          articleURL: p.blog.title + Math.floor(Math.random() * 1000),
-        },
+        ...p,
+        [attrToChange]: e.target.value,
+        articleURL: slugify(p.title) + Math.floor(Math.random() * 1000),
       };
     });
   return (
@@ -74,7 +93,7 @@ export const CreateArticle = (_props: Props) => {
           <input
             type="text"
             required
-            value={articleState.blog.author}
+            value={articleState.author}
             onChange={(e) => changeAttr(e, "author")}
           />
         </label>
@@ -83,7 +102,7 @@ export const CreateArticle = (_props: Props) => {
           <input
             type="text"
             required
-            value={articleState.blog.title}
+            value={articleState.title}
             onChange={(e) => changeAttr(e, "title")}
           />
         </label>
@@ -91,11 +110,11 @@ export const CreateArticle = (_props: Props) => {
           Body
           <textarea
             required
-            value={articleState.blog.text}
+            value={articleState.text}
             onChange={(e) => changeAttr(e, "text")}
           />
         </label>
-        <button type="submit">Submit</button>
+        <Button type="submit">Submit</Button>
       </Form>
     </DivWrapper>
   );

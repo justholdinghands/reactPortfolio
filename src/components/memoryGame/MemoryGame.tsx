@@ -16,13 +16,8 @@ const PWinMessage = styled.p`
   text-align: center;
   width: 100vw;
   height: 0vh;
-<<<<<<< HEAD:src/components/pexeso/Pexeso.tsx
-  font: 5em/0 ${theme.pexeso.fontPrimary};
-  color: ${theme.pexeso.primaryTextColor};
-=======
   font: 5em/0 ${theme.memoryGame.fontPrimary};
-  color: ${theme.memoryGame.textColor};
->>>>>>> 03fc82c0f00368a3ffa0a68809aec84bc7f13cc8:src/components/memoryGame/MemoryGame.tsx
+  color: ${theme.memoryGame.primaryTextColor};
 `;
 
 type Props = {
