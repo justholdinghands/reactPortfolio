@@ -48,13 +48,12 @@ export const theme = {
   },
 
   blog: {
-    primary: "#cffaf6 ",
-    secondary: "#7ebdb485",
-    background: "#ffffff",
-    primaryTextColor: "#00d1c0",
-    secondaryTextColor: "#1a3a36",
-    hoverTextColor: "#FFFFFF",
-    fontPrimary: "'Roboto', sans-serif;",
-    fontSecondary: "'Roboto', sans-serif;",
+    primary: "#26c0b3 ",
+    secondary: "#4eb9ab85",
+    background: "#001614",
+    primaryTextColor: "#cffaf6",
+    secondaryTextColor: "#4eb9b0",
+    fontPrimary: "'Delius Swash Caps', cursive",
+    fontSecondary: "'Arima Madurai', cursive",
   },
 };
