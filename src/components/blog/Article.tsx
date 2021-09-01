@@ -2,6 +2,7 @@ import { BASE_URL } from "./Blog";
 import { Link } from "react-router-dom";
 import { theme } from "../../theme";
 import marked from "marked";
+import moment from "moment";
 import styled from "styled-components";
 
 const DivArticle = styled.div`
@@ -13,6 +14,7 @@ const DivArticle = styled.div`
   border-radius: 0.5em;
   box-shadow: 12px 12px 2px 1px ${theme.blog.secondary};
   padding-bottom: 3em;
+  word-wrap: break-word;
   overflow: hidden;
   border-radius: 4px;
   -webkit-transition: all 0.3s ease;
@@ -72,27 +74,29 @@ type Props = {
 };
 
 export const Article = (props: Props) => {
-  function createMarkup() {
+  const createMarkup = () => {
     const articleBody = marked(
       props.fulltext ? props.blog.text : props.blog.text.slice(0, 200)
     );
     return {
       __html: articleBody,
     };
-  }
+  };
 
   return (
     <div>
       <div>
         <DivArticle>
-          {props.fulltext === false ? (
-            <Link to={`${BASE_URL}${props.blog.articleURL}`}>
+          {props.fulltext ? (
+            <DivTitle>{props.blog.title}</DivTitle>
+          ) : (
+            <Link
+              to={`${BASE_URL}${props.blog.author}/${props.blog.articleURL}`}
+            >
               <DivTitle>{props.blog.title}</DivTitle>
             </Link>
-          ) : (
-            <DivTitle>{props.blog.title}</DivTitle>
           )}
-          <DivDate>{props.blog.date}</DivDate>
+          <DivDate>{moment(props.blog.date).format("DD. MM. YYYY")}</DivDate>
           <DivBody dangerouslySetInnerHTML={createMarkup()}></DivBody>
           <DivWrapAuthor>
             <DivAuthor>{props.blog.author}</DivAuthor>

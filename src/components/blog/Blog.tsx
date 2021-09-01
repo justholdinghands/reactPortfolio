@@ -5,6 +5,7 @@ import { theme } from "../../theme";
 import { useEffect, useState } from "react";
 import React from "react";
 import styled from "styled-components";
+import useLocalStorage from "use-local-storage";
 
 const DivCreate = styled.div`
   height: 100vh;
@@ -70,14 +71,7 @@ export const BlogContext = React.createContext<BlogContextValue>(null as any);
 export const BASE_URL = "/blog/";
 
 export const BlogComponent = () => {
-  const [blogs, addBlog] = useState([] as Blog[]);
-
-  useEffect(() => {
-    addBlog(JSON.parse(localStorage.getItem("blogs") as string));
-  }, []);
-  useEffect(() => {
-    localStorage.setItem("blogs", JSON.stringify(blogs));
-  }, [blogs]);
+  const [blogs, addBlog] = useLocalStorage("blogs", [] as Blog[]);
 
   return (
     <DivFullWrapper>
@@ -91,8 +85,11 @@ export const BlogComponent = () => {
               <Link to={`${BASE_URL}NewPost`}>New Post</Link>
             </NavDiv>
           </NavWrapper>
-          {blogs.map((blog, index) => (
-            <Route key={index} path={`${BASE_URL}${blog.articleURL}`}>
+          {blogs.map((blog) => (
+            <Route
+              key={blog.articleURL}
+              path={`${BASE_URL}${blog.author}/${blog.articleURL}`}
+            >
               <Article blog={blog} fulltext={true} />
             </Route>
           ))}
@@ -103,8 +100,8 @@ export const BlogComponent = () => {
           </Route>
           <Route path={`${BASE_URL}AllPosts`}>
             <DivArticles>
-              {blogs.map((blog, index) => (
-                <Article key={index} blog={blog} fulltext={false} />
+              {blogs.map((blog) => (
+                <Article key={blog.articleURL} blog={blog} fulltext={false} />
               ))}
             </DivArticles>
           </Route>
