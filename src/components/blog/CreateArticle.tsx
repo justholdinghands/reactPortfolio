@@ -2,7 +2,7 @@ import { Blog } from "./Blog";
 import { BlogContext } from "./Blog";
 import { errorMessages } from "./errorMessages";
 import { theme } from "../../theme";
-import { useContext, useEffect, useState } from "react";
+import { useContext, useState } from "react";
 import { useHistory } from "react-router-dom";
 import slugify from "react-slugify";
 import styled from "styled-components";
@@ -67,6 +67,13 @@ const PError = styled.p`
   color: ${theme.blog.errorColor};
 `;
 
+type errorTypes = {
+  authorErr: string;
+  titleErr: string;
+  textErr: string;
+  uniqueErr: string;
+};
+
 export const CreateArticle = () => {
   const [articleState, setArticleState] = useState({
     author: "",
@@ -76,54 +83,60 @@ export const CreateArticle = () => {
     articleURL: "",
   } as Blog);
   const blogContext = useContext(BlogContext);
-  const [authorErr, setAuthorErr] = useState("");
-  const [titleErr, setTitleErr] = useState("");
-  const [textErr, setTextErr] = useState("");
-  const [uniqueErr, setUniqueErr] = useState("");
+  const [errorMessage, setErrorMessage] = useState({
+    authorErr: "",
+    titleErr: "",
+    textErr: "",
+    uniqueErr: "",
+  } as errorTypes);
 
   const history = useHistory();
-
-  useEffect(() => {
-    if (isUniqueUrl()) {
-      setUniqueErr("");
-    } else {
-      setUniqueErr(errorMessages.uniqueError);
-    }
-  }, [articleState.title, articleState.articleURL, articleState.author]);
 
   const validateForm = () => {
     let validated = true;
     if (articleState.author) {
-      setAuthorErr("");
+      setErrorMessage((p) => ({ ...p, authorErr: "" }));
     } else {
       validated = false;
-      setAuthorErr(errorMessages.authorError);
+      setErrorMessage((p) => ({
+        ...p,
+        authorErr: errorMessages.authorError,
+      }));
     }
     if (articleState.title) {
-      setTitleErr("");
+      setErrorMessage((p) => ({ ...p, titleErr: "" }));
     } else {
       validated = false;
-      setTitleErr(errorMessages.titleError);
+      setErrorMessage((p) => ({
+        ...p,
+        titleErr: errorMessages.titleError,
+      }));
     }
     if (articleState.text) {
-      setTextErr("");
+      setErrorMessage((p) => ({ ...p, textErr: "" }));
     } else {
       validated = false;
-      setTextErr(errorMessages.bodyError);
+      setErrorMessage((p) => ({
+        ...p,
+        textErr: errorMessages.textError,
+      }));
     }
-    if (!isUniqueUrl()) {
+    let url = articleState.articleURL
+      ? slugify(articleState.articleURL)
+      : slugify(articleState.title);
+    if (!isUniqueUrl(url, articleState.author)) {
       validated = false;
-      setUniqueErr(errorMessages.uniqueError);
+      setErrorMessage((p) => ({
+        ...p,
+        uniqueErr: errorMessages.uniqueError,
+      }));
     }
     return validated;
   };
 
-  const isUniqueUrl = () => {
-    let url = articleState.articleURL
-      ? slugify(articleState.articleURL)
-      : slugify(articleState.title);
+  const isUniqueUrl = (url: string, author: string) => {
     return !blogContext.blogs
-      .filter((blog) => blog.author === articleState.author)
+      .filter((blog) => blog.author === author)
       .some((blog) => url === blog.articleURL);
   };
 
@@ -147,9 +160,12 @@ export const CreateArticle = () => {
 
   const changeAuthor = (e: React.ChangeEvent<HTMLInputElement>) => {
     if (e.target.value) {
-      setAuthorErr("");
+      setErrorMessage((p) => ({ ...p, authorErr: "" }));
     } else {
-      setAuthorErr(errorMessages.authorError);
+      setErrorMessage((p) => ({
+        ...p,
+        authorErr: errorMessages.authorError,
+      }));
     }
     setArticleState((p) => {
       return {
@@ -157,13 +173,27 @@ export const CreateArticle = () => {
         author: e.target.value,
       };
     });
+    let url = articleState.articleURL
+      ? slugify(articleState.articleURL)
+      : slugify(articleState.title);
+    if (isUniqueUrl(url, e.target.value)) {
+      setErrorMessage((p) => ({ ...p, uniqueErr: "" }));
+    } else {
+      setErrorMessage((p) => ({
+        ...p,
+        uniqueErr: errorMessages.uniqueError,
+      }));
+    }
   };
 
   const changeTitle = (e: React.ChangeEvent<HTMLInputElement>) => {
     if (e.target.value) {
-      setTitleErr("");
+      setErrorMessage((p) => ({ ...p, titleErr: "" }));
     } else {
-      setTitleErr(errorMessages.titleError);
+      setErrorMessage((p) => ({
+        ...p,
+        titleErr: errorMessages.titleError,
+      }));
     }
     setArticleState((p) => {
       return {
@@ -171,6 +201,17 @@ export const CreateArticle = () => {
         title: e.target.value,
       };
     });
+    let url = articleState.articleURL
+      ? slugify(articleState.articleURL)
+      : slugify(e.target.value);
+    if (isUniqueUrl(url, articleState.author)) {
+      setErrorMessage((p) => ({ ...p, uniqueErr: "" }));
+    } else {
+      setErrorMessage((p) => ({
+        ...p,
+        uniqueErr: errorMessages.uniqueError,
+      }));
+    }
   };
 
   const changeUrl = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -180,13 +221,27 @@ export const CreateArticle = () => {
         articleURL: e.target.value,
       };
     });
+    let url = e.target.value
+      ? slugify(e.target.value)
+      : slugify(articleState.title);
+    if (isUniqueUrl(url, articleState.author)) {
+      setErrorMessage((p) => ({ ...p, uniqueErr: "" }));
+    } else {
+      setErrorMessage((p) => ({
+        ...p,
+        uniqueErr: errorMessages.uniqueError,
+      }));
+    }
   };
 
   const changeText = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
     if (e.target.value) {
-      setTextErr("");
+      setErrorMessage((p) => ({ ...p, textErr: "" }));
     } else {
-      setTextErr(errorMessages.bodyError);
+      setErrorMessage((p) => ({
+        ...p,
+        textErr: errorMessages.textError,
+      }));
     }
     setArticleState((p) => {
       return {
@@ -198,46 +253,46 @@ export const CreateArticle = () => {
   return (
     <DivWrapper>
       <P>Create a new article</P>
-      <form onSubmit={(e) => handleSubmit(e)}>
+      <form onSubmit={handleSubmit}>
         <label id="Author">
           Author
           <Input
-            valid={!authorErr ? true : false}
+            valid={!errorMessage.authorErr}
             type="text"
             value={articleState.author}
-            onChange={(e) => changeAuthor(e)}
+            onChange={changeAuthor}
           />
-          <PError>{authorErr}</PError>
+          <PError>{errorMessage.authorErr}</PError>
         </label>
         <label id="Title">
           Title
           <Input
-            valid={!titleErr ? true : false}
+            valid={!errorMessage.titleErr}
             type="text"
             value={articleState.title}
-            onChange={(e) => changeTitle(e)}
+            onChange={changeTitle}
           />
-          <PError>{titleErr}</PError>
+          <PError>{errorMessage.titleErr}</PError>
         </label>
         <label id="Slug">
           Can I interest you in a custom URL?
           <Input
-            valid={!uniqueErr ? true : false}
+            valid={!errorMessage.uniqueErr}
             type="text"
             placeholder={slugify(articleState.title)}
             value={slugify(articleState.articleURL)}
-            onChange={(e) => changeUrl(e)}
+            onChange={changeUrl}
           />
-          <PError>{uniqueErr}</PError>
+          <PError>{errorMessage.uniqueErr}</PError>
         </label>
         <label id="Body">
           Body
           <Textarea
-            valid={!textErr ? true : false}
+            valid={!errorMessage.textErr}
             value={articleState.text}
-            onChange={(e) => changeText(e)}
+            onChange={changeText}
           />
-          <PError>{textErr}</PError>
+          <PError>{errorMessage.textErr}</PError>
         </label>
         <Button type="submit">Submit</Button>
       </form>
