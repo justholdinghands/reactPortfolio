@@ -1,0 +1,24 @@
+{
+  "files": {
+    "main.css": "/reactPortfolio/static/css/main.6dea0f05.chunk.css",
+    "main.js": "/reactPortfolio/static/js/main.49ca199a.chunk.js",
+    "main.js.map": "/reactPortfolio/static/js/main.49ca199a.chunk.js.map",
+    "runtime-main.js": "/reactPortfolio/static/js/runtime-main.5edc8aea.js",
+    "runtime-main.js.map": "/reactPortfolio/static/js/runtime-main.5edc8aea.js.map",
+    "static/js/2.fdbb0cc9.chunk.js": "/reactPortfolio/static/js/2.fdbb0cc9.chunk.js",
+    "static/js/2.fdbb0cc9.chunk.js.map": "/reactPortfolio/static/js/2.fdbb0cc9.chunk.js.map",
+    "static/js/3.fb243641.chunk.js": "/reactPortfolio/static/js/3.fb243641.chunk.js",
+    "static/js/3.fb243641.chunk.js.map": "/reactPortfolio/static/js/3.fb243641.chunk.js.map",
+    "index.html": "/reactPortfolio/index.html",
+    "static/css/main.6dea0f05.chunk.css.map": "/reactPortfolio/static/css/main.6dea0f05.chunk.css.map",
+    "static/js/2.fdbb0cc9.chunk.js.LICENSE.txt": "/reactPortfolio/static/js/2.fdbb0cc9.chunk.js.LICENSE.txt",
+    "static/media/pink-axo-vertical.d65f91ee.gif": "/reactPortfolio/static/media/pink-axo-vertical.d65f91ee.gif",
+    "static/media/white-axo-side.0dfb56ba.gif": "/reactPortfolio/static/media/white-axo-side.0dfb56ba.gif"
+  },
+  "entrypoints": [
+    "static/js/runtime-main.5edc8aea.js",
+    "static/js/2.fdbb0cc9.chunk.js",
+    "static/css/main.6dea0f05.chunk.css",
+    "static/js/main.49ca199a.chunk.js"
+  ]
+}
