@@ -1,4 +1,4 @@
-import { BASE_URL } from "./Blog";
+import { BASE_URL, Blog } from "./Blog";
 import { Link } from "react-router-dom";
 import { theme } from "../../theme";
 import marked from "marked";
@@ -63,13 +63,7 @@ const DivBody = styled.div`
 `;
 
 type Props = {
-  blog: {
-    author: string;
-    title: string;
-    text: string;
-    date: string;
-    articleURL: string;
-  };
+  blog: Blog;
   fulltext: boolean;
 };
 
