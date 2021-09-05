@@ -1,4 +1,7 @@
 export const theme = {
+  global: {
+    borderColor: "#b5b5b5",
+  },
   counter: {
     primary: "#ffdab7",
     plus: "#7ccbff",
@@ -14,7 +17,8 @@ export const theme = {
     backgroundGranted: "#585858",
     denied: "#fd3131",
     backgroundDenied: "#5a0000",
-    font: "mono",
+    fontSecondary: "'Press Start 2P', cursive;",
+    fontPrimary: "'IBM Plex Mono', monospace",
   },
   todo: {
     accent: "#ead7d7",

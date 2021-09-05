@@ -1,7 +1,6 @@
+import { Component } from "react";
 import { theme } from "./../../theme";
-import { withRouter } from "react-router";
 import Button from "./Button";
-import React, { Component } from "react";
 import pinkAxo from "./imgs/pink-axo-vertical.gif";
 import styled from "styled-components";
 import whiteAxo from "./imgs/white-axo-side.gif";
@@ -17,16 +16,20 @@ type Props = {
 // styled-components definition
 const DivMain = styled.div`
   * {
-    padding: 0;
-    margin: 0;
     color: ${theme.counter.primary};
     font: ${theme.counter.fontPrimary};
   }
 
+  width: 100%;
   display: flex;
   flex-direction: row;
   justify-content: center;
   align-items: center;
+`;
+
+const DivWrapCounter = styled.div`
+  width: 50%;
+  border: green 2px solid;
 `;
 
 const DivBtns = styled.div`
@@ -49,26 +52,30 @@ const DivCount = styled.div`
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  width: 100vw;
-  height: 80vh;
+  width: 100%;
+  height: 80%;
   overflow: hidden;
+  border: yellow 2px solid;
+`;
+
+const DivAxos = styled.div`
+  width: 100%;
+  border: orange 2px solid;
 `;
 
 const ImgWAxo = styled.img`
   display: block;
   position: absolute;
-  left: 10rem;
   transform: scaleX(-1);
   height: 165px;
-  margin-top: -25vh;
+  border: white 2px solid;
 `;
 
 const ImgPAxo = styled.img`
   display: block;
   position: absolute;
-  right: 10rem;
-  margin-top: 30vh;
   height: 150px;
+  border: pink 2px solid;
 `;
 
 export default class Counter extends Component<Props, State> {
@@ -95,36 +102,40 @@ export default class Counter extends Component<Props, State> {
     var { count } = this.state;
     return (
       <DivMain id="main-div" className="counter">
-        <ImgWAxo
-          className="white-axo"
-          src={whiteAxo}
-          alt="white-axolotl"
-        ></ImgWAxo>
-        <DivCount id="count-div">
-          <DivTalk id="talk">
-            <h2>Counter:</h2>
-          </DivTalk>
-          <DivBtns id="btns-div">
-            <Button
-              className="plus-btn"
-              onClick={this.plus}
-              text="+"
-              background="plus"
-            ></Button>
-            {count}
-            <Button
-              className="minus-btn"
-              onClick={this.minus}
-              text="-"
-              background="minus"
-            ></Button>
-          </DivBtns>
-        </DivCount>
-        <ImgPAxo
-          className="pink-axo"
-          src={pinkAxo}
-          alt="pink-axolotl"
-        ></ImgPAxo>
+        <DivWrapCounter>
+          <DivCount id="count-div">
+            <DivTalk id="talk">
+              <h2>Counter:</h2>
+            </DivTalk>
+            <DivBtns id="btns-div">
+              <Button
+                className="plus-btn"
+                onClick={this.plus}
+                text="+"
+                background="plus"
+              ></Button>
+              {count}
+              <Button
+                className="minus-btn"
+                onClick={this.minus}
+                text="-"
+                background="minus"
+              ></Button>
+            </DivBtns>
+          </DivCount>
+          <DivAxos>
+            <ImgWAxo
+              className="white-axo"
+              src={whiteAxo}
+              alt="white-axolotl"
+            ></ImgWAxo>
+            <ImgPAxo
+              className="pink-axo"
+              src={pinkAxo}
+              alt="pink-axolotl"
+            ></ImgPAxo>
+          </DivAxos>
+        </DivWrapCounter>
       </DivMain>
     );
   }
