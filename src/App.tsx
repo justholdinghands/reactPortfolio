@@ -1,4 +1,5 @@
-import { Component } from "react";
+import { BlogComponent } from "./components/blog/Blog";
+import { Component, useState } from "react";
 import {
   Link,
   Route,
@@ -24,6 +25,9 @@ const UlNav = styled.ul`
   font: bold 1.8em/150% ${theme.hackertyper.font};
 `;
 
+//prettier-ignore
+export const blogRoutes = new RegExp('^\/blog\/*.*$');
+
 const GlobalStyle = createGlobalStyle<{ bgcolor: string }>`
   body {
     background-color: ${(props) =>
@@ -35,6 +39,8 @@ const GlobalStyle = createGlobalStyle<{ bgcolor: string }>`
         ? theme.todo.background
         : props.bgcolor === "/tictactoe"
         ? theme.tictactoe.background
+        : blogRoutes.test(props.bgcolor)
+        ? theme.blog.background
         : props.bgcolor === "/memoryGame"
         ? theme.memoryGame.background
         : ""};
@@ -44,12 +50,10 @@ const GlobalStyle = createGlobalStyle<{ bgcolor: string }>`
     height: 100vh;
     width: 97vw;
   }`;
-
 class App extends Component<RouteComponentProps<{ location: any }>> {
   constructor(props) {
     super(props);
   }
-
   render() {
     return (
       <div>
@@ -82,6 +86,11 @@ class App extends Component<RouteComponentProps<{ location: any }>> {
                   Memory Game
                 </Link>
               </li>
+              <li>
+                <Link to="/blog" style={{ textDecoration: "none" }}>
+                  Blog
+                </Link>
+              </li>
             </UlNav>
           </nav>
 
@@ -100,6 +109,9 @@ class App extends Component<RouteComponentProps<{ location: any }>> {
             </Route>
             <Route path="/memoryGame">
               <MemoryGame></MemoryGame>
+            </Route>
+            <Route path="/blog">
+              <BlogComponent></BlogComponent>
             </Route>
           </Switch>
         </div>

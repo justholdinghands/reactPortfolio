@@ -17,7 +17,7 @@ const PWinMessage = styled.p`
   width: 100vw;
   height: 0vh;
   font: 5em/0 ${theme.memoryGame.fontPrimary};
-  color: ${theme.memoryGame.textColor};
+  color: ${theme.memoryGame.primaryTextColor};
 `;
 
 type Props = {

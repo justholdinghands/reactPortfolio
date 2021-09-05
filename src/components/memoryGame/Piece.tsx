@@ -15,7 +15,7 @@ const ButtonPiece = styled.div<{
   height: 20vh;
   width: 20vw;
   font: 2vw/0 ${theme.memoryGame.fontPrimary};
-  color: ${theme.memoryGame.textColor};
+  color: ${theme.memoryGame.primaryTextColor};
   border: ${theme.memoryGame.background} 2px solid;
   border-radius: 5%;
   background: ${(props) =>
