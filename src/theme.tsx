@@ -46,8 +46,20 @@ export const theme = {
     flipped: "#2b6d6d",
     notFlipped: "#6d83ac",
     background: "#212746",
-    textColor: "#bcb1ca",
+    primaryTextColor: "#bcb1ca",
     fontPrimary: "'Delius Swash Caps', cursive",
     fontSecondary: "monospace",
+  },
+
+  blog: {
+    primary: "#cffaf6 ",
+    secondary: "#7ebdb485",
+    background: "#ffffff",
+    primaryTextColor: "#00d1c0",
+    secondaryTextColor: "#1a3a36",
+    hoverTextColor: "#FFFFFF",
+    fontPrimary: "'Roboto', sans-serif;",
+    fontSecondary: "'Roboto', sans-serif;",
+    errorColor: "#ff0800",
   },
 };

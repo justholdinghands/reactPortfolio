@@ -5,7 +5,12 @@ import styled from "styled-components";
 
 export const Table = styled.table`
   height: 100%;
-  width: 50%;
+  width: 60%;
+`;
+
+export const Td = styled.td`
+  height: 100px;
+  width: 100px;
 `;
 
 export const DivInput = styled.div`
@@ -29,7 +34,7 @@ export const DivResult = styled.div`
   width: 20vw;
   height: 20vh;
   font: 5em/0 ${theme.tictactoe.fontPrimary};
-  color: ${theme.tictactoe.textColor};
+  color: ${theme.tictactoe.primaryTextColor};
   background: ${theme.tictactoe.background};
 `;
 
@@ -40,7 +45,7 @@ export const DivTurn = styled.div`
   width: 20vw;
   height: 20vh;
   font: 5em/0 ${theme.tictactoe.fontPrimary};
-  color: ${theme.tictactoe.textColor};
+  color: ${theme.tictactoe.primaryTextColor};
   background: ${theme.tictactoe.background};
 `;
 
@@ -54,22 +59,48 @@ export const DivWrapper = styled.div`
 `;
 
 export const InputBoardSize = styled.input`
-  height: 5vh;
-  width: 20vw;
+  height: 8vh;
+  width: 50vw;
   background-color: ${theme.tictactoe.secondary};
   color: ${theme.tictactoe.primary};
   font: 5vh/0 ${theme.tictactoe.fontSecondary};
   border: none;
+  ::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+  }
 `;
 
-export const Box = styled.button`
-  padding: 0;
-  margin: 0;
-  min-height: 100%;
-  min-width: 100%;
+export const DivBox = styled.div`
+  height: 100%;
+  width: 100%;
   background-color: ${theme.tictactoe.box};
   color: ${theme.tictactoe.secondary};
-  font: 100%/0 ${theme.tictactoe.fontPrimary};
+  border: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: inset 2px 2px 2px 2px ${theme.tictactoe.fontPrimary};
+
+  :hover {
+    background: ${theme.tictactoe["box-shadow"]};
+  }
+
+  p {
+    margin: 0;
+    padding: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font: 500% ${theme.tictactoe.fontPrimary};
+    max-width: 50%;
+    max-height: 50%;
+    text-align: center;
+  }
+`;
+export const TBody = styled.tbody`
+  width: 100vw;
+  height: 50vh;
 `;
 
 export const PLAYER_X = "X" as const;
@@ -197,22 +228,24 @@ export default class Tictactoe extends Component<Props, State> {
           </DivInput>
         </DivWrapSettings>
         <Table>
-          <tbody>
+          <TBody>
             {this.state.boardMatrix.map((boardRow, rowIndex) => {
               return (
                 <tr key={rowIndex}>
                   {boardRow.map((cell, columnIndex) => (
-                    <td
+                    <Td
                       key={columnIndex}
                       onClick={() => this.move(rowIndex, columnIndex)}
                     >
-                      <Box>{cell}</Box>
-                    </td>
+                      <DivBox>
+                        <p>{cell}</p>
+                      </DivBox>
+                    </Td>
                   ))}
                 </tr>
               );
             })}
-          </tbody>
+          </TBody>
         </Table>
       </DivWrapper>
     );
