@@ -36,7 +36,7 @@ export const theme = {
     secondary: "#0b454d",
     box: "#ce903f",
     background: "#d1d1d1",
-    textColor: "#ffffff",
+    primaryTextColor: "#ffffff",
     fontPrimary: '"Cabin Sketch", cursive',
     fontSecondary: "monospace",
   },

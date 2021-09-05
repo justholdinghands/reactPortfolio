@@ -110,10 +110,6 @@ const ButtonFiltered = styled.button<{ selected: string }>`
 
   border: ${(props) =>
     props.selected ? `${theme.todo.faded}` + " 2px solid" : "white"}; // :D
-
-  :hover {
-    cursor: pointer;
-  }
 `;
 
 const DivTask = styled.div<{ strikethrough: string }>`
@@ -124,6 +120,19 @@ const DivTask = styled.div<{ strikethrough: string }>`
 const DivNumOfTasks = styled.div`
   padding-top: 1em;
   padding-left: 0.5em;
+`;
+
+const ButtonDestroy = styled.button`
+  width: 1em;
+  height: 1em;
+  border: 0;
+  color: ${theme.todo.pale};
+  background-color: ${theme.todo.pale};
+  vertical-align: middle;
+  outline: none;
+  cursor: pointer;
+  font-size: x-large;
+  text-decoration: none !important;
 `;
 
 const TaskLi = styled.li`
@@ -139,23 +148,13 @@ const TaskLi = styled.li`
   color: ${theme.todo.primary};
   width: 100%;
   list-style-type: none;
-`;
-
-const ButtonDestroy = styled.button`
-  width: 1em;
-  height: 1em;
-  border: 0;
-  color: ${theme.todo.pale};
-  background-color: ${theme.todo.pale};
-  vertical-align: middle;
-  outline: none;
-  cursor: pointer;
-  font-size: x-large;
-  text-decoration: none !important;
 
   :hover {
-    color: ${theme.todo.primary};
-    text-decoration: none !important;
+    cursor: pointer;
+    button {
+      color: ${theme.todo.primary};
+      text-decoration: none !important;
+    }
   }
 `;
 
@@ -295,11 +294,14 @@ export default class Todo extends Component<Props, State> {
           <ul>
             {filteredArr.map((task, index) => {
               return (
-                <TaskLi className={"task"} key={task.name + index}>
+                <TaskLi
+                  className={"task"}
+                  key={task.name + index}
+                  onClick={() => this.isChecked(task.id)}
+                >
                   <Input
                     className="round-checkbox"
                     type="checkbox"
-                    onChange={() => this.isChecked(task.id)}
                     checked={task.status}
                   ></Input>
                   <DivTask strikethrough={task.status ? "true" : ""}>

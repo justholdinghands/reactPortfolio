@@ -169,11 +169,6 @@ class App extends Component<RouteComponentProps<{ location: any }>> {
                   </DivImgWrap>
                 </Link>
               </li>
-              <li>
-                <Link to="/blog" style={{ textDecoration: "none" }}>
-                  Blog
-                </Link>
-              </li>
             </UlNav>
           </nav>
           <DivSwitch>
