@@ -1,4 +1,5 @@
 import { BlogComponent } from "./components/blog/Blog";
+import { ChuckNorris } from "./components/chucknorris/ChuckNorris";
 import { Component, useState } from "react";
 import {
   Link,
@@ -169,6 +170,16 @@ class App extends Component<RouteComponentProps<{ location: any }>> {
                   </DivImgWrap>
                 </Link>
               </li>
+              <li>
+                <Link to="/chucknorris" style={{ textDecoration: "none" }}>
+                  <DivImgWrap>
+                    <DivIcon>
+                      <img src={shark} alt="chucknorris" />
+                    </DivIcon>
+                    Chuck Norris
+                  </DivImgWrap>
+                </Link>
+              </li>
             </UlNav>
           </nav>
           <DivSwitch>
@@ -190,6 +201,9 @@ class App extends Component<RouteComponentProps<{ location: any }>> {
               </Route>
               <Route path="/blog">
                 <BlogComponent></BlogComponent>
+              </Route>
+              <Route path="/chucknorris">
+                <ChuckNorris></ChuckNorris>
               </Route>
             </Switch>
           </DivSwitch>
