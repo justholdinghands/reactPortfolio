@@ -6,8 +6,8 @@ export const theme = {
     primary: "#ffdab7",
     plus: "#7ccbff",
     minus: "#ff8b5d",
-    fontSecondary: "normal 1.2em/150% 'Poppins', sans-serif",
-    fontPrimary: "normal 1.5em/150% 'Vollkorn', serif",
+    fontSecondary: "'Poppins', sans-serif",
+    fontPrimary: "'VT323', monospace",
     background: "#79bac2",
   },
   hackertyper: {

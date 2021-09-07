@@ -12,8 +12,8 @@ type Props = {
 // styled-components definition
 type ButtonProps = { background: string };
 const ButtonStyled = styled.button<ButtonProps>`
-  width: 100px;
-  height: 100px;
+  width: 150px;
+  height: 150px;
   border: 0;
   box-shadow: 0 5px 6px -6px black;
   background: ${(props) =>
@@ -24,8 +24,8 @@ const ButtonStyled = styled.button<ButtonProps>`
       : ""};
 
   :hover {
-    box-shadow: 0 5px 6px -6px ${theme.hackertyper.background},
-      inset 0 0 150px -80px ${theme.hackertyper.background};
+    box-shadow: 0 7px 9px -9px ${theme.hackertyper.background},
+      inset 0 0 220px -120px ${theme.hackertyper.background};
     cursor: pointer;
   }
 

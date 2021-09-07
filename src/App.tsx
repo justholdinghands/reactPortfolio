@@ -42,11 +42,8 @@ const UlNav = styled.ul`
   height: 100%;
   font: bold 1.8em/150% ${theme.hackertyper.fontPrimary};
   border: 10px blue solid;
-
-  li {
-    padding-left: 2%;
-    width: 15vw;
-  }
+  padding-left: 2%;
+  width: 15%;
 `;
 
 const DivIcon = styled.div`
@@ -67,7 +64,7 @@ const DivImgWrap = styled.div`
 
 const DivSwitch = styled.div`
   position: absolute;
-  width: 80vw;
+  width: 85%;
   height: 100%;
   right: 0;
   /* border: 10px pink solid; */

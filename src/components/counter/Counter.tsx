@@ -13,38 +13,41 @@ type Props = {
   className?: string;
 };
 
-// styled-components definition
 const DivMain = styled.div`
   * {
     color: ${theme.counter.primary};
-    font: ${theme.counter.fontPrimary};
+    overflow: hidden;
   }
 
   width: 100%;
+  height: 100%;
   display: flex;
-  flex-direction: row;
-  justify-content: center;
+  flex-direction: column;
+  justify-content: space-between;
   align-items: center;
+  position: relative;
 `;
 
 const DivWrapCounter = styled.div`
-  width: 50%;
-  border: green 2px solid;
+  width: 100%;
+  height: 100%;
+  position: absolute;
 `;
 
 const DivBtns = styled.div`
   display: flex;
   flex-direction: row;
-  width: 30vw;
-  justify-content: space-around;
+  width: 40%;
+  height: 40%;
+  justify-content: space-between;
   align-items: center;
+  font: 10em ${theme.counter.fontPrimary};
 `;
 
 const DivTalk = styled.div`
   display: flex;
   justify-content: center;
   width: 30vw;
-  height: 7rem;
 `;
 
 const DivCount = styled.div`
@@ -53,29 +56,88 @@ const DivCount = styled.div`
   justify-content: center;
   align-items: center;
   width: 100%;
-  height: 80%;
+  height: 100%;
   overflow: hidden;
-  border: yellow 2px solid;
+  position: absolute;
+
+  h2 {
+    font: 5em ${theme.counter.fontPrimary};
+  }
 `;
 
 const DivAxos = styled.div`
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
   width: 100%;
-  border: orange 2px solid;
+  height: 100%;
+  font: 2em ${theme.counter.fontPrimary};
+  position: absolute;
 `;
 
 const ImgWAxo = styled.img`
-  display: block;
   position: absolute;
+  display: block;
   transform: scaleX(-1);
-  height: 165px;
-  border: white 2px solid;
+  height: 5em;
+
+  animation: whiteMove 50s infinite;
+  animation-timing-function: linear;
+
+  @keyframes whiteMove {
+    0% {
+      left: -20%;
+      top: 80%;
+      transform: scaleX(-1);
+    }
+    50% {
+      left: 150%;
+      top: 80%;
+      transform: scaleX(-1);
+    }
+    51% {
+      left: 150%;
+      top: 80%;
+      transform: scaleX(1);
+    }
+    100% {
+      left: 0;
+      top: 80%;
+      transform: scaleX(1);
+    }
+  }
 `;
 
 const ImgPAxo = styled.img`
-  display: block;
   position: absolute;
-  height: 150px;
-  border: pink 2px solid;
+  display: block;
+  height: 5em;
+  right: 0;
+
+  animation: pinkMove 50s infinite;
+  animation-timing-function: linear;
+
+  @keyframes pinkMove {
+    0% {
+      right: 0;
+      bottom: 80%;
+      transform: scaleX(1);
+    }
+    50% {
+      right: 150%;
+      bottom: 80%;
+      transform: scaleX(1);
+    }
+    51% {
+      transform: scaleX(-1);
+    }
+    100% {
+      right: -50%;
+      bottom: 80%;
+      transform: scaleX(-1);
+    }
+  }
 `;
 
 export default class Counter extends Component<Props, State> {
@@ -102,6 +164,18 @@ export default class Counter extends Component<Props, State> {
     var { count } = this.state;
     return (
       <DivMain id="main-div" className="counter">
+        <DivAxos>
+          <ImgWAxo
+            className="white-axo"
+            src={whiteAxo}
+            alt="white-axolotl"
+          ></ImgWAxo>
+          <ImgPAxo
+            className="pink-axo"
+            src={pinkAxo}
+            alt="pink-axolotl"
+          ></ImgPAxo>
+        </DivAxos>
         <DivWrapCounter>
           <DivCount id="count-div">
             <DivTalk id="talk">
@@ -123,18 +197,6 @@ export default class Counter extends Component<Props, State> {
               ></Button>
             </DivBtns>
           </DivCount>
-          <DivAxos>
-            <ImgWAxo
-              className="white-axo"
-              src={whiteAxo}
-              alt="white-axolotl"
-            ></ImgWAxo>
-            <ImgPAxo
-              className="pink-axo"
-              src={pinkAxo}
-              alt="pink-axolotl"
-            ></ImgPAxo>
-          </DivAxos>
         </DivWrapCounter>
       </DivMain>
     );
