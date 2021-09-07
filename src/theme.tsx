@@ -62,4 +62,12 @@ export const theme = {
     fontSecondary: "'Roboto', sans-serif;",
     errorColor: "#ff0800",
   },
+
+  chuck: {
+    background: "#c9c9c9",
+    primaryColor: "#240202",
+    secondaryColor: "#85180a",
+    primaryFont: "'Special Elite', cursive",
+    secondaryFont: "'Smokum', cursive",
+  },
 };

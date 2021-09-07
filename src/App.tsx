@@ -17,6 +17,7 @@ import MemoryGame from "./components/memoryGame/MemoryGame";
 import TicTacToe from "./components/tictactoe/tictactoe";
 import Todo from "./components/todo/Todo";
 import blog from "./icons/blog.png";
+import chuck from "./icons/chucc.png";
 import purpleAxo from "./icons/purpleAxo.png";
 import robot from "./icons/download.png";
 import shark from "./icons/shark.png";
@@ -43,10 +44,10 @@ const UlNav = styled.ul`
   height: 100%;
   font: bold 1.8em/150% ${theme.hackertyper.fontPrimary};
   border: 10px blue solid;
+  width: 15%;
 
   li {
     padding-left: 2%;
-    width: 15vw;
   }
 `;
 
@@ -68,7 +69,7 @@ const DivImgWrap = styled.div`
 
 const DivSwitch = styled.div`
   position: absolute;
-  width: 80vw;
+  width: 85%;
   height: 100%;
   right: 0;
   /* border: 10px pink solid; */
@@ -174,7 +175,7 @@ class App extends Component<RouteComponentProps<{ location: any }>> {
                 <Link to="/chucknorris" style={{ textDecoration: "none" }}>
                   <DivImgWrap>
                     <DivIcon>
-                      <img src={shark} alt="chucknorris" />
+                      <img src={chuck} alt="chucknorris" />
                     </DivIcon>
                     Chuck Norris
                   </DivImgWrap>
