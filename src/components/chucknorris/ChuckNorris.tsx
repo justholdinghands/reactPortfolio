@@ -2,41 +2,81 @@ import { JokesInCategory } from "./JokesInCategory";
 import { Link, Route } from "react-router-dom";
 import { theme } from "../../theme";
 import { useEffect, useState } from "react";
+import norris from "../../icons/norris.png";
 import styled from "styled-components";
 
-const DivWrapper = styled.div`
+export const DivWrapper = styled.div`
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
   color: ${theme.chuck.primaryColor};
-  background: ${theme.chuck.background};
   align-items: center;
-  :nth-child(1n) {
-    border: 2px pink groove;
+  min-height: 100%;
+  width: 100%;
+`;
+
+export const DivAllJokes = styled.div`
+  padding-top: 2em;
+  width: 60%;
+`;
+
+export const DivJokeWrapper = styled.div`
+  display: flex;
+  flex: row;
+  align-items: center;
+  padding-bottom: 1em;
+  img {
+    margin-left: 0.1em;
+    margin-right: 0.5em;
+    height: 1.5em;
+    width: 1.5em;
   }
 `;
 
 export const DivJoke = styled.div`
-  font: 1em/3em ${theme.chuck.primaryFont};
+  font: 1.5em ${theme.chuck.primaryFont};
 `;
 
 const Navbar = styled.nav`
-  UlCategories {
-    display: flex;
-    flex-direction: row;
-    font: 2em ${theme.chuck.secondaryFont};
-  }
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  width: 25%;
 `;
 
 const UlCategories = styled.ul`
   list-style: none;
   display: flex;
   flex-direction: row;
-  justify-content: space-evenly;
+  justify-content: flex-start;
   font: 1.5em ${theme.chuck.primaryFont};
   text-decoration: none;
-  width: 50%;
   overflow-x: scroll;
+  position: relative;
+  padding-bottom: 0.5em;
+
+  ::-webkit-scrollbar-track {
+    box-shadow: ${theme.chuck.scrollbarShadow};
+    border-radius: 10px;
+  }
+
+  ::-webkit-scrollbar {
+    margin-left: 30px;
+    float: left;
+    height: 5px;
+    background-color: ${theme.chuck.scrollbar};
+  }
+
+  ::-webkit-scrollbar-thumb {
+    border-radius: 10px;
+    box-shadow: ${theme.chuck.scrollbarShadow};
+    background-color: ${theme.chuck.scrollbarThumb};
+  }
   li {
-    margin-left: 1em;
-    margin-right: 1em;
+    margin-right: 2em;
+    a {
+      color: ${theme.chuck.primaryColor};
+    }
   }
 `;
 
@@ -111,7 +151,7 @@ export const ChuckNorris = (props: Props) => {
         <Navbar>
           <UlCategories>
             <li>
-              <Link to={`${baseURL}`}>All</Link>
+              <Link to={`${baseURL}`}>#all</Link>
             </li>
             {categories.map((category, index) => (
               <li key={index}>
@@ -130,12 +170,14 @@ export const ChuckNorris = (props: Props) => {
         {loadingJokes ? (
           <div>Loading Jokes ...</div>
         ) : (
-          jokeArr.map((joke, index) => (
-            <div key={index}>
-              <DivJoke>{joke.value}</DivJoke>
-              <br />
-            </div>
-          ))
+          <DivAllJokes>
+            {jokeArr.map((joke, index) => (
+              <DivJokeWrapper key={index}>
+                <img src={norris} alt="chuckhead" />
+                <DivJoke>{joke.value}</DivJoke>
+              </DivJokeWrapper>
+            ))}
+          </DivAllJokes>
         )}
       </Route>
     </DivWrapper>

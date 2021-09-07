@@ -64,6 +64,10 @@ export const theme = {
   },
 
   chuck: {
+    scrollbarThumb: "#1c01014c",
+    scrollbar: "#f5f5f5",
+    scrollbarTrack: "#aaaaaa",
+    scrollbarShadow: "inset 0 0 6px rgba(0, 0, 0, 0.3)",
     background: "#c9c9c9",
     primaryColor: "#240202",
     secondaryColor: "#85180a",

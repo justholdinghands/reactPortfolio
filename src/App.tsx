@@ -72,11 +72,11 @@ const DivSwitch = styled.div`
   width: 85%;
   height: 100%;
   right: 0;
-  /* border: 10px pink solid; */
 `;
 
 //prettier-ignore
 export const blogRoutes = new RegExp('^\/blog\/*.*$');
+export const chuckRoutes = new RegExp("^/chucknorris/*.*$");
 
 const GlobalStyle = createGlobalStyle<{ bgcolor: string }>`
   body {
@@ -93,6 +93,8 @@ const GlobalStyle = createGlobalStyle<{ bgcolor: string }>`
         ? theme.blog.background
         : props.bgcolor === "/memoryGame"
         ? theme.memoryGame.background
+        : chuckRoutes.test(props.bgcolor)
+        ? theme.chuck.background
         : ""};
     display: flex;
     flex-direction: column;

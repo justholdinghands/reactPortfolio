@@ -1,6 +1,14 @@
-import { DivJoke, Joke, numberOfJokes } from "./ChuckNorris";
+import {
+  DivAllJokes,
+  DivJoke,
+  DivJokeWrapper,
+  DivWrapper,
+  Joke,
+  numberOfJokes,
+} from "./ChuckNorris";
 import { theme } from "../../theme";
 import { useEffect, useState } from "react";
+import norris from "../../icons/norris.png";
 import styled from "styled-components";
 
 type Props = {
@@ -41,15 +49,20 @@ export const JokesInCategory = (props: Props) => {
     load();
   }, []);
   return (
-    <div>
+    <DivWrapper>
       <H2>Top 5: </H2>
       {loadingJokes ? (
         <div>Loading jokes ...</div>
       ) : (
-        jokeArr.map((joke, index) => (
-          <DivJoke key={index}>{joke.value}</DivJoke>
-        ))
+        <DivAllJokes>
+          {jokeArr.map((joke, index) => (
+            <DivJokeWrapper key={index}>
+              <img src={norris} alt="chuckhead" />
+              <DivJoke>{joke.value}</DivJoke>
+            </DivJokeWrapper>
+          ))}
+        </DivAllJokes>
       )}
-    </div>
+    </DivWrapper>
   );
 };
