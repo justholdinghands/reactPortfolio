@@ -11,7 +11,7 @@ const DivWrapper = styled.div`
   background: ${theme.blog.secondary};
   border-radius: 1em;
   margin-top: 2em;
-  label {
+  Label {
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -21,8 +21,12 @@ const DivWrapper = styled.div`
   }
   padding: 3em;
   overflow: hidden;
-  width: 80vw;
+  width: 70vw;
   height: 100%;
+`;
+
+const Label = styled.label`
+  font-size: 1.5em;
 `;
 
 const Input = styled.input<{
@@ -60,7 +64,7 @@ const Button = styled.button`
 `;
 
 const P = styled.p`
-  font: 2em ${theme.blog.fontSecondary};
+  font: 3em ${theme.blog.fontSecondary};
 `;
 
 const PError = styled.p`
@@ -254,7 +258,7 @@ export const CreateArticle = () => {
     <DivWrapper>
       <P>Create a new article</P>
       <form onSubmit={handleSubmit}>
-        <label id="Author">
+        <Label id="Author">
           Author
           <Input
             valid={!errorMessage.authorErr}
@@ -263,8 +267,8 @@ export const CreateArticle = () => {
             onChange={changeAuthor}
           />
           <PError>{errorMessage.authorErr}</PError>
-        </label>
-        <label id="Title">
+        </Label>
+        <Label id="Title">
           Title
           <Input
             valid={!errorMessage.titleErr}
@@ -273,8 +277,8 @@ export const CreateArticle = () => {
             onChange={changeTitle}
           />
           <PError>{errorMessage.titleErr}</PError>
-        </label>
-        <label id="Slug">
+        </Label>
+        <Label id="Slug">
           Can I interest you in a custom URL?
           <Input
             valid={!errorMessage.uniqueErr}
@@ -284,8 +288,8 @@ export const CreateArticle = () => {
             onChange={changeUrl}
           />
           <PError>{errorMessage.uniqueErr}</PError>
-        </label>
-        <label id="Body">
+        </Label>
+        <Label id="Body">
           Body
           <Textarea
             valid={!errorMessage.textErr}
@@ -293,7 +297,7 @@ export const CreateArticle = () => {
             onChange={changeText}
           />
           <PError>{errorMessage.textErr}</PError>
-        </label>
+        </Label>
         <Button type="submit">Submit</Button>
       </form>
     </DivWrapper>
