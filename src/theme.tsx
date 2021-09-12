@@ -52,9 +52,9 @@ export const theme = {
   },
 
   blog: {
-    primary: "#cffaf6 ",
-    secondary: "#7ebdb485",
-    background: "#ffffff",
+    primary: "#ededed ",
+    secondary: "#92929285",
+    background: "#e4e4e4",
     primaryTextColor: "#00d1c0",
     secondaryTextColor: "#1a3a36",
     hoverTextColor: "#FFFFFF",

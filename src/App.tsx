@@ -28,8 +28,8 @@ import xoxo from "./icons/xo.png";
 const DivWrapper = styled.div`
   display: flex;
   flex-direction: row;
-  height: 98vh;
-  width: 98vw;
+  height: 100%;
+  width: 100%;
   overflow-x: hidden;
 `;
 
@@ -44,7 +44,7 @@ const UlNav = styled.ul`
   height: 100%;
   font: bold 1.8em/150% ${theme.hackertyper.fontPrimary};
   border: 10px blue solid;
-  width: 15%;
+  width: 300px;
 
   li {
     padding-left: 2%;
@@ -69,7 +69,7 @@ const DivImgWrap = styled.div`
 
 const DivSwitch = styled.div`
   position: absolute;
-  width: 85%;
+  width: calc(100% - 300px);
   height: 100%;
   right: 0;
 `;
