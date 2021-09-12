@@ -46,7 +46,7 @@ const UlNav = styled.ul`
   width: 15%;
 `;
 
-const DivIcon = styled.div`
+export const DivIcon = styled.div`
   margin-left: 0.1em;
   margin-right: 0.1em;
   height: 1.2em;

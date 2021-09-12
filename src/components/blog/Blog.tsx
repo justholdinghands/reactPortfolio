@@ -14,8 +14,10 @@ const DivCreate = styled.div`
 const NavWrapper = styled.nav`
   display: flex;
   flex-direction: row;
-  justify-content: space-evenly;
-  width: 100%;
+  justify-content: space-between;
+  align-items: center;
+  width: 70vw;
+  height: 3em;
   font: 2em ${theme.blog.fontPrimary};
   color: ${theme.blog.primaryTextColor};
   padding: 0.5em;
@@ -26,7 +28,6 @@ const NavDiv = styled.div`
   background: ${theme.blog.primary};
   padding: 0.5em;
   border-radius: 0.5em;
-  box-shadow: 12px 12px 2px 1px ${theme.blog.secondary};
 `;
 
 const DivFullWrapper = styled.div`
@@ -50,7 +51,10 @@ const DivWrapper = styled.div`
   }
 `;
 
-const DivArticles = styled.div``;
+const DivArticles = styled.div`
+  display: flex;
+  flex-direction: column-reverse;
+`;
 
 export type Blog = {
   author: string;
@@ -110,6 +114,30 @@ export const BlogComponent = () => {
               ))}
             </DivArticles>
           </Route>
+          {context.blogs
+            .filter(
+              (blog, index, arr) =>
+                arr.findIndex((t) => t.author === blog.author) === index
+            )
+            .map((uniqueAuthor) => (
+              <Route
+                key={uniqueAuthor.author}
+                exact
+                path={`${BASE_URL}${uniqueAuthor.author}`}
+              >
+                <DivArticles>
+                  {context.blogs.map((blog) =>
+                    blog.author === uniqueAuthor.author ? (
+                      <Article
+                        key={`${blog.author}/${blog.articleURL}`}
+                        blog={blog}
+                        fulltext={false}
+                      />
+                    ) : null
+                  )}
+                </DivArticles>
+              </Route>
+            ))}
         </DivWrapper>
       </BlogContext.Provider>
     </DivFullWrapper>

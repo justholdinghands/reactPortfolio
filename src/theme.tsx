@@ -52,14 +52,15 @@ export const theme = {
   },
 
   blog: {
-    primary: "#cffaf6 ",
-    secondary: "#7ebdb485",
-    background: "#ffffff",
-    primaryTextColor: "#00d1c0",
+    primary: "#ededed ",
+    secondary: "#92929285",
+    background: "#e4e4e4",
+    primaryTextColor: "#008d81",
     secondaryTextColor: "#1a3a36",
     hoverTextColor: "#FFFFFF",
     fontPrimary: "'Roboto', sans-serif;",
     fontSecondary: "'Roboto', sans-serif;",
     errorColor: "#ff0800",
+    iconSize: "2em",
   },
 };
