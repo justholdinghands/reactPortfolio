@@ -7,7 +7,10 @@ import {
   BrowserRouter as Router,
   Switch,
 } from "react-router-dom";
+import { Provider } from "react-redux";
+import { ReduxCounter } from "./components/reduxCounter/ReduxCounter";
 import { createGlobalStyle } from "styled-components";
+import { store } from "./components/reduxCounter/store";
 import { theme } from "./theme";
 import { withRouter } from "react-router";
 import Counter from "./components/counter/Counter";
@@ -17,6 +20,7 @@ import TicTacToe from "./components/tictactoe/tictactoe";
 import Todo from "./components/todo/Todo";
 import blog from "./icons/blog.png";
 import purpleAxo from "./icons/purpleAxo.png";
+import redux from "./icons/redux.png";
 import robot from "./icons/download.png";
 import shark from "./icons/shark.png";
 import styled from "styled-components";
@@ -166,6 +170,16 @@ class App extends Component<RouteComponentProps<{ location: any }>> {
                   </DivImgWrap>
                 </Link>
               </li>
+              <li>
+                <Link to="/redux" style={{ textDecoration: "none" }}>
+                  <DivImgWrap>
+                    <DivIcon>
+                      <img src={redux} alt="redux" />
+                    </DivIcon>
+                    Redux counter
+                  </DivImgWrap>
+                </Link>
+              </li>
             </UlNav>
           </nav>
           <DivSwitch>
@@ -187,6 +201,11 @@ class App extends Component<RouteComponentProps<{ location: any }>> {
               </Route>
               <Route path="/blog">
                 <BlogComponent></BlogComponent>
+              </Route>
+              <Route path="/redux">
+                <Provider store={store}>
+                  <ReduxCounter></ReduxCounter>
+                </Provider>
               </Route>
             </Switch>
           </DivSwitch>

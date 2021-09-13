@@ -63,4 +63,10 @@ export const theme = {
     errorColor: "#ff0800",
     iconSize: "2em",
   },
+  redux: {
+    black: "#000000",
+    white: "#ffffff",
+    grey: "#d8d8d8",
+    orange: "#c7813f",
+  },
 };
