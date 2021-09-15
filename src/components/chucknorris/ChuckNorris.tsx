@@ -1,8 +1,11 @@
+import { ErrorBoundary } from "react-error-boundary";
 import { JokesInCategory } from "./JokesInCategory";
 import { Link, Route } from "react-router-dom";
 import { theme } from "../../theme";
 import { useEffect, useState } from "react";
+import configURL from "./urlconfig.json";
 import norris from "../../icons/norris.png";
+import revolver from "./imgs/revolver.png";
 import styled from "styled-components";
 
 export const DivWrapper = styled.div`
@@ -36,6 +39,45 @@ export const DivJokeWrapper = styled.div`
 export const DivJoke = styled.div`
   font: 1.5em ${theme.chuck.primaryFont};
 `;
+
+export const DivErrorPopup = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  position: absolute;
+  text-align: center;
+  background: ${theme.chuck.toastBackground};
+  font: 5em ${theme.chuck.primaryFont};
+  border-radius: 5px;
+  top: 0;
+  height: 100%;
+  width: 100%;
+  overflow: hidden;
+  p {
+    padding-bottom: 3em;
+  }
+`;
+
+export const DivImg = styled.div`
+  display: flex;
+  position: relative;
+  flex-direction: row;
+  width: 50%;
+  margin-bottom: -3em;
+  justify-content: space-between;
+  align-items: flex-end;
+  img {
+    height: 100px;
+    width: 150px;
+  }
+`;
+
+export const ImgLeft = styled.img`
+  transform: scaleX(-1);
+`;
+
+export const ImgRight = styled.img``;
 
 const Navbar = styled.nav`
   display: flex;
@@ -102,41 +144,51 @@ export type Joke = {
 
 export const numberOfJokes = 20;
 
-const baseURL = "/chucknorris";
-
 export const ChuckNorris = (props: Props) => {
   const [jokeArr, setJokeArr] = useState([] as Joke[]);
   const [categories, setCategories] = useState([] as Category[]);
   const [loadingJokes, setLoadingJokes] = useState(true);
   const [loadingCategories, setLoadingCategories] = useState(true);
+  const [errorMessage, setErrorMessage] = useState({
+    errorMessage: "",
+  });
 
   useEffect(() => {
     const load = async () => {
       const loadJokeArr = [] as Joke[];
       try {
         while (loadJokeArr.length !== numberOfJokes) {
-          let loadData = await fetch("https://api.chucknorris.io/jokes/random");
+          let loadData = await fetch(configURL.api.jokesRandom);
           if (!loadData.ok) throw new Error(`${loadData.status}`);
           let data = await loadData.json();
           if (!loadJokeArr.some((element) => element.value === data.value)) {
             loadJokeArr.push(data);
           }
+          setErrorMessage(() => ({
+            errorMessage: "",
+          }));
+        }
+        setJokeArr([...loadJokeArr]);
+        setLoadingJokes(false);
+        try {
+          const loadCategories = await fetch(configURL.api.categories);
+          if (!loadCategories.ok) throw new Error(`${loadCategories.status}`);
+          const listCategories = await loadCategories.json();
+          setErrorMessage(() => ({
+            errorMessage: "",
+          }));
+          setCategories([...listCategories]);
+          setLoadingCategories(false);
+        } catch (errCat) {
+          setErrorMessage(() => ({
+            errorMessage: `Error loading categories (${errCat})`,
+          }));
         }
       } catch (errJoke) {
-        console.error("Error loading jokes: " + errJoke);
-      }
-      setJokeArr([...loadJokeArr]);
-      setLoadingJokes(false);
-      try {
-        const loadCategories = await fetch(
-          "https://api.chucknorris.io/jokes/categories"
-        );
-        if (!loadCategories.ok) throw new Error(`${loadCategories.status}`);
-        const listCategories = await loadCategories.json();
-        setCategories([...listCategories]);
         setLoadingCategories(false);
-      } catch (errCat) {
-        console.error("Error loading categories: " + errCat);
+        setErrorMessage(() => ({
+          errorMessage: `Error loading jokes (${errJoke})`,
+        }));
       }
     };
     load();
@@ -144,29 +196,45 @@ export const ChuckNorris = (props: Props) => {
 
   return (
     <DivWrapper>
+      {errorMessage.errorMessage && (
+        <DivErrorPopup>
+          <p>{errorMessage.errorMessage}</p>
+          <DivImg>
+            <ImgLeft src={revolver} alt="revolver" />
+            <ImgRight src={revolver} alt="revolver" />
+          </DivImg>
+        </DivErrorPopup>
+      )}
       <H1>Chuck Norris</H1>
       {loadingCategories ? (
         <div>Loading Categories ...</div>
       ) : (
         <Navbar>
-          <UlCategories>
-            <li>
-              <Link to={`${baseURL}`}>#all</Link>
-            </li>
-            {categories.map((category, index) => (
-              <li key={index}>
-                <Link to={`${baseURL}/${category}`}> #{category} </Link>
+          {!errorMessage.errorMessage && (
+            <UlCategories>
+              <li>
+                <Link to={configURL.portfolioSite.baseURL}>#all</Link>
               </li>
-            ))}
-          </UlCategories>
+              {categories.map((category, index) => (
+                <li key={index}>
+                  <Link to={`${configURL.portfolioSite.baseURL}/${category}`}>
+                    #{category}
+                  </Link>
+                </li>
+              ))}
+            </UlCategories>
+          )}
         </Navbar>
       )}
       {categories.map((category) => (
-        <Route key={`${category}`} path={`${baseURL}/${category}`}>
+        <Route
+          key={`${category}`}
+          path={`${configURL.portfolioSite.baseURL}/${category}`}
+        >
           <JokesInCategory category={category}></JokesInCategory>
         </Route>
       ))}
-      <Route exact path={`${baseURL}`}>
+      <Route exact path={configURL.portfolioSite.baseURL}>
         {loadingJokes ? (
           <div>Loading Jokes ...</div>
         ) : (

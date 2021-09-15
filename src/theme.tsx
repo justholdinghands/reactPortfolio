@@ -71,6 +71,7 @@ export const theme = {
     background: "#c9c9c9",
     primaryColor: "#240202",
     secondaryColor: "#85180a",
+    toastBackground: "#ffffff",
     primaryFont: "'Special Elite', cursive",
     secondaryFont: "'Smokum', cursive",
   },
