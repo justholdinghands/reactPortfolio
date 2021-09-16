@@ -83,7 +83,7 @@ export const CreateArticle = () => {
     author: "",
     title: "",
     text: "",
-    date: "",
+    date: new Date(),
     articleURL: "",
   } as Blog);
   const blogContext = useContext(BlogContext);
@@ -156,7 +156,7 @@ export const CreateArticle = () => {
         articleURL: articleState.articleURL
           ? slugify(articleState.articleURL)
           : slugify(articleState.title),
-        date: Date(),
+        date: new Date(),
       },
     ]);
     history.push("/blog/AllPosts");

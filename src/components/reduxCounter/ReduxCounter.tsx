@@ -7,6 +7,7 @@ import counterSlice, {
   increment,
   multiply,
   power,
+  selectCount,
 } from "./counterSlice";
 import styled from "styled-components";
 
@@ -65,7 +66,7 @@ const OrangeButton = styled(Button)`
 `;
 
 export const ReduxCounter = () => {
-  let count = useAppSelector((state) => state.counter.value);
+  let count = useAppSelector(selectCount);
   const dispatch = useAppDispatch();
   return (
     <DivWrapper>

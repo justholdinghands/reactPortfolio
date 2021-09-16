@@ -2,7 +2,7 @@ import { Component } from "react";
 import { theme } from "./../../theme";
 import Button from "./Button";
 import pinkAxo from "./imgs/pink-axo-vertical.gif";
-import styled from "styled-components";
+import styled, { keyframes } from "styled-components";
 import whiteAxo from "./imgs/white-axo-side.gif";
 
 type State = {
@@ -76,16 +76,7 @@ const DivAxos = styled.div`
   position: absolute;
 `;
 
-const ImgWAxo = styled.img`
-  position: absolute;
-  display: block;
-  transform: scaleX(-1);
-  height: 5em;
-
-  animation: whiteMove 50s infinite;
-  animation-timing-function: linear;
-
-  @keyframes whiteMove {
+const whiteMove = keyframes`
     0% {
       left: -20%;
       top: 80%;
@@ -106,19 +97,9 @@ const ImgWAxo = styled.img`
       top: 80%;
       transform: scaleX(1);
     }
-  }
 `;
 
-const ImgPAxo = styled.img`
-  position: absolute;
-  display: block;
-  height: 5em;
-  right: 0;
-
-  animation: pinkMove 50s infinite;
-  animation-timing-function: linear;
-
-  @keyframes pinkMove {
+const pinkMove = keyframes`
     0% {
       right: 0;
       bottom: 80%;
@@ -137,7 +118,24 @@ const ImgPAxo = styled.img`
       bottom: 80%;
       transform: scaleX(-1);
     }
-  }
+`;
+
+const ImgWAxo = styled.img`
+  position: absolute;
+  display: block;
+  transform: scaleX(-1);
+  height: 5em;
+  animation: ${whiteMove} 50s infinite;
+  animation-timing-function: linear;
+`;
+
+const ImgPAxo = styled.img`
+  position: absolute;
+  display: block;
+  height: 5em;
+  right: 0;
+  animation: ${pinkMove} 50s infinite;
+  animation-timing-function: linear;
 `;
 
 export default class Counter extends Component<Props, State> {

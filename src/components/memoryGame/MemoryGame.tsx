@@ -93,8 +93,6 @@ const MemoryGame = (props: Props) => {
     setMatrix((p) => p.map((piece) => ({ ...piece, flippedNow: false })));
   };
 
-  console.log(process.env.PUBLIC_URL);
-
   useEffect(() => {
     const flipped = matrix.filter((piece) => piece.flippedNow);
     if (flipped.length === 2) {

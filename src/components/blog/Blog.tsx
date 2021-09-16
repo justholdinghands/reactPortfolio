@@ -85,7 +85,7 @@ export type Blog = {
   author: string;
   title: string;
   text: string;
-  date: string;
+  date: Date;
   articleURL: string;
 };
 
@@ -168,9 +168,3 @@ export const BlogComponent = () => {
     </DivFullWrapper>
   );
 };
-
-// searchbar
-// todo: pridavanie fotiek
-// share on fb, twitter, reddit, linkedinm, copyurl
-// hashtag
-// like

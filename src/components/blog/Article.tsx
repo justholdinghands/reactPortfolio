@@ -3,7 +3,6 @@ import { DivIcon } from "../../App";
 import { Link } from "react-router-dom";
 import { theme } from "../../theme";
 import marked from "marked";
-import moment from "moment";
 import programmer from "../../icons/programmer.png";
 import styled from "styled-components";
 
@@ -67,6 +66,13 @@ type Props = {
   fulltext: boolean;
 };
 
+const daysAgo = (date: Date) => {
+  const oneDay = 1000 * 60 * 60 * 24;
+  const today = Number(new Date());
+  const publishDate = Number(new Date(date));
+  return ((today - publishDate) / oneDay).toFixed(0);
+};
+
 export const Article = (props: Props) => {
   const createMarkup = () => {
     const articleBody = marked(
@@ -76,8 +82,6 @@ export const Article = (props: Props) => {
       __html: articleBody,
     };
   };
-
-  const oneDay = 1000 * 60 * 60 * 24;
 
   return (
     <div>
@@ -92,12 +96,15 @@ export const Article = (props: Props) => {
             </Link>
           </DivWrapAuthor>
           <DivDate>
-            {moment(props.blog.date).format("DD. MM. YYYY") +
+            {new Date(props.blog.date).toLocaleString("en-US", {
+              timeZone: "UTC",
+              weekday: "long",
+              year: "numeric",
+              month: "numeric",
+              day: "2-digit",
+            }) +
               " (" +
-              (
-                (Number(moment(new Date())) - Number(moment(props.blog.date))) /
-                oneDay
-              ).toFixed(0) +
+              daysAgo(props.blog.date) +
               " days ago)"}
           </DivDate>
           {props.fulltext ? (
