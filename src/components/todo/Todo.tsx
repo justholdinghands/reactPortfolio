@@ -146,7 +146,6 @@ const TaskLi = styled.li`
   background-color: ${theme.todo.pale};
   list-style-type: none;
   color: ${theme.todo.primary};
-  width: 100%;
   list-style-type: none;
 
   :hover {

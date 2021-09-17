@@ -1,4 +1,5 @@
 import { BlogComponent } from "./components/blog/Blog";
+import { ChuckNorris } from "./components/chucknorris/ChuckNorris";
 import { Component, useState } from "react";
 import {
   Link,
@@ -19,6 +20,7 @@ import MemoryGame from "./components/memoryGame/MemoryGame";
 import TicTacToe from "./components/tictactoe/tictactoe";
 import Todo from "./components/todo/Todo";
 import blog from "./icons/blog.png";
+import chuck from "./icons/chucc.png";
 import purpleAxo from "./icons/purpleAxo.png";
 import redux from "./icons/redux.png";
 import robot from "./icons/download.png";
@@ -30,8 +32,8 @@ import xoxo from "./icons/xo.png";
 const DivWrapper = styled.div`
   display: flex;
   flex-direction: row;
-  height: 98vh;
-  width: 98vw;
+  height: 100%;
+  width: 100%;
   overflow-x: hidden;
 `;
 
@@ -46,8 +48,11 @@ const UlNav = styled.ul`
   height: 100%;
   font: bold 1.8em/150% ${theme.hackertyper.fontPrimary};
   border: 10px blue solid;
-  padding-left: 2%;
-  width: 15%;
+  width: 300px;
+
+  li {
+    padding-left: 2%;
+  }
 `;
 
 export const DivIcon = styled.div`
@@ -68,14 +73,14 @@ const DivImgWrap = styled.div`
 
 const DivSwitch = styled.div`
   position: absolute;
-  width: 85%;
+  width: calc(100% - 300px);
   height: 100%;
   right: 0;
-  /* border: 10px pink solid; */
 `;
 
 //prettier-ignore
 export const blogRoutes = new RegExp('^\/blog\/*.*$');
+export const chuckRoutes = new RegExp("^/chucknorris/*.*$");
 
 const GlobalStyle = createGlobalStyle<{ bgcolor: string }>`
   body {
@@ -92,6 +97,8 @@ const GlobalStyle = createGlobalStyle<{ bgcolor: string }>`
         ? theme.blog.background
         : props.bgcolor === "/memoryGame"
         ? theme.memoryGame.background
+        : chuckRoutes.test(props.bgcolor)
+        ? theme.chuck.background
         : ""};
     display: flex;
     flex-direction: column;
@@ -177,6 +184,12 @@ class App extends Component<RouteComponentProps<{ location: any }>> {
                       <img src={redux} alt="redux" />
                     </DivIcon>
                     Redux counter
+                <Link to="/chucknorris" style={{ textDecoration: "none" }}>
+                  <DivImgWrap>
+                    <DivIcon>
+                      <img src={chuck} alt="chucknorris" />
+                    </DivIcon>
+                    Chuck Norris
                   </DivImgWrap>
                 </Link>
               </li>
@@ -206,6 +219,8 @@ class App extends Component<RouteComponentProps<{ location: any }>> {
                 <Provider store={store}>
                   <ReduxCounter></ReduxCounter>
                 </Provider>
+              <Route path="/chucknorris">
+                <ChuckNorris></ChuckNorris>
               </Route>
             </Switch>
           </DivSwitch>

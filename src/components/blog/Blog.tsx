@@ -16,7 +16,7 @@ const NavWrapper = styled.nav`
   flex-direction: row;
   justify-content: space-between;
   align-items: center;
-  width: 70vw;
+  width: 100%;
   height: 3em;
   font: 2em ${theme.blog.fontPrimary};
   color: ${theme.blog.primaryTextColor};
@@ -76,10 +76,7 @@ const DivNew = styled.div`
   }
 `;
 
-const DivArticles = styled.div`
-  display: flex;
-  flex-direction: column-reverse;
-`;
+const DivArticles = styled.div``;
 
 export type Blog = {
   author: string;
@@ -168,3 +165,9 @@ export const BlogComponent = () => {
     </DivFullWrapper>
   );
 };
+
+// searchbar
+// todo: pridavanie fotiek
+// share on fb, twitter, reddit, linkedinm, copyurl
+// hashtag
+// like

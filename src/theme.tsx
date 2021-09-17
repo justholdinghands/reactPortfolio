@@ -55,7 +55,7 @@ export const theme = {
     primary: "#ededed ",
     secondary: "#92929285",
     background: "#e4e4e4",
-    primaryTextColor: "#008d81",
+    primaryTextColor: "#00d1c0",
     secondaryTextColor: "#1a3a36",
     hoverTextColor: "#FFFFFF",
     fontPrimary: "'Roboto', sans-serif;",
@@ -68,5 +68,18 @@ export const theme = {
     white: "#ffffff",
     grey: "#d8d8d8",
     orange: "#c7813f",
+  },
+
+  chuck: {
+    scrollbarThumb: "#1c01014c",
+    scrollbar: "#f5f5f5",
+    scrollbarTrack: "#aaaaaa",
+    scrollbarShadow: "inset 0 0 6px rgba(0, 0, 0, 0.3)",
+    background: "#c9c9c9",
+    primaryColor: "#240202",
+    secondaryColor: "#85180a",
+    toastBackground: "#ffffff",
+    primaryFont: "'Special Elite', cursive",
+    secondaryFont: "'Smokum', cursive",
   },
 };

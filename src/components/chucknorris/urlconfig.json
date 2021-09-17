@@ -1,0 +1,9 @@
+{
+  "portfolioSite": {
+    "baseURL": "/chucknorris"
+  },
+  "api": {
+    "jokesRandom": "https://api.chucknorris.io/jokes/random",
+    "categories": "https://api.chucknorris.io/jokes/categories"
+  }
+}
