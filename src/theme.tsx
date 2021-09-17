@@ -1,4 +1,7 @@
 export const theme = {
+  global: {
+    borderColor: "#b5b5b5",
+  },
   counter: {
     primary: "#ffdab7",
     plus: "#7ccbff",
@@ -14,7 +17,8 @@ export const theme = {
     backgroundGranted: "#585858",
     denied: "#fd3131",
     backgroundDenied: "#5a0000",
-    font: "mono",
+    fontSecondary: "'Press Start 2P', cursive;",
+    fontPrimary: "'IBM Plex Mono', monospace",
   },
   todo: {
     accent: "#ead7d7",
@@ -30,9 +34,8 @@ export const theme = {
   tictactoe: {
     primary: "#ff8133",
     secondary: "#0b454d",
-    box: "#ceaca3",
-    "box-shadow": "#957167",
-    background: "#dfcbc3",
+    box: "#ce903f",
+    background: "#d1d1d1",
     primaryTextColor: "#ffffff",
     fontPrimary: '"Cabin Sketch", cursive',
     fontSecondary: "monospace",
@@ -49,14 +52,27 @@ export const theme = {
   },
 
   blog: {
-    primary: "#cffaf6 ",
-    secondary: "#7ebdb485",
-    background: "#ffffff",
+    primary: "#ededed ",
+    secondary: "#92929285",
+    background: "#e4e4e4",
     primaryTextColor: "#00d1c0",
     secondaryTextColor: "#1a3a36",
     hoverTextColor: "#FFFFFF",
     fontPrimary: "'Roboto', sans-serif;",
     fontSecondary: "'Roboto', sans-serif;",
     errorColor: "#ff0800",
+  },
+
+  chuck: {
+    scrollbarThumb: "#1c01014c",
+    scrollbar: "#f5f5f5",
+    scrollbarTrack: "#aaaaaa",
+    scrollbarShadow: "inset 0 0 6px rgba(0, 0, 0, 0.3)",
+    background: "#c9c9c9",
+    primaryColor: "#240202",
+    secondaryColor: "#85180a",
+    toastBackground: "#ffffff",
+    primaryFont: "'Special Elite', cursive",
+    secondaryFont: "'Smokum', cursive",
   },
 };

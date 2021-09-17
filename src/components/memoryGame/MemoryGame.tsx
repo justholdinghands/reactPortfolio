@@ -1,6 +1,6 @@
-import { Component, useEffect, useRef, useState } from "react";
 import { randomSort } from "./arrayUtils";
 import { theme } from "../../theme";
+import { useEffect, useState } from "react";
 import Piece from "./Piece";
 import styled from "styled-components";
 
@@ -35,42 +35,42 @@ const flipTime = 500;
 const cards: Card[] = [
   {
     name: "a",
-    image: "./imgs/worm1.jpg",
+    image: "./imgs/urchin.jpg",
     flippedNow: false,
   },
   {
     name: "b",
-    image: "./imgs/worm2.jpg",
+    image: "./imgs/clown.jpeg",
     flippedNow: false,
   },
   {
     name: "c",
-    image: "./imgs/worm3.jpg",
+    image: "./imgs/jelly.jpg",
     flippedNow: false,
   },
   {
     name: "d",
-    image: "./imgs/worm4.jpg",
+    image: "./imgs/octo.jpg",
     flippedNow: false,
   },
   {
     name: "e",
-    image: "./imgs/worm5.jpg",
+    image: "./imgs/patrick.jpg",
     flippedNow: false,
   },
   {
     name: "f",
-    image: "./imgs/worm6.jpg",
+    image: "./imgs/rays.jpg",
     flippedNow: false,
   },
   {
     name: "g",
-    image: "./imgs/worm7.jpg",
+    image: "./imgs/turbellaria.jpg",
     flippedNow: false,
   },
   {
     name: "h",
-    image: "./imgs/worm8.jpg",
+    image: "./imgs/whale.jpg",
     flippedNow: false,
   },
 ];

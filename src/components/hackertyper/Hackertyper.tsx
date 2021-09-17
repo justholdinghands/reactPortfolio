@@ -1,6 +1,6 @@
+import { Component } from "react";
 import { codeDemo } from "./code";
 import { theme } from "../../theme";
-import React, { Component } from "react";
 import Welcome from "./Welcome";
 import styled from "styled-components";
 
@@ -8,12 +8,12 @@ import styled from "styled-components";
 const DivContainer = styled.div`
   background-color: ${theme.hackertyper.background};
   color: ${theme.hackertyper.primary};
-  font-family: ${theme.hackertyper.font};
+  font-family: ${theme.hackertyper.fontPrimary};
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
-
+  position: relative;
   ::-webkit-scrollbar {
     width: 0;
   }
@@ -21,42 +21,51 @@ const DivContainer = styled.div`
 
 const DivTerminal = styled.div`
   padding-left: 5em;
-  width: 100%;
+  width: 98vh;
   white-space: pre;
+  height: 100%;
   line-height: 2rem;
-
+  overflow-y: scroll;
   ::-webkit-scrollbar {
     width: 0;
   }
 `;
 
-const DivPopDenied = styled.div`
+const DivPopups = styled.div`
   display: flex;
-  position: fixed;
-  height: 15vh;
-  width: 30vw;
-  top: 40%;
-  left: 35%;
   justify-content: center;
   align-items: center;
-  font-size: 3vw;
-  font-weight: bolder;
+  height: 100vh;
+  width: 100%;
+  position: fixed;
+  top: 0;
+`;
+
+const DivPopDenied = styled.div`
+  position: fixed;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 15vh;
+  width: 20em;
+  justify-content: center;
+  align-items: center;
+  font: 2em ${theme.hackertyper.fontSecondary};
   border: 0.5vh solid ${theme.hackertyper.denied};
   background-color: ${theme.hackertyper.backgroundDenied};
   color: ${theme.hackertyper.denied};
 `;
 
 const DivPopGranted = styled.div`
-  display: flex;
   position: fixed;
-  height: 15vh;
-  width: 30vw;
-  top: 40%;
-  left: 35%;
+  display: flex;
   justify-content: center;
   align-items: center;
-  font-size: 3vw;
-  font-weight: bolder;
+  height: 15vh;
+  width: 20em;
+  justify-content: center;
+  align-items: center;
+  font: 2em ${theme.hackertyper.fontSecondary};
   border: 0.5vh solid ${theme.hackertyper.primary};
   background-color: ${theme.hackertyper.backgroundGranted};
   color: ${theme.hackertyper.primary};
@@ -169,7 +178,9 @@ export default class Hackertyper extends Component<Props, State> {
     } else if (
       e.keyCode !== keyCodes.ALT &&
       e.keyCode !== keyCodes.CAPS &&
-      e.keyCode !== keyCodes.ESC
+      e.keyCode !== keyCodes.ESC &&
+      !this.state.isDenied &&
+      !this.state.isGranted
     ) {
       this.setState((prevState) => ({
         code: codeDemo.substring(0, prevState.position + stepSize),
@@ -197,16 +208,18 @@ export default class Hackertyper extends Component<Props, State> {
         ) : (
           <DivTerminal id="terminal">{this.state.code}</DivTerminal>
         )}
-        {this.state.isDenied && (
-          <DivPopDenied className="popup" id="access-denied">
-            ACCESS DENIED
-          </DivPopDenied>
-        )}
-        {this.state.isGranted && (
-          <DivPopGranted className="popup" id="access-granted">
-            ACCESS GRANTED
-          </DivPopGranted>
-        )}
+        <DivPopups>
+          {this.state.isDenied && (
+            <DivPopDenied className="popup" id="access-denied">
+              ACCESS DENIED
+            </DivPopDenied>
+          )}
+          {this.state.isGranted && (
+            <DivPopGranted className="popup" id="access-granted">
+              ACCESS GRANTED
+            </DivPopGranted>
+          )}
+        </DivPopups>
       </DivContainer>
     );
   }

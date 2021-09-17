@@ -1,5 +1,5 @@
-import { Component, useState } from "react";
 import { theme } from "../../theme";
+import shark from "./shark.png";
 import styled from "styled-components";
 
 const ButtonPiece = styled.div<{
@@ -26,8 +26,16 @@ const Img = styled.img`
   width: 100%;
   height: 100%;
   z-index: 1;
-  background-size: cover;
+  background-size: contain;
   border-radius: 5%;
+`;
+
+const ImgBack = styled.img`
+  width: 30%;
+  height: 30%;
+  z-index: 1;
+  background-size: cover;
+  filter: hue-rotate(210deg);
 `;
 
 type Props = {
@@ -48,7 +56,7 @@ const Piece = (props: Props) => {
       image={props.image}
     >
       {(props.isFlippedNow && <Img src={props.image} />) ||
-        (!props.isGuessed && "Turbellaria")}
+        (!props.isGuessed && <ImgBack src={shark} />)}
     </ButtonPiece>
   );
 };
