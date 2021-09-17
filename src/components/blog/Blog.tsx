@@ -82,7 +82,7 @@ export type Blog = {
   author: string;
   title: string;
   text: string;
-  date: string;
+  date: Date;
   articleURL: string;
 };
 
@@ -136,6 +136,30 @@ export const BlogComponent = () => {
               ))}
             </DivArticles>
           </Route>
+          {context.blogs
+            .filter(
+              (blog, index, arr) =>
+                arr.findIndex((t) => t.author === blog.author) === index
+            )
+            .map((uniqueAuthor) => (
+              <Route
+                key={uniqueAuthor.author}
+                exact
+                path={`${BASE_URL}${uniqueAuthor.author}`}
+              >
+                <DivArticles>
+                  {context.blogs.map((blog) =>
+                    blog.author === uniqueAuthor.author ? (
+                      <Article
+                        key={`${blog.author}/${blog.articleURL}`}
+                        blog={blog}
+                        fulltext={false}
+                      />
+                    ) : null
+                  )}
+                </DivArticles>
+              </Route>
+            ))}
         </DivWrapper>
       </BlogContext.Provider>
     </DivFullWrapper>
