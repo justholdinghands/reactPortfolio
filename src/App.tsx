@@ -184,6 +184,10 @@ class App extends Component<RouteComponentProps<{ location: any }>> {
                       <img src={redux} alt="redux" />
                     </DivIcon>
                     Redux counter
+                  </DivImgWrap>
+                </Link>
+              </li>
+              <li>
                 <Link to="/chucknorris" style={{ textDecoration: "none" }}>
                   <DivImgWrap>
                     <DivIcon>
@@ -219,6 +223,7 @@ class App extends Component<RouteComponentProps<{ location: any }>> {
                 <Provider store={store}>
                   <ReduxCounter></ReduxCounter>
                 </Provider>
+              </Route>
               <Route path="/chucknorris">
                 <ChuckNorris></ChuckNorris>
               </Route>
