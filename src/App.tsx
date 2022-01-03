@@ -8,6 +8,7 @@ import {
   BrowserRouter as Router,
   Switch,
 } from "react-router-dom";
+import { Navbar } from "react-bootstrap";
 import { Provider } from "react-redux";
 import { ReduxCounter } from "./components/reduxCounter/ReduxCounter";
 import { createGlobalStyle } from "styled-components";
@@ -115,86 +116,88 @@ class App extends Component<RouteComponentProps<{ location: any }>> {
       <div>
         <GlobalStyle bgcolor={this.props.location.pathname} />
         <DivWrapper id="divRender">
-          <nav>
-            <UlNav>
-              <li>
-                <Link to="/counter" style={{ textDecoration: "none" }}>
-                  <DivImgWrap>
-                    <DivIcon>
-                      <img src={purpleAxo} alt="purple axo" />
-                    </DivIcon>
-                    Counter
-                  </DivImgWrap>
-                </Link>
-              </li>
-              <li>
-                <Link to="/hackertyper" style={{ textDecoration: "none" }}>
-                  <DivImgWrap>
-                    <DivIcon>
-                      <img src={robot} alt="robot axo" />
-                    </DivIcon>
-                    Hacker Typer
-                  </DivImgWrap>
-                </Link>
-              </li>
-              <li>
-                <Link to="/todo" style={{ textDecoration: "none" }}>
-                  <DivImgWrap>
-                    <DivIcon>
-                      <img src={superwoman} alt="superwoman" />
-                    </DivIcon>
-                    To Do List
-                  </DivImgWrap>
-                </Link>
-              </li>
-              <li>
-                <Link to="/tictactoe" style={{ textDecoration: "none" }}>
-                  <DivImgWrap>
-                    <DivIcon>
-                      <img src={xoxo} alt="xoxo" />
-                    </DivIcon>
-                    Tic Tac Toe
-                  </DivImgWrap>
-                </Link>
-              </li>
-              <li>
-                <Link to="/memoryGame" style={{ textDecoration: "none" }}>
-                  <DivImgWrap>
-                    <DivIcon>
-                      <img src={shark} alt="shark" />
-                    </DivIcon>
-                    Memory Game
-                  </DivImgWrap>
-                </Link>
-              </li>
-              <li>
-                <Link to="/blog" style={{ textDecoration: "none" }}>
-                  <DivImgWrap>
-                    <DivIcon>
-                      <img src={blog} alt="blog" />
-                    </DivIcon>
-                    Blog
-                  </DivImgWrap>
-                </Link>
-              </li>
-              <li>
-                <Link to="/redux" style={{ textDecoration: "none" }}>
-                  <DivImgWrap>
-                    <DivIcon>
-                      <img src={redux} alt="redux" />
-                    </DivIcon>
-                    Redux counter
-                <Link to="/chucknorris" style={{ textDecoration: "none" }}>
-                  <DivImgWrap>
-                    <DivIcon>
-                      <img src={chuck} alt="chucknorris" />
-                    </DivIcon>
-                    Chuck Norris
-                  </DivImgWrap>
-                </Link>
-              </li>
-            </UlNav>
-          </nav>
+          <Navbar bg="dark">
+            <li>
+              <Link to="/counter" style={{ textDecoration: "none" }}>
+                <DivImgWrap>
+                  <DivIcon>
+                    <img src={purpleAxo} alt="purple axo" />
+                  </DivIcon>
+                  Counter
+                </DivImgWrap>
+              </Link>
+            </li>
+            <li>
+              <Link to="/hackertyper" style={{ textDecoration: "none" }}>
+                <DivImgWrap>
+                  <DivIcon>
+                    <img src={robot} alt="robot axo" />
+                  </DivIcon>
+                  Hacker Typer
+                </DivImgWrap>
+              </Link>
+            </li>
+            <li>
+              <Link to="/todo" style={{ textDecoration: "none" }}>
+                <DivImgWrap>
+                  <DivIcon>
+                    <img src={superwoman} alt="superwoman" />
+                  </DivIcon>
+                  To Do List
+                </DivImgWrap>
+              </Link>
+            </li>
+            <li>
+              <Link to="/tictactoe" style={{ textDecoration: "none" }}>
+                <DivImgWrap>
+                  <DivIcon>
+                    <img src={xoxo} alt="xoxo" />
+                  </DivIcon>
+                  Tic Tac Toe
+                </DivImgWrap>
+              </Link>
+            </li>
+            <li>
+              <Link to="/memoryGame" style={{ textDecoration: "none" }}>
+                <DivImgWrap>
+                  <DivIcon>
+                    <img src={shark} alt="shark" />
+                  </DivIcon>
+                  Memory Game
+                </DivImgWrap>
+              </Link>
+            </li>
+            <li>
+              <Link to="/blog" style={{ textDecoration: "none" }}>
+                <DivImgWrap>
+                  <DivIcon>
+                    <img src={blog} alt="blog" />
+                  </DivIcon>
+                  Blog
+                </DivImgWrap>
+              </Link>
+            </li>
+            <li>
+              <Link to="/redux" style={{ textDecoration: "none" }}>
+                <DivImgWrap>
+                  <DivIcon>
+                    <img src={redux} alt="redux" />
+                  </DivIcon>
+                  Redux counter
+                </DivImgWrap>
+              </Link>
+            </li>
+            <li>
+              <Link to="/chucknorris" style={{ textDecoration: "none" }}>
+                <DivImgWrap>
+                  <DivIcon>
+                    <img src={chuck} alt="chucknorris" />
+                  </DivIcon>
+                  Chuck Norris
+                </DivImgWrap>
+              </Link>
+            </li>
+          </Navbar>
           <DivSwitch>
             <Switch>
               <Route path="/counter">
@@ -219,6 +222,7 @@ class App extends Component<RouteComponentProps<{ location: any }>> {
                 <Provider store={store}>
                   <ReduxCounter></ReduxCounter>
                 </Provider>
+              </Route>
               <Route path="/chucknorris">
                 <ChuckNorris></ChuckNorris>
               </Route>
