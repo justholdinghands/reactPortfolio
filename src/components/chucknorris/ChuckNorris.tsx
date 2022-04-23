@@ -1,5 +1,5 @@
 import { ErrorBoundary } from "react-error-boundary";
-import { JokesInCategory } from "./JokesInCategory";
+import { JokesInCategory } from "./CategoryJokes";
 import { Link, Route } from "react-router-dom";
 import { theme } from "../../theme";
 import { useEffect, useState } from "react";

@@ -39,7 +39,7 @@ export const JokesInCategory = (props: Props) => {
       try {
         while (loadJokeArr.length !== numberOfJokes) {
           let loadData = await fetch(
-            `${configURL.api.jokesRandom}akshgf?category=${props.category}`
+            `${configURL.api.jokesRandom}?category=${props.category}` /** FOR ERROR `${configURL.api.jokesRandom}akshgf?category=${props.category}` */
           );
           if (!loadData.ok) throw new Error(`${loadData.status}`);
           let data: Joke = await loadData.json();
