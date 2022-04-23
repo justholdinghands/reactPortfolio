@@ -14,23 +14,18 @@ const DivCreate = styled.div`
 const NavWrapper = styled.nav`
   display: flex;
   flex-direction: row;
-  justify-content: space-evenly;
+  justify-content: space-between;
+  align-items: center;
   width: 100%;
+  height: 3em;
   font: 2em ${theme.blog.fontPrimary};
   color: ${theme.blog.primaryTextColor};
-  padding: 0.5em;
-  background: ${theme.blog.background};
-`;
 
-const NavDiv = styled.div`
   background: ${theme.blog.primary};
-  padding: 0.5em;
-  border-radius: 0.5em;
-  box-shadow: 12px 12px 2px 1px ${theme.blog.secondary};
 `;
 
 const DivFullWrapper = styled.div`
-  width: 100vw;
+  width: 100%;
   background: ${theme.blog.background};
 `;
 
@@ -42,11 +37,42 @@ const DivWrapper = styled.div`
   align-items: center;
   justify-content: flex-start;
   background: ${theme.blog.background};
-
-  width: 100vw;
+  width: 100%;
   a {
     color: ${theme.blog.primaryTextColor};
     text-decoration: none;
+  }
+`;
+
+const DivAll = styled.div`
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding-left: 2%;
+  padding-right: 2%;
+  width: 300px;
+  height: 100%;
+`;
+
+const DivNew = styled.div`
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 120px;
+  height: 50%;
+  border-radius: 5%;
+  font-size: 23px;
+  font-weight: 800;
+  background: ${theme.blog.secondaryTextColor};
+  margin-right: 2em;
+  a {
+    color: ${theme.blog.primaryTextColor};
+    :active {
+      color: ${theme.blog.secondaryTextColor};
+    }
+  }
+  :active {
+    background: ${theme.blog.primaryTextColor};
   }
 `;
 
@@ -56,7 +82,7 @@ export type Blog = {
   author: string;
   title: string;
   text: string;
-  date: string;
+  date: Date;
   articleURL: string;
 };
 
@@ -79,12 +105,12 @@ export const BlogComponent = () => {
       <BlogContext.Provider value={context}>
         <DivWrapper>
           <NavWrapper>
-            <NavDiv>
-              <Link to={`${BASE_URL}AllPosts`}>All posts</Link>
-            </NavDiv>
-            <NavDiv>
+            <DivAll>
+              <Link to={`${BASE_URL}AllPosts`}>React blog site</Link>
+            </DivAll>
+            <DivNew>
               <Link to={`${BASE_URL}NewPost`}>New Post</Link>
-            </NavDiv>
+            </DivNew>
           </NavWrapper>
           {context.blogs.map((blog) => (
             <Route
@@ -110,8 +136,38 @@ export const BlogComponent = () => {
               ))}
             </DivArticles>
           </Route>
+          {context.blogs
+            .filter(
+              (blog, index, arr) =>
+                arr.findIndex((t) => t.author === blog.author) === index
+            )
+            .map((uniqueAuthor) => (
+              <Route
+                key={uniqueAuthor.author}
+                exact
+                path={`${BASE_URL}${uniqueAuthor.author}`}
+              >
+                <DivArticles>
+                  {context.blogs.map((blog) =>
+                    blog.author === uniqueAuthor.author ? (
+                      <Article
+                        key={`${blog.author}/${blog.articleURL}`}
+                        blog={blog}
+                        fulltext={false}
+                      />
+                    ) : null
+                  )}
+                </DivArticles>
+              </Route>
+            ))}
         </DivWrapper>
       </BlogContext.Provider>
     </DivFullWrapper>
   );
 };
+
+// searchbar
+// todo: pridavanie fotiek
+// share on fb, twitter, reddit, linkedinm, copyurl
+// hashtag
+// like

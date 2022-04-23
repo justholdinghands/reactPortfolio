@@ -1,8 +1,19 @@
 export const theme = {
   global: {
+    globalBg:
+      "linear-gradient(180deg, rgba(142, 84, 233, 0.52) 0%, #89D5FF 100%)",
+    defaultBg: "#ffffff",
+    defaultClr: "#C8A9F8",
+    activeBg: "#C8A9F8",
+    activeClr: "#ffffff",
+    titleClr: "#ffffff",
     borderColor: "#b5b5b5",
+    fontFamily1: "Roboto Slab",
+    fontFamily2: "Roboto Mono",
+    fontFamily3: "IBM Plex Mono",
   },
   counter: {
+    btnClr: "#ffffff",
     primary: "#ffdab7",
     plus: "#7ccbff",
     minus: "#ff8b5d",
@@ -52,14 +63,34 @@ export const theme = {
   },
 
   blog: {
-    primary: "#cffaf6 ",
-    secondary: "#7ebdb485",
-    background: "#ffffff",
+    primary: "#ededed ",
+    secondary: "#92929285",
+    background: "#e4e4e4",
     primaryTextColor: "#00d1c0",
     secondaryTextColor: "#1a3a36",
     hoverTextColor: "#FFFFFF",
     fontPrimary: "'Roboto', sans-serif;",
     fontSecondary: "'Roboto', sans-serif;",
     errorColor: "#ff0800",
+    iconSize: "2em",
+  },
+  redux: {
+    black: "#000000",
+    white: "#ffffff",
+    grey: "#d8d8d8",
+    orange: "#c7813f",
+  },
+
+  chuck: {
+    scrollbarThumb: "#1c01014c",
+    scrollbar: "#f5f5f5",
+    scrollbarTrack: "#aaaaaa",
+    scrollbarShadow: "inset 0 0 6px rgba(0, 0, 0, 0.3)",
+    background: "#c9c9c9",
+    primaryColor: "#240202",
+    secondaryColor: "#85180a",
+    toastBackground: "#ffffff",
+    primaryFont: "'Special Elite', cursive",
+    secondaryFont: "'Smokum', cursive",
   },
 };

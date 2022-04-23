@@ -1,12 +1,12 @@
 import { Component } from "react";
+import { Row } from "react-bootstrap";
 import { theme } from "./../../theme";
 import Button from "./Button";
-import pinkAxo from "./imgs/pink-axo-vertical.gif";
-import styled from "styled-components";
-import whiteAxo from "./imgs/white-axo-side.gif";
+import styled, { keyframes } from "styled-components";
 
 type State = {
   count: number;
+  isDesktop: boolean;
 };
 
 type Props = {
@@ -76,16 +76,7 @@ const DivAxos = styled.div`
   position: absolute;
 `;
 
-const ImgWAxo = styled.img`
-  position: absolute;
-  display: block;
-  transform: scaleX(-1);
-  height: 5em;
-
-  animation: whiteMove 50s infinite;
-  animation-timing-function: linear;
-
-  @keyframes whiteMove {
+const whiteMove = keyframes`
     0% {
       left: -20%;
       top: 80%;
@@ -106,19 +97,9 @@ const ImgWAxo = styled.img`
       top: 80%;
       transform: scaleX(1);
     }
-  }
 `;
 
-const ImgPAxo = styled.img`
-  position: absolute;
-  display: block;
-  height: 5em;
-  right: 0;
-
-  animation: pinkMove 50s infinite;
-  animation-timing-function: linear;
-
-  @keyframes pinkMove {
+const pinkMove = keyframes`
     0% {
       right: 0;
       bottom: 80%;
@@ -137,17 +118,47 @@ const ImgPAxo = styled.img`
       bottom: 80%;
       transform: scaleX(-1);
     }
-  }
 `;
+
+const ImgWAxo = styled.img`
+  position: absolute;
+  display: block;
+  transform: scaleX(-1);
+  height: 5em;
+  animation: ${whiteMove} 50s infinite;
+  animation-timing-function: linear;
+`;
+
+const ImgPAxo = styled.img`
+  position: absolute;
+  display: block;
+  height: 5em;
+  right: 0;
+  animation: ${pinkMove} 50s infinite;
+  animation-timing-function: linear;
+`;
+
+const buttonsStyle = {
+  opacity: "100%",
+  zIndex: "19",
+};
+
+const numberStyle = {
+  font: `50vw ${theme.global.fontFamily1}`,
+  color: `${theme.counter.btnClr}`,
+  opacity: "40%",
+  zIndex: "0",
+  "overflow-y": "hidden",
+};
 
 export default class Counter extends Component<Props, State> {
   constructor(props) {
     super(props);
     this.state = {
       count: 0,
+      isDesktop: true,
     };
   }
-
   plus = () => {
     this.setState((prevState) => ({
       count: prevState.count + 1,
@@ -162,43 +173,74 @@ export default class Counter extends Component<Props, State> {
 
   render() {
     var { count } = this.state;
+    // console.log(
+    //   `isDesktop: ${this.props.isDesktop.valueOf}, chooseNumberPosition.font: ${this.chooseNumberPosition.font.valueOf}`
+    // );
     return (
-      <DivMain id="main-div" className="counter">
-        <DivAxos>
-          <ImgWAxo
-            className="white-axo"
-            src={whiteAxo}
-            alt="white-axolotl"
-          ></ImgWAxo>
-          <ImgPAxo
-            className="pink-axo"
-            src={pinkAxo}
-            alt="pink-axolotl"
-          ></ImgPAxo>
-        </DivAxos>
-        <DivWrapCounter>
-          <DivCount id="count-div">
-            <DivTalk id="talk">
-              <h2>Counter:</h2>
-            </DivTalk>
-            <DivBtns id="btns-div">
-              <Button
-                className="plus-btn"
-                onClick={this.plus}
-                text="+"
-                background="plus"
-              ></Button>
-              {count}
-              <Button
-                className="minus-btn"
-                onClick={this.minus}
-                text="-"
-                background="minus"
-              ></Button>
-            </DivBtns>
-          </DivCount>
-        </DivWrapCounter>
-      </DivMain>
+      <>
+        <Row
+          className="gx-0 w-100 position-fixed align-items-start align-content-center bottom-0 justify-content-center h-75"
+          style={numberStyle}
+        >
+          {count}
+        </Row>
+        <Row className="gx-0 w-100 position-absolute bottom-0 justify-content-center align-items-center">
+          <div
+            className="d-flex w-auto align-items-end overflow-hidden gap-5 h-75 pb-5"
+            style={buttonsStyle}
+          >
+            <Button
+              className="plus-btn"
+              onClick={this.plus}
+              text="+"
+              background="plus"
+            ></Button>
+            <Button
+              className="minus-btn"
+              onClick={this.minus}
+              text="-"
+              background="minus"
+            ></Button>
+          </div>
+        </Row>
+      </>
     );
   }
 }
+
+// <DivMain id="main-div" className="counter">
+//   <DivAxos>
+//     <ImgWAxo
+//       className="white-axo"
+//       src={whiteAxo}
+//       alt="white-axolotl"
+//     ></ImgWAxo>
+//     <ImgPAxo
+//       className="pink-axo"
+//       src={pinkAxo}
+//       alt="pink-axolotl"
+//     ></ImgPAxo>
+//   </DivAxos>
+//   <DivWrapCounter>
+//     <DivCount id="count-div">
+//       <DivTalk id="talk">
+//         <h2>Counter:</h2>
+//       </DivTalk>
+//       <DivBtns id="btns-div">
+//         <Button
+//           className="plus-btn"
+//           onClick={this.plus}
+//           text="+"
+//           background="plus"
+//         ></Button>
+//         {count}
+//         <Button
+//           className="minus-btn"
+//           onClick={this.minus}
+//           text="-"
+//           background="minus"
+//         ></Button>
+//       </DivBtns>
+//     </DivCount>
+//   </DivWrapCounter>
+// </DivMain>

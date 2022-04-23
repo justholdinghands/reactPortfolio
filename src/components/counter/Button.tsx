@@ -1,5 +1,5 @@
+import { Component } from "react";
 import { theme } from "./../../theme";
-import React, { Component } from "react";
 import styled from "styled-components";
 
 type Props = {
@@ -12,25 +12,20 @@ type Props = {
 // styled-components definition
 type ButtonProps = { background: string };
 const ButtonStyled = styled.button<ButtonProps>`
-  width: 150px;
-  height: 150px;
-  border: 0;
-  box-shadow: 0 5px 6px -6px black;
-  background: ${(props) =>
-    props.background === "plus"
-      ? theme.counter.plus
-      : props.background === "minus"
-      ? theme.counter.minus
-      : ""};
-
-  :hover {
-    box-shadow: 0 7px 9px -9px ${theme.hackertyper.background},
-      inset 0 0 220px -120px ${theme.hackertyper.background};
-    cursor: pointer;
+  width: 5rem;
+  height: 5rem;
+  border-radius: 8px;
+  border: none;
+  font: 3rem ${theme.global.fontFamily1};
+  font-weight: bolder;
+  color: ${theme.global.defaultClr};
+  background: ${theme.global.titleClr};
+  cursor: pointer;
   }
 
-  :active {
-    box-shadow: inset 0 0 200px -70px ${theme.hackertyper.background};
+  :hover {
+    background: ${theme.global.activeBg};
+    color: ${theme.global.activeClr};
   }
 `;
 
