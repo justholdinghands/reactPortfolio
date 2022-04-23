@@ -1,8 +1,19 @@
 export const theme = {
   global: {
+    globalBg:
+      "linear-gradient(180deg, rgba(142, 84, 233, 0.52) 0%, #89D5FF 100%)",
+    defaultBg: "#ffffff",
+    defaultClr: "#C8A9F8",
+    activeBg: "#C8A9F8",
+    activeClr: "#ffffff",
+    titleClr: "#ffffff",
     borderColor: "#b5b5b5",
+    fontFamily1: "Roboto Slab",
+    fontFamily2: "Roboto Mono",
+    fontFamily3: "IBM Plex Mono",
   },
   counter: {
+    btnClr: "#ffffff",
     primary: "#ffdab7",
     plus: "#7ccbff",
     minus: "#ff8b5d",

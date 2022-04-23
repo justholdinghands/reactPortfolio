@@ -150,7 +150,7 @@ export const CreateArticle = () => {
       return;
     }
     blogContext.addBlog((p) => [
-      ...p,
+      ...(p || []),
       {
         ...articleState,
         articleURL: articleState.articleURL
