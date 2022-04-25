@@ -14,6 +14,7 @@ export const theme = {
   },
   counter: {
     btnClr: "#ffffff",
+    nmbrClr: "rgba(142, 84, 233, 0.52)",
     primary: "#ffdab7",
     plus: "#7ccbff",
     minus: "#ff8b5d",

@@ -6,7 +6,7 @@ import PhoneInTalkIcon from "@mui/icons-material/PhoneInTalk";
 
 function NavbarMenu() {
   return (
-    <Container fluid className="w-100">
+    <Container fluid className="w-100 px-0">
       <Row className="py-2 gx-0" style={{ background: "black" }}></Row>
       <Navbar
         className="px-3 justify-content-between h-75"
