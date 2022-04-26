@@ -12,9 +12,9 @@ type Props = {
 // styled-components definition
 type ButtonProps = { background: string };
 const ButtonStyled = styled.button<ButtonProps>`
-  width: 5rem;
-  height: 5rem;
-  border-radius: 8px;
+  width: 100px;
+  height: 100px;
+  border-radius: 10px;
   border: none;
   font: 3rem ${theme.global.fontFamily1};
   font-weight: bolder;
@@ -24,8 +24,13 @@ const ButtonStyled = styled.button<ButtonProps>`
   }
 
   :hover {
-    background: ${theme.global.activeBg};
-    color: ${theme.global.activeClr};
+    box-shadow: 0 7px 9px -9px ${theme.hackertyper.background},
+      inset 0 0 220px -120px ${theme.hackertyper.background};
+    cursor: pointer;
+  }
+
+  :active {
+    box-shadow: inset 0 0 200px -70px ${theme.hackertyper.background};
   }
 `;
 
