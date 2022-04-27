@@ -80,7 +80,7 @@ export default class Counter extends Component<Props, State> {
       <DivContainer>
         <DivCount>{count}</DivCount>
 
-        <DivButtons className="d-flex w-auto align-items-end overflow-hidden gap-5 h-75 pb-5">
+        <DivButtons>
           <Button
             className="plus-btn"
             onClick={this.plus}

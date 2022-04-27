@@ -19,7 +19,7 @@ const ButtonStyled = styled.button<ButtonProps>`
   font: 3rem ${theme.global.fontFamily1};
   font-weight: bolder;
   color: ${theme.global.defaultClr};
-  background: ${theme.global.titleClr};
+  background: {this.props.background};
   cursor: pointer;
   }
 

@@ -44,12 +44,10 @@ export const theme = {
   },
 
   tictactoe: {
-    primary: "#ff8133",
+    primary: "#ffffff",
     secondary: "#0b454d",
-    box: "#ce903f",
-    background: "#d1d1d1",
-    primaryTextColor: "#ffffff",
-    fontPrimary: '"Cabin Sketch", cursive',
+    tertiary: "#ff8133",
+    fontPrimary: "'Abel', sans-serif",
     fontSecondary: "monospace",
   },
 
