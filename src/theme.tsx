@@ -67,10 +67,10 @@ export const theme = {
     errorColor: "#ff0800",
   },
   redux: {
-    black: "#000000",
+    black: "#8e54e984",
     white: "#ffffff",
     grey: "#d8d8d8",
-    orange: "#c7813f",
+    orange: "#89D5FF",
   },
 
   chuck: {
