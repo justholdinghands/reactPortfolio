@@ -57,7 +57,12 @@ function TabScrollerMenu() {
           to="/memoryGame"
           component={Link}
         /> */}
-        <Tab label="Blog App" value="/blog" to="/blog" component={Link} />
+        <Tab
+          label="Blog App"
+          value="/blog"
+          to="/blog/AllPosts"
+          component={Link}
+        />
         <Tab
           label="Redux Counter"
           value="/redux"
