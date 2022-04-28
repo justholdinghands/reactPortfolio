@@ -4,12 +4,15 @@ import { useEffect, useState } from "react";
 import Piece from "./Piece";
 import styled from "styled-components";
 
-const DivWrapper = styled.div`
+const DivContainer = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
   flex-wrap: wrap;
-  height: 0vh;
+  height: 90%;
+  width: 90%;
+
+  border: 2px solid yellow;
 `;
 
 const PWinMessage = styled.p`
@@ -147,7 +150,7 @@ const MemoryGame = (props: Props) => {
   };
 
   return (
-    <DivWrapper>
+    <DivContainer>
       {checkWin() && (
         <PWinMessage>You won in {numberOfTries} tries!</PWinMessage>
       )}
@@ -166,7 +169,7 @@ const MemoryGame = (props: Props) => {
           ></Piece>
         );
       })}
-    </DivWrapper>
+    </DivContainer>
   );
 };
 

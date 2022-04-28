@@ -16,7 +16,7 @@ import { useEffect, useState } from "react";
 import { withRouter } from "react-router";
 import Counter from "./components/counter/Counter";
 import Hackertyper from "./components/hackertyper/Hackertyper";
-import MemoryGame from "./components/memoryGame/MemoryGame";
+// import MemoryGame from "./components/memoryGame/MemoryGame";
 import NavbarMenu from "./components/Navigation/NavbarMenu";
 import TabScrollerMenu from "./components/Navigation/TabScrollerMenu";
 import TicTacToe from "./components/tictactoe/tictactoe";
@@ -111,9 +111,9 @@ function App /* class extends Component <RouteComponentProps<{ location: any }>>
           <Route path="/tictactoe">
             <TicTacToe></TicTacToe>
           </Route>
-          <Route path="/memoryGame">
+          {/* <Route path="/memoryGame">
             <MemoryGame></MemoryGame>
-          </Route>
+          </Route> */}
           <Route path="/blog">
             <BlogComponent></BlogComponent>
           </Route>

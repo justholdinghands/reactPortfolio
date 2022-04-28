@@ -27,7 +27,7 @@ function TabScrollerMenu() {
     "/hackertyper",
     "/todo",
     "/tictactoe",
-    "/memoryGame",
+    // "/memoryGame",
     "/blog",
     "/redux",
     "/chucknorris",
@@ -51,12 +51,12 @@ function TabScrollerMenu() {
           to="/tictactoe"
           component={Link}
         />
-        <Tab
+        {/* <Tab
           label="Memory Game"
           value="/memoryGame"
           to="/memoryGame"
           component={Link}
-        />
+        /> */}
         <Tab label="Blog App" value="/blog" to="/blog" component={Link} />
         <Tab
           label="Redux Counter"
