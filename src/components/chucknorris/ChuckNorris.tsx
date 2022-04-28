@@ -9,9 +9,11 @@ import revolver from "./imgs/revolver.png";
 import styled from "styled-components";
 
 export const DivContainer = styled.div`
+  position: relative;
   display: flex;
   flex-direction: column;
   justify-content: center;
+  align-items: stretch;
   color: ${theme.chuck.primaryColor};
   align-items: center;
   height: 90%;
@@ -22,6 +24,7 @@ const Navbar = styled.nav`
   display: flex;
   flex-direction: column;
   justify-content: center;
+  top: 5%;
   width: 80%;
 `;
 
@@ -30,11 +33,11 @@ const UlCategories = styled.ul`
   display: flex;
   flex-direction: row;
   justify-content: flex-start;
-  font: 1.5em ${theme.chuck.primaryFont};
+  font: 2vh ${theme.chuck.primaryFont};
   text-decoration: none;
   overflow-x: scroll;
   position: relative;
-  padding-bottom: 0.5em;
+  padding-bottom: 1vh;
 
   ::-webkit-scrollbar-track {
     box-shadow: ${theme.chuck.scrollbarShadow};
@@ -64,7 +67,7 @@ const UlCategories = styled.ul`
 `;
 
 export const DivAllJokes = styled.div`
-  padding-top: 2em;
+  height: 95%;
   width: 80%;
   overflow-y: scroll;
 
