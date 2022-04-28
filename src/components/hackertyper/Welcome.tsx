@@ -3,24 +3,18 @@ import { theme } from "../../theme";
 import styled from "styled-components";
 
 const DivWelcome = styled.div`
+  position: absolute;
   display: flex;
   flex-direction: column;
-  justify-content: center;
+  justify-content: space-evenly;
   align-items: center;
-  text-align: left;
-  height: 98vh;
-  div {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    width: 60%;
-    height: 50%;
-  }
+  width: 100%;
+  height: 100%;
+  padding: 2vw;
 `;
 
 const H1 = styled.h1`
-  font: 4em ${theme.hackertyper.fontSecondary};
-  width: 100%;
+  font: 6vw ${theme.hackertyper.fontSecondary};
 `;
 
 const P = styled.p`
@@ -28,16 +22,15 @@ const P = styled.p`
 `;
 
 const Button = styled.button`
-  margin-top: 5rem;
-  width: 35rem;
   background-color: ${theme.hackertyper.background};
   color: ${theme.hackertyper.primary};
-  border: 0.2rem solid ${theme.hackertyper.hover};
-  font: 2em ${theme.hackertyper.fontSecondary};
+  border: 0.2rem solid ${theme.hackertyper.primary};
+  font: 2vw ${theme.hackertyper.fontSecondary};
   padding: 1em;
   z-index: 1;
   :hover {
-    background-color: ${theme.hackertyper.hover};
+    background-color: ${theme.hackertyper.primary};
+    color: ${theme.hackertyper.secondary};
     cursor: pointer;
   }
 `;
@@ -61,10 +54,10 @@ How to get access denied in hacker typer?
 Hit CAPS LOCK 3 for "Access Denied"
 How can I clear access granted or access denied?
 Hit ESCAPE to clear "Access Denied/Granted"`}</P>
-          <Button id="start-btn" onClick={this.props.startGame}>
-            Start HackerTyping...
-          </Button>
         </div>
+        <Button id="start-btn" onClick={this.props.startGame}>
+          Start HackerTyping...
+        </Button>
       </DivWelcome>
     );
   }
