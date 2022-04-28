@@ -1,8 +1,3 @@
-/** pridat
- *  button "delete all completed"
- *  ... ked zacina scrolling, id="block" dat overflow-hidden pred klikom na ..., po kliku toggle overflow-hidden na overflow-visible
- */
-
 import { Button, Col, Row } from "react-bootstrap";
 import { theme } from "../../theme";
 import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
@@ -10,15 +5,83 @@ import React, { Component } from "react";
 import styled, { css } from "styled-components";
 
 const DivContainer = styled.div`
-  /* display: flex;
+  /* Hide scrollbar for Chrome, Safari and Opera */
+  ::-webkit-scrollbar {
+    display: none;
+  }
+
+  /* Hide scrollbar for IE, Edge and Firefox */
+  -ms-overflow-style: none; /* IE and Edge */
+  scrollbar-width: none; /* Firefox */
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+`;
+
+const DivTasks = styled.div`
+  display: flex;
   flex-direction: column;
   align-items: center;
-  background-color: ${theme.todo.base};
+  position: relative;
+  height: 70%;
+  width: 70%;
+`;
 
-  * {
-    padding: 0;
-    margin: 0;
-  } */
+const Form = styled.form`
+  display: flex;
+  width: 100%;
+`;
+
+const DivInput = styled.div`
+  top: 0;
+  display: flex;
+  flex-direction: row;
+  background: ${theme.todo.white};
+  height: 60px;
+  width: 100%;
+  border-radius: 10px;
+  gap: 0;
+`;
+
+const DivCheckAllButton = styled.div`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100%;
+  color: ${theme.todo.primary};
+`;
+
+const InputField = styled.input`
+  padding: 2%;
+  background-color: ${theme.todo.white};
+  color: ${theme.todo.secondary};
+  border: none;
+  cursor: pointer;
+  border-radius: 10px;
+
+  ::placeholder {
+    color: ${theme.todo.primary};
+    font-style: italic;
+  }
+
+  :focus {
+    outline: none;
+  }
+`;
+
+const UlTasks = styled.ul`
+  display: flex;
+  flex-direction: column-reverse;
+  position: absolute;
+  height: 78%;
+  width: 100%;
+  padding: 0;
+  bottom: 0;
+  overflow-y: scroll;
+  scroll-snap-type: y mandatory;
 
   /* Hide scrollbar for Chrome, Safari and Opera */
   ::-webkit-scrollbar {
@@ -30,141 +93,25 @@ const DivContainer = styled.div`
   scrollbar-width: none; /* Firefox */
 `;
 
-const H1 = styled.h1`
-  /* font: 7rem ${theme.todo.h1Font};
-  color: ${theme.todo.accent}; */
-`;
-
-const DivBlock = styled.div`
-  /* width: 50%;
-  padding: 1rem;
-  background-color: ${theme.todo.pale};
-  border: 2px solid ${theme.todo.faded}; */
-`;
-
-const ButtonCheckAll = styled.button`
-  /* font-size: xx-large;
-  height: 0.5em;
-  width: 5rem;
-  transform: rotate(90deg);
-  border: 0;
-  background-color: ${theme.todo.pale};
-  color: ${theme.todo.faded};
-  cursor: pointer; */
-`;
-
-const InputTask = styled.input`
-  padding-top: 20px;
-  padding-bottom: 20px;
-  background-color: transparent;
-  border: none;
-
-  ::placeholder {
-    color: pink;
-    font-style: italic;
-  }
-
-  :focus {
-    outline: none;
-  }
-`;
-
-const Input = styled.input`
-  width: 20px;
-  height: 20px;
-  background-color: ${theme.todo.white};
-  border-radius: 50%;
-  /* margin: 0.5em; */
-  vertical-align: middle;
-  -webkit-appearance: none;
-  outline: none;
+const LiTask = styled.li`
+  display: flex;
+  align-items: center;
+  justify-content: space-evenly;
+  scroll-snap-align: start;
+  width: 100%;
   cursor: pointer;
-
-  :checked {
-    background-color: ${theme.todo.accent};
-  }
+  background-color: ${theme.todo.primary};
+  color: ${theme.todo.white};
+  margin: 2px 0;
+  border-radius: 10px;
 `;
 
-const Form = styled.form`
-  /* display: flex;
-  flex-direction: row;
-  justify-content: stretch;
-  align-items: center;
-  height: 5rem;
-  width: 100%;
-  background-color: ${theme.todo.pale}; */
-`;
-
-const DivFilter = styled.div`
-  /* display: flex;
-  flex-direction: row;
-  justify-content: center;
-  align-items: center;
-  width: 50vw; */
-`;
-
-const UlFiltered = styled.ul`
-  /* display: flex;
-  flex-direction: row; */
-`;
-
-const LiFiltered = styled.li`
-  /* list-style-type: none;
-  color: ${theme.todo.primary};
-  width: 100%;
-  margin: 0.5rem;
-  padding: 0.5rem;
-  list-style-type: none;
-  color: ${theme.todo.primary};
-  width: 100%; */
-`;
-const ButtonFiltered = styled.button<{ selected: string }>`
-  border: 0;
-  margin: 0.5rem;
-  padding: 0.5rem;
-  background-color: ${theme.todo.base};
-  color: ${theme.todo.primary};
-  border-radius: 10%;
-
-  border: ${(props) =>
-    props.selected ? `${theme.todo.faded}` + " 2px solid" : "white"}; // :D
-`;
-
-const DivTask = styled.div<{ strikethrough: string }>`
+const H2TaskName = styled.div<{ strikethrough: string }>`
   text-decoration: ${(props) =>
     props.strikethrough ? "line-through" : "none"};
-`;
+  text-decoration-color: ${theme.todo.white};
+  text-decoration-thickness: 4px;
 
-const DivNumOfTasks = styled.div`
-  /* padding-top: 1em;
-  padding-left: 0.5em; */
-`;
-
-const ButtonDestroy = styled.button`
-  /* width: 1em;
-  height: 1em;
-  border: 0; */
-  color: red;
-  background-color: yellow;
-  /* vertical-align: middle;
-  outline: none;
-  cursor: pointer;
-  font-size: x-large;
-  text-decoration: none !important; */
-`;
-
-const TaskLi = styled.li`
-  /* display: flex;
-  flex-direction: row;
-  justify-content: space-between;
-  align-items: center;
-  width: 100%;
-  height: 5vh;
-  border: 0.5px solid ${theme.todo.faded};
-  background-color: ${theme.todo.pale};
-  list-style-type: none;
-  color: ${theme.todo.primary};
-  list-style-type: none; */
 
   :hover {
     cursor: pointer;
@@ -172,7 +119,48 @@ const TaskLi = styled.li`
       color: ${theme.todo.primary};
       text-decoration: none !important;
     }
+`;
+
+const InputCheckbox = styled.input`
+  width: 20px;
+  height: 20px;
+  background-color: ${theme.todo.white};
+  border-radius: 50%;
+  vertical-align: middle;
+  -webkit-appearance: none;
+  outline: none;
+  cursor: pointer;
+
+  :checked {
+    background-color: transparent;
   }
+`;
+const UlFiltered = styled.ul``;
+
+const LiFiltered = styled.li``;
+const ButtonFiltered = styled.button<{ selected: string }>`
+  border: 0;
+  margin: 0.5rem;
+  padding: 0.5rem;
+  background-color: ${theme.todo.base};
+  color: ${theme.todo.primary};
+  border-radius: 10px;
+
+  background: ${(props) =>
+    props.selected ? `${theme.todo.primary}` : `${theme.todo.white}`};
+
+  color: ${(props) =>
+    props.selected ? `${theme.todo.white}` : `${theme.todo.primary}`};
+`;
+
+const DivNumOfTasks = styled.div`
+  color: ${theme.todo.white};
+`;
+
+const ButtonDestroy = styled.button`
+  background: ${theme.todo.background};
+  color: ${theme.todo.primary};
+  border: none;
 `;
 
 type State = {
@@ -288,120 +276,73 @@ export default class Todo extends Component<Props, State> {
     }
 
     return (
-      <DivContainer
-        id="container"
-        className="d-flex flex-column justify-content-center align-items-center h-100 scrollbar-hidden"
-      >
-        {/* <H1>todos</H1> */}
-        <div
-          id="block"
-          className="p-3 d-flex align-items-center"
-          style={{
-            height: "50vh",
-            width: "80vw",
-            maxWidth: "70vh",
-            // border: "solid 2px blue",
-          }}
-        >
-          <Col
-            className="mh-100"
-            style={{
-              overflowY: "scroll",
-              overflowX: "hidden",
-            }}
-          >
-            <Row
-              className="sticky-top py-2 g-0"
-              style={{
-                background: "white",
-                borderRadius: "10px",
-              }}
-            >
-              <form onSubmit={(e) => this.addToArr(e)}>
-                <Row className="gx-0 align-items-center d-flex justify-content-evenly">
-                  <Col xs="2" className="mx-0 px-0">
-                    <div
-                      id="checkAllBtn"
-                      className="text-center"
-                      onClick={this.checkAll}
-                    >
-                      <ExpandMoreIcon className="fs-1" />
-                    </div>
+      <DivContainer id="container">
+        <DivTasks id="block">
+          <DivInput>
+            <Form onSubmit={(e) => this.addToArr(e)} className="flex-row">
+              <Col xs="3" md="2">
+                <DivCheckAllButton
+                  className="text-center"
+                  onClick={this.checkAll}
+                >
+                  <ExpandMoreIcon className="fs-1" />
+                </DivCheckAllButton>
+              </Col>
+              <Col xs="9" md="10">
+                <InputField
+                  type="text"
+                  onChange={this.addTask}
+                  value={this.state.value}
+                  required={true}
+                  placeholder="What needs to be done?"
+                  id="input"
+                  className="h-100 w-100"
+                />
+              </Col>
+            </Form>
+          </DivInput>
+          <UlTasks>
+            {filteredArr.map((task, index) => {
+              return (
+                <LiTask
+                  key={task.name + index}
+                  onClick={() => this.isChecked(task.id)}
+                  onMouseOver={() =>
+                    document
+                      .querySelector(".task .destroy")!
+                      .classList.toggle("d-none")
+                  }
+                >
+                  <Col xs="3" md="2" className="text-center">
+                    <InputCheckbox
+                      className="round-checkbox text-center"
+                      type="checkbox"
+                      checked={task.status}
+                    ></InputCheckbox>
                   </Col>
-                  <Col xs="8" md="9" className="">
-                    <InputTask
-                      type="text"
-                      onChange={this.addTask}
-                      value={this.state.value}
-                      required={true}
-                      placeholder="What needs to be done?"
-                      id="input"
-                      className="w-100 h-100 px-0 px-md-3 text-center"
-                    />
+                  <Col xs="8" md="9">
+                    <H2TaskName strikethrough={task.status ? "true" : ""}>
+                      {task.name}
+                    </H2TaskName>
                   </Col>
-                </Row>
-              </form>
-            </Row>
-            <Row className="gx-0 d-flex flex-column-reverse flex-row align-items-center justify-content-evenly">
-              {/* <ul
-                className="d-flex flex-column-reverse"
-                style={{ border: "2px solid green" }}
-              > */}
-              {filteredArr.map((task, index) => {
-                return (
-                  <Row /*TaskLi*/ /** here */
-                    key={task.name + index}
-                    onClick={() => this.isChecked(task.id)}
-                    onMouseOver={() =>
-                      document
-                        .querySelector(".task .destroy")!
-                        .classList.toggle("d-none")
-                    }
-                    className="gx-0 align-items-center d-flex justify-content-evenly"
-                  >
-                    <Col
-                      className="text-center mx-0 px-0 gx-0 col-1"
-                      style={{
-                        height: "fit-content",
-                      }}
+                  <Col xs="1">
+                    <ButtonDestroy
+                      className="destroy d-block"
+                      onClick={() => this.deleteFnc(task.id)}
                     >
-                      <Input
-                        className="round-checkbox text-center"
-                        type="checkbox"
-                        checked={task.status}
-                      ></Input>
-                    </Col>
-                    <Col className="col-7" style={{ overflowWrap: "anywhere" }}>
-                      <DivTask
-                        className="text-center"
-                        strikethrough={task.status ? "true" : ""}
-                      >
-                        {task.name}
-                      </DivTask>
-                    </Col>
-                    <Col className="col-1" style={{ height: "fit-content" }}>
-                      <ButtonDestroy
-                        className="destroy d-block"
-                        onClick={() => this.deleteFnc(task.id)}
-                      >
-                        x
-                      </ButtonDestroy>
-                    </Col>
-                  </Row> //default - All
-                );
-              })}
-              {/* </ul> */}
-            </Row>
-          </Col>
-        </div>
+                      x
+                    </ButtonDestroy>
+                  </Col>
+                </LiTask>
+              );
+            })}
+          </UlTasks>
+        </DivTasks>
         <Row>
-          <DivNumOfTasks
-            id="numOfTasks"
-            style={{ color: `${theme.todo.faded}` }}
-          >
+          <DivNumOfTasks id="numOfTasks">
             {this.state.tasks.filter((elem) => {
               return !elem.status;
-            }).length + " items left"}
+            }).length + " unfinished tasks"}
           </DivNumOfTasks>
         </Row>
         <div id="filter" className="d-flex flex-row justify-content-center">

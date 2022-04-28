@@ -1,6 +1,5 @@
 import { BlogComponent } from "./components/blog/Blog";
 import { ChuckNorris } from "./components/chucknorris/ChuckNorris";
-import { Col, Row } from "react-bootstrap";
 import {
   Link,
   Route,
@@ -107,11 +106,7 @@ function App /* class extends Component <RouteComponentProps<{ location: any }>>
             <Hackertyper></Hackertyper>
           </Route>
           <Route path="/todo">
-            <Col className="gx-0 align-items-center">
-              <Row className="w-100 gx-0 align-items-center justify-content-center">
-                <Todo></Todo>
-              </Row>
-            </Col>
+            <Todo></Todo>
           </Route>
           <Route path="/tictactoe">
             <TicTacToe></TicTacToe>
@@ -139,5 +134,4 @@ function App /* class extends Component <RouteComponentProps<{ location: any }>>
     </DivContainer>
   );
 }
-
 export default withRouter(App);
