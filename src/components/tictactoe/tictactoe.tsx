@@ -271,6 +271,7 @@ export default class Tictactoe extends Component<Props, State> {
   setFontSize = (cellOffsetHeight) => {
     this.dynamicFontSize.fontSize = Number(cellOffsetHeight - 4);
   };
+
   render() {
     return (
       <DivContainer>

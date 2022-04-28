@@ -6,69 +6,72 @@ import styled from "styled-components";
 
 //styled-components definition
 const DivContainer = styled.div`
-  background-color: ${theme.hackertyper.background};
-  color: ${theme.hackertyper.primary};
-  font-family: ${theme.hackertyper.fontPrimary};
   display: flex;
+  position: relative;
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  position: relative;
-  ::-webkit-scrollbar {
-    width: 0;
-  }
+  padding: 2vh;
+  background-color: ${theme.hackertyper.background};
+  color: ${theme.hackertyper.primary};
+  font: ${theme.hackertyper.fontPrimary};
+  width: 80%;
+  height: 100%;
 `;
 
 const DivTerminal = styled.div`
-  padding-left: 5em;
-  width: 98vh;
+  position: absolute;
+  top: 0;
+  display: flex;
+  flex-direction: column-reverse;
   white-space: pre;
-  height: 100%;
-  line-height: 2rem;
+  width: 100%;
+  max-height: 100%;
   overflow-y: scroll;
+  overflow-x: hidden;
+  padding: 2vw;
   ::-webkit-scrollbar {
     width: 0;
   }
 `;
 
 const DivPopups = styled.div`
+  position: absolute;
   display: flex;
   justify-content: center;
   align-items: center;
-  height: 100vh;
-  width: 100%;
-  position: fixed;
-  top: 0;
+  width: 80%;
+  height: 100%:
 `;
 
 const DivPopDenied = styled.div`
-  position: fixed;
+  position: absolute;
   display: flex;
-  justify-content: center;
+  text-align: center;
   align-items: center;
   height: 15vh;
-  width: 20em;
+  width: 100%;
   justify-content: center;
   align-items: center;
   font: 2em ${theme.hackertyper.fontSecondary};
   border: 0.5vh solid ${theme.hackertyper.denied};
-  background-color: ${theme.hackertyper.backgroundDenied};
   color: ${theme.hackertyper.denied};
+  background-color: ${theme.hackertyper.popupBackground};
 `;
 
 const DivPopGranted = styled.div`
-  position: fixed;
+  position: absolute;
   display: flex;
-  justify-content: center;
+  text-align: center;
   align-items: center;
   height: 15vh;
-  width: 20em;
+  width: 100%;
   justify-content: center;
   align-items: center;
   font: 2em ${theme.hackertyper.fontSecondary};
-  border: 0.5vh solid ${theme.hackertyper.primary};
-  background-color: ${theme.hackertyper.backgroundGranted};
-  color: ${theme.hackertyper.primary};
+  border: 0.5vh solid ${theme.hackertyper.granted};
+  color: ${theme.hackertyper.granted};
+  background-color: ${theme.hackertyper.popupBackground};
 `;
 
 type State = {
@@ -99,7 +102,7 @@ const pressXTimes = {
   pressALT: 3,
 };
 
-const stepSize = 3;
+const stepSize = 13;
 
 export default class Hackertyper extends Component<Props, State> {
   constructor(props) {

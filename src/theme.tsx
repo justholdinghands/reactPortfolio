@@ -1,7 +1,6 @@
 export const theme = {
   global: {
-    globalBg:
-      "linear-gradient(180deg, rgba(142, 84, 233, 0.52) 0%, #89D5FF 100%)",
+    globalBg: "linear-gradient(180deg, #8e54e984 0%, #89D5FF 100%)",
     defaultBg: "#ffffff",
     defaultClr: "#C8A9F8",
     activeBg: "#C8A9F8",
@@ -14,21 +13,17 @@ export const theme = {
   },
   counter: {
     btnClr: "#ffffff",
-    nmbrClr: "rgba(142, 84, 233, 0.52)",
-    primary: "#ffdab7",
-    plus: "#7ccbff",
-    minus: "#ff8b5d",
+    nmbrClr: "#8e54e984",
     fontSecondary: "'Poppins', sans-serif",
     fontPrimary: "'VT323', monospace",
-    background: "#79bac2",
   },
   hackertyper: {
-    background: "#000000",
-    primary: "#00ff00",
-    hover: "#009100",
-    backgroundGranted: "#585858",
-    denied: "#fd3131",
-    backgroundDenied: "#5a0000",
+    background: "transparent",
+    primary: "#8046df",
+    secondary: "#89D5FF",
+    popupBackground: "#8f8f8f",
+    granted: "#9dff00",
+    denied: "#ff0000",
     fontSecondary: "'Press Start 2P', cursive;",
     fontPrimary: "'IBM Plex Mono', monospace",
   },
