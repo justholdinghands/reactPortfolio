@@ -8,82 +8,21 @@ import norris from "../../icons/norris.png";
 import revolver from "./imgs/revolver.png";
 import styled from "styled-components";
 
-export const DivWrapper = styled.div`
+export const DivContainer = styled.div`
   display: flex;
   flex-direction: column;
   justify-content: center;
   color: ${theme.chuck.primaryColor};
   align-items: center;
-  min-height: 100%;
+  height: 90%;
   width: 100%;
 `;
-
-export const DivAllJokes = styled.div`
-  padding-top: 2em;
-  width: 60%;
-`;
-
-export const DivJokeWrapper = styled.div`
-  display: flex;
-  flex: row;
-  align-items: center;
-  padding-bottom: 1em;
-  img {
-    margin-left: 0.1em;
-    margin-right: 0.5em;
-    height: 1.5em;
-    width: 1.5em;
-  }
-`;
-
-export const DivJoke = styled.div`
-  font: 1.5em ${theme.chuck.primaryFont};
-`;
-
-export const DivErrorPopup = styled.div`
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  position: absolute;
-  text-align: center;
-  background: ${theme.chuck.toastBackground};
-  font: 5em ${theme.chuck.primaryFont};
-  border-radius: 5px;
-  top: 0;
-  height: 100%;
-  width: 100%;
-  overflow: hidden;
-  p {
-    padding-bottom: 3em;
-  }
-`;
-
-export const DivImg = styled.div`
-  display: flex;
-  position: relative;
-  flex-direction: row;
-  width: 50%;
-  margin-bottom: -3em;
-  justify-content: space-between;
-  align-items: flex-end;
-  img {
-    height: 100px;
-    width: 150px;
-  }
-`;
-
-export const ImgLeft = styled.img`
-  transform: scaleX(-1);
-`;
-
-export const ImgRight = styled.img``;
 
 const Navbar = styled.nav`
   display: flex;
   flex-direction: column;
   justify-content: center;
-  width: 25%;
+  width: 80%;
 `;
 
 const UlCategories = styled.ul`
@@ -100,6 +39,7 @@ const UlCategories = styled.ul`
   ::-webkit-scrollbar-track {
     box-shadow: ${theme.chuck.scrollbarShadow};
     border-radius: 10px;
+    border-radius: 10px;
   }
 
   ::-webkit-scrollbar {
@@ -107,6 +47,7 @@ const UlCategories = styled.ul`
     float: left;
     height: 5px;
     background-color: ${theme.chuck.scrollbar};
+    border-radius: 10px;
   }
 
   ::-webkit-scrollbar-thumb {
@@ -121,6 +62,72 @@ const UlCategories = styled.ul`
     }
   }
 `;
+
+export const DivAllJokes = styled.div`
+  padding-top: 2em;
+  width: 80%;
+  overflow-y: scroll;
+
+  /* Hide scrollbar for Chrome, Safari and Opera */
+  ::-webkit-scrollbar {
+    display: none;
+  }
+
+  /* Hide scrollbar for IE, Edge and Firefox */
+  -ms-overflow-style: none; /* IE and Edge */
+  scrollbar-width: none; /* Firefox */
+`;
+
+export const DivJokeWrapper = styled.div`
+  display: flex;
+  flex: row;
+  align-items: center;
+  padding-bottom: 1em;
+  img {
+    margin-left: 0.1em;
+    margin-right: 0.5em;
+    height: 1.5em;
+    width: 1.5em;
+  }
+`;
+
+export const DivJoke = styled.div`
+  font: 2.5vh ${theme.chuck.primaryFont};
+`;
+
+export const DivErrorPopup = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  color: ${theme.chuck.white};
+  font: 5vh ${theme.chuck.primaryFont};
+  width: 80%;
+  height: 100%;
+  overflow: hidden;
+`;
+
+export const DivImg = styled.div`
+  display: flex;
+  justify-content: space-between;
+  position: relative;
+  flex-direction: row;
+  width: 100%;
+  margin-bottom: -3em;
+  justify-content: space-between;
+  align-items: flex-end;
+  img {
+    height: 10vh;
+    width: 15vh;
+  }
+`;
+
+export const ImgLeft = styled.img`
+  transform: scaleX(-1);
+`;
+
+export const ImgRight = styled.img``;
 
 const H1 = styled.h1`
   text-align: center;
@@ -195,7 +202,7 @@ export const ChuckNorris = (props: Props) => {
   }, []);
 
   return (
-    <DivWrapper>
+    <DivContainer>
       {errorMessage.errorMessage && (
         <DivErrorPopup>
           <p>{errorMessage.errorMessage}</p>
@@ -205,9 +212,8 @@ export const ChuckNorris = (props: Props) => {
           </DivImg>
         </DivErrorPopup>
       )}
-      <H1>Chuck Norris</H1>
       {loadingCategories ? (
-        <div>Loading Categories ...</div>
+        <p>Loading Categories ...</p>
       ) : (
         <Navbar>
           {!errorMessage.errorMessage && (
@@ -248,6 +254,6 @@ export const ChuckNorris = (props: Props) => {
           </DivAllJokes>
         )}
       </Route>
-    </DivWrapper>
+    </DivContainer>
   );
 };

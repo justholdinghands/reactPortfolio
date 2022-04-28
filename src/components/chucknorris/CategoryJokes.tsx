@@ -1,8 +1,8 @@
 import {
   DivAllJokes,
+  DivContainer,
   DivJoke,
   DivJokeWrapper,
-  DivWrapper,
   Joke,
   numberOfJokes,
 } from "./ChuckNorris";
@@ -39,7 +39,8 @@ export const JokesInCategory = (props: Props) => {
       try {
         while (loadJokeArr.length !== numberOfJokes) {
           let loadData = await fetch(
-            `${configURL.api.jokesRandom}?category=${props.category}` /** FOR ERROR `${configURL.api.jokesRandom}akshgf?category=${props.category}` */
+            `${configURL.api.jokesRandom}?category=${props.category}`
+            // `${configURL.api.jokesRandom}akshgf?category=${props.category}`
           );
           if (!loadData.ok) throw new Error(`${loadData.status}`);
           let data: Joke = await loadData.json();
@@ -64,7 +65,7 @@ export const JokesInCategory = (props: Props) => {
     load();
   }, []);
   return (
-    <DivWrapper>
+    <DivContainer>
       {errorMessage.errorMessage !== "" && (
         <DivErrorPopup>
           <p>{errorMessage.errorMessage}</p>
@@ -74,7 +75,6 @@ export const JokesInCategory = (props: Props) => {
           </DivImg>
         </DivErrorPopup>
       )}
-      <H2>Top 5: </H2>
       {loadingJokes ? (
         <div>Loading jokes ...</div>
       ) : (
@@ -87,6 +87,6 @@ export const JokesInCategory = (props: Props) => {
           ))}
         </DivAllJokes>
       )}
-    </DivWrapper>
+    </DivContainer>
   );
 };
