@@ -7,9 +7,10 @@ import { useHistory } from "react-router-dom";
 import slugify from "react-slugify";
 import styled from "styled-components";
 
-const DivWrapper = styled.div`
-  background: ${theme.blog.secondary};
-  border-radius: 1em;
+const DivContainer = styled.div`
+  background: ${theme.blog.primary};
+  border-radius: 10px;
+  color: ${theme.blog.white};
   margin-top: 2em;
   Label {
     display: flex;
@@ -22,16 +23,27 @@ const DivWrapper = styled.div`
   padding: 3em;
   overflow: hidden;
   width: 70vw;
-  height: 100%;
+  height: 80%;
+`;
+
+const P = styled.p`
+  font-size: 2.3vh;
+`;
+
+const Form = styled.form`
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
 `;
 
 const Label = styled.label`
-  font-size: 1.5em;
+  font-size: 2vh;
 `;
 
 const Input = styled.input<{
   valid: boolean;
 }>`
+  height: 3vh;
   border: ${(props) =>
     props.valid ? "0" : theme.blog.errorColor + " 2px solid"};
   :focus {
@@ -43,7 +55,7 @@ const Input = styled.input<{
 const Textarea = styled.textarea<{
   valid: boolean;
 }>`
-  height: 50vh;
+  height: 10vh;
   border: ${(props) =>
     props.valid ? "0" : theme.blog.errorColor + " 2px solid"};
   :focus {
@@ -53,21 +65,22 @@ const Textarea = styled.textarea<{
 `;
 
 const Button = styled.button`
-  background: ${theme.blog.primary};
+  background: ${theme.blog.white};
+  color: ${theme.blog.primary};
   padding: 0.5em;
   border-radius: 0.5em;
-  box-shadow: 2px 2px 1px 1px ${theme.blog.secondary};
+  border: none;
+  box-shadow: 0 3px 10px ${theme.blog.primary};
+
   :hover {
-    color: ${theme.blog.hoverTextColor};
-    background: ${theme.blog.background};
+    color: ${theme.blog.white};
+    background: ${theme.blog.primary};
+    box-shadow: none;
   }
 `;
 
-const P = styled.p`
-  font: 3em ${theme.blog.fontSecondary};
-`;
-
 const PError = styled.p`
+  font-size: 1.5vh;
   color: ${theme.blog.errorColor};
 `;
 
@@ -255,9 +268,9 @@ export const CreateArticle = () => {
     });
   };
   return (
-    <DivWrapper>
+    <DivContainer>
       <P>Create a new article</P>
-      <form onSubmit={handleSubmit}>
+      <Form onSubmit={handleSubmit}>
         <Label id="Author">
           Author
           <Input
@@ -279,7 +292,7 @@ export const CreateArticle = () => {
           <PError>{errorMessage.titleErr}</PError>
         </Label>
         <Label id="Slug">
-          Can I interest you in a custom URL?
+          Custom URL (optional)
           <Input
             valid={!errorMessage.uniqueErr}
             type="text"
@@ -299,7 +312,7 @@ export const CreateArticle = () => {
           <PError>{errorMessage.textErr}</PError>
         </Label>
         <Button type="submit">Submit</Button>
-      </form>
-    </DivWrapper>
+      </Form>
+    </DivContainer>
   );
 };

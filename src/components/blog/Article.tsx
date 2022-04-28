@@ -1,5 +1,4 @@
 import { BASE_URL, Blog } from "./Blog";
-import { DivIcon } from "../../App";
 import { Link } from "react-router-dom";
 import { theme } from "../../theme";
 import marked from "marked";
@@ -9,57 +8,58 @@ import styled from "styled-components";
 const DivArticle = styled.div`
   display: flex;
   flex-direction: column;
-  justify-content: safe;
-  background: ${theme.blog.primary};
-  border-radius: 0.5em;
+  background: ${theme.blog.white};
   padding-bottom: 3em;
   word-wrap: break-word;
   overflow: hidden;
   border-radius: 10px;
-  height: 500px;
-  -webkit-transition: all 0.3s ease;
-  -o-transition: all 0.3s ease;
-  transition: all 0.3s ease;
-  border: solid 2px ${theme.blog.primary};
-  margin: 2em;
+  height: 100%;
+  margin: 10px;
   width: 70vw;
-`;
-const DivTitle = styled.div`
-  font-size: 3em;
   padding: 15px;
-  font-weight: 800;
-  width: 100%;
-`;
-
-const DivDate = styled.div`
-  margin-top: -2em;
-  margin-left: 4.5em;
-  color: ${theme.blog.secondaryTextColor};
-  font-size: 1em;
+  a {
+    text-decoration: none;
+  }
 `;
 
 const DivWrapAuthor = styled.div`
   display: flex;
   align-items: center;
   justify-content: flex-start;
-  font-size: 2em;
-  padding: 0.5em;
+  height: 50%;
+
   img {
-    font-size: ${theme.blog.iconSize};
-    margin: 0.1em;
+    width: 50px;
+    height: 50px;
   }
 `;
 
-const DivAuthor = styled.div`
-  padding: 0.5em;
-  color: ${theme.blog.secondaryTextColor};
-  font-size: 1em;
+const DivAuthorName = styled.div`
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: flex-start;
+  margin-left: 2vh;
 `;
 
-const DivBody = styled.div`
-  padding: 0.5em;
-  font-size: 2em;
+const DivAuthor = styled.div`
+  color: ${theme.blog.secondaryTextColor};
+  font-size: 1.8vh;
+  font-style: italic;
 `;
+
+const DivDate = styled.div`
+  font-size: 1.2vh;
+  color: ${theme.blog.secondaryTextColor};
+`;
+
+const DivTitle = styled.div`
+  font-size: 3vh;
+  margin: 2vh 0;
+  color: ${theme.blog.primary};
+`;
+
+const DivBody = styled.div``;
 
 type Props = {
   blog: Blog;
@@ -88,25 +88,27 @@ export const Article = (props: Props) => {
       <div>
         <DivArticle>
           <DivWrapAuthor>
-            <DivIcon>
-              <img src={programmer} alt="programmer" />
-            </DivIcon>
             <Link to={`${BASE_URL}${props.blog.author}`}>
-              <DivAuthor>{props.blog.author}</DivAuthor>
+              <img src={programmer} alt="programmer" />
             </Link>
+            <DivAuthorName>
+              <Link to={`${BASE_URL}${props.blog.author}`}>
+                <DivAuthor>{props.blog.author}</DivAuthor>
+              </Link>
+              <DivDate>
+                {new Date(props.blog.date).toLocaleString("en-US", {
+                  timeZone: "UTC",
+                  weekday: "long",
+                  year: "numeric",
+                  month: "numeric",
+                  day: "2-digit",
+                }) +
+                  " (" +
+                  daysAgo(props.blog.date) +
+                  " days ago)"}
+              </DivDate>
+            </DivAuthorName>
           </DivWrapAuthor>
-          <DivDate>
-            {new Date(props.blog.date).toLocaleString("en-US", {
-              timeZone: "UTC",
-              weekday: "long",
-              year: "numeric",
-              month: "numeric",
-              day: "2-digit",
-            }) +
-              " (" +
-              daysAgo(props.blog.date) +
-              " days ago)"}
-          </DivDate>
           {props.fulltext ? (
             <DivTitle>{props.blog.title}</DivTitle>
           ) : (

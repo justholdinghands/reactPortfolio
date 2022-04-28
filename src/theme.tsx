@@ -57,16 +57,14 @@ export const theme = {
   },
 
   blog: {
-    primary: "#ededed ",
-    secondary: "#92929285",
-    background: "#e4e4e4",
+    primary: "#8e54e984 ",
+    secondary: "#89D5FF",
+    white: "#ffffff",
     primaryTextColor: "#00d1c0",
     secondaryTextColor: "#1a3a36",
-    hoverTextColor: "#FFFFFF",
     fontPrimary: "'Roboto', sans-serif;",
     fontSecondary: "'Roboto', sans-serif;",
     errorColor: "#ff0800",
-    iconSize: "2em",
   },
   redux: {
     black: "#000000",
