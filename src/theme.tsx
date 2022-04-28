@@ -30,12 +30,12 @@ export const theme = {
   todo: {
     accent: "#ead7d7",
     base: "#f5f5f5",
-    faded: "#e6e6e6",
-    primary: "#7b7777",
+    primary: "#8e54e984",
+    secondary: "#89D5FF",
+    white: "#FFFFFF",
     pale: "#f1ffff",
     h1Font: "'Helvetica Neue', Helvetica, Arial, sans-serif",
-    background: "#f5f5f5",
-    white: "#FFFFFF",
+    background: "transparent",
   },
 
   tictactoe: {
