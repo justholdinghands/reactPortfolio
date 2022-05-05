@@ -1,4 +1,3 @@
-import { ErrorBoundary } from "react-error-boundary";
 import { JokesInCategory } from "./CategoryJokes";
 import { Link, Route } from "react-router-dom";
 import { theme } from "../../theme";
@@ -13,11 +12,11 @@ export const DivContainer = styled.div`
   display: flex;
   flex-direction: column;
   justify-content: center;
-  align-items: stretch;
-  color: ${theme.chuck.primaryColor};
   align-items: center;
-  height: 90%;
+  height: 95%;
   width: 100%;
+  background-color: ${theme.colors.background};
+  color: ${theme.colors.primary};
 `;
 
 const Navbar = styled.nav`
@@ -33,14 +32,14 @@ const UlCategories = styled.ul`
   display: flex;
   flex-direction: row;
   justify-content: flex-start;
-  font: 2vh ${theme.chuck.primaryFont};
+  font: 2vh ${theme.fonts.fontFamily6};
   text-decoration: none;
   overflow-x: scroll;
   position: relative;
   padding-bottom: 1vh;
 
   ::-webkit-scrollbar-track {
-    box-shadow: ${theme.chuck.scrollbarShadow};
+    box-shadow: ${theme.shadows.shadow1};
     border-radius: 10px;
     border-radius: 10px;
   }
@@ -49,19 +48,23 @@ const UlCategories = styled.ul`
     margin-left: 30px;
     float: left;
     height: 5px;
-    background-color: ${theme.chuck.scrollbar};
+    background-color: ${theme.colors.primaryFaded};
     border-radius: 10px;
   }
 
   ::-webkit-scrollbar-thumb {
     border-radius: 10px;
-    box-shadow: ${theme.chuck.scrollbarShadow};
-    background-color: ${theme.chuck.scrollbarThumb};
+    box-shadow: ${theme.shadows.shadow1};
+    background-color: ${theme.colors.primary};
   }
+
   li {
     margin-right: 2em;
     a {
-      color: ${theme.chuck.primaryColor};
+      color: ${theme.colors.primary};
+      :hover {
+        color: ${theme.colors.white};
+      }
     }
   }
 `;
@@ -70,15 +73,11 @@ export const DivAllJokes = styled.div`
   height: 95%;
   width: 80%;
   overflow-y: scroll;
-
-  /* Hide scrollbar for Chrome, Safari and Opera */
   ::-webkit-scrollbar {
     display: none;
   }
-
-  /* Hide scrollbar for IE, Edge and Firefox */
-  -ms-overflow-style: none; /* IE and Edge */
-  scrollbar-width: none; /* Firefox */
+  -ms-overflow-style: none;
+  scrollbar-width: none;
 `;
 
 export const DivJokeWrapper = styled.div`
@@ -95,7 +94,7 @@ export const DivJokeWrapper = styled.div`
 `;
 
 export const DivJoke = styled.div`
-  font: 2.5vh ${theme.chuck.primaryFont};
+  font: 2.5vh ${theme.fonts.fontFamily6};
 `;
 
 export const DivErrorPopup = styled.div`
@@ -104,8 +103,8 @@ export const DivErrorPopup = styled.div`
   align-items: center;
   justify-content: center;
   text-align: center;
-  color: ${theme.chuck.white};
-  font: 5vh ${theme.chuck.primaryFont};
+  color: ${theme.colors.white};
+  font: 5vh ${theme.fonts.fontFamily6};
   width: 80%;
   height: 100%;
   overflow: hidden;
@@ -126,6 +125,15 @@ export const DivImg = styled.div`
   }
 `;
 
+const DivFade = styled.div`
+  position: absolute;
+  background: ${theme.colors.fadeBottom};
+  width: 100%;
+  height: 30px;
+  bottom: 0;
+  z-index: 2;
+`;
+
 export const ImgLeft = styled.img`
   transform: scaleX(-1);
 `;
@@ -134,8 +142,8 @@ export const ImgRight = styled.img``;
 
 const H1 = styled.h1`
   text-align: center;
-  font: 5em ${theme.chuck.secondaryFont};
-  color: ${theme.chuck.secondaryColor};
+  font: 5em ${theme.fonts.fontFamily7};
+  color: ${theme.colors.secondary};
 `;
 
 type Props = {};
@@ -247,14 +255,17 @@ export const ChuckNorris = (props: Props) => {
         {loadingJokes ? (
           <div>Loading Jokes ...</div>
         ) : (
-          <DivAllJokes>
-            {jokeArr.map((joke, index) => (
-              <DivJokeWrapper key={index}>
-                <img src={norris} alt="chuckhead" />
-                <DivJoke>{joke.value}</DivJoke>
-              </DivJokeWrapper>
-            ))}
-          </DivAllJokes>
+          <>
+            <DivAllJokes>
+              {jokeArr.map((joke, index) => (
+                <DivJokeWrapper key={index}>
+                  <img src={norris} alt="chuckhead" />
+                  <DivJoke>{joke.value}</DivJoke>
+                </DivJokeWrapper>
+              ))}
+            </DivAllJokes>
+            <DivFade></DivFade>
+          </>
         )}
       </Route>
     </DivContainer>

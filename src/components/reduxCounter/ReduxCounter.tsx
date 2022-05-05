@@ -16,20 +16,15 @@ const DivContainer = styled.div`
   width: 100%;
   display: flex;
   flex-direction: column;
-  justify-content: center;
+  justify-content: space-evenly;
   align-items: center;
 `;
 
-const DivButtonsContainer = styled.div`
-  width: 100%;
-  display: flex;
-  justify-content: center;
-`;
-
 const DivButtons = styled.div`
-  width: 83vh;
+  width: 80%;
   display: flex;
-  justify-content: flex-end;
+  align-items: center;
+  justify-content: center;
   flex-wrap: wrap;
 `;
 
@@ -37,39 +32,45 @@ const Button = styled.button`
   width: 8vh;
   height: 8vh;
   font-size: 3.5vh;
-  background: ${theme.redux.black};
-  color: ${theme.redux.white};
+  background: ${theme.colors.primaryFaded};
+  color: ${theme.colors.white};
   margin: 1px;
   border: none;
   :hover {
-    background: ${theme.redux.white};
-    color: ${theme.redux.black};
+    background: ${theme.colors.white};
+    color: ${theme.colors.grey};
   }
 `;
 
-const OrangeButton = styled(Button)`
-  background: ${theme.redux.white};
-  color: ${theme.redux.orange};
+const ResetButton = styled(Button)`
+  background: ${theme.colors.white};
+  color: ${theme.colors.primary};
 
   :hover {
-    background: ${theme.redux.white};
-    color: ${theme.redux.orange};
+    background: ${theme.colors.white};
+    color: ${theme.colors.primary};
   }
 `;
 
 const DivCount = styled.div`
   width: fit-content;
   min-width: 200px;
+  max-width: 90vw;
   height: 200px;
+  overflow: scroll;
+  ::-webkit-scrollbar {
+    display: none;
+  }
+  -ms-overflow-style: none;
+  scrollbar-width: none;
   font-size: 5em;
   font-weight: 600;
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  background: ${theme.redux.white};
-  margin: 1em;
-  padding: 1em;
+  padding: 5px;
+  background: ${theme.colors.white};
   border-radius: 10px;
 `;
 
@@ -79,26 +80,24 @@ export const ReduxCounter = () => {
   return (
     <DivContainer>
       <DivCount>{count}</DivCount>
-      <DivButtonsContainer>
-        <DivButtons>
-          <Button onClick={() => dispatch(increment(1))}>+1</Button>
-          <Button onClick={() => dispatch(increment(2))}>+2</Button>
-          <Button onClick={() => dispatch(decrement(1))}>-1</Button>
-          <Button onClick={() => dispatch(decrement(2))}>-2</Button>
-          <Button onClick={() => dispatch(multiply(2))}>*2</Button>
-          <Button onClick={() => dispatch(divide(2))}>&#247;2</Button>
-          <Button onClick={() => dispatch(power(2))}>
-            x<sup>2</sup>
-          </Button>
-          <Button onClick={() => dispatch(power(count))}>
-            x<sup>x</sup>
-          </Button>
-          <Button onClick={() => dispatch(power(1 / 2))}>&#8730;x</Button>
-          <OrangeButton onClick={() => dispatch(clear())}>
-            <div>C</div>
-          </OrangeButton>
-        </DivButtons>
-      </DivButtonsContainer>
+      <DivButtons>
+        <Button onClick={() => dispatch(increment(1))}>+1</Button>
+        <Button onClick={() => dispatch(increment(2))}>+2</Button>
+        <Button onClick={() => dispatch(decrement(1))}>-1</Button>
+        <Button onClick={() => dispatch(decrement(2))}>-2</Button>
+        <Button onClick={() => dispatch(multiply(2))}>*2</Button>
+        <Button onClick={() => dispatch(divide(2))}>&#247;2</Button>
+        <Button onClick={() => dispatch(power(2))}>
+          x<sup>2</sup>
+        </Button>
+        <Button onClick={() => dispatch(power(count))}>
+          x<sup>x</sup>
+        </Button>
+        <Button onClick={() => dispatch(power(1 / 2))}>&#8730;x</Button>
+        <ResetButton onClick={() => dispatch(clear())}>
+          <div>C</div>
+        </ResetButton>
+      </DivButtons>
     </DivContainer>
   );
 };

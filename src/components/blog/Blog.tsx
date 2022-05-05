@@ -8,10 +8,17 @@ import useLocalStorage from "use-local-storage";
 
 const DivContainer = styled.div`
   width: 100%;
+  height: 100%;
   display: flex;
   flex-direction: column;
   align-items: center;
+  justify-content: space-evenly;
   overflow-y: scroll;
+  ::-webkit-scrollbar {
+    display: none;
+  }
+  -ms-overflow-style: none;
+  scrollbar-width: none;
 `;
 
 const NavWrapper = styled.nav`
@@ -21,42 +28,46 @@ const NavWrapper = styled.nav`
   align-items: center;
   width: 100%;
   height: 10%;
-  font: 10px ${theme.blog.fontPrimary};
+  font-family: ${theme.fonts.fontFamily2};
 
   a {
+    font-family: ${theme.fonts.fontFamily2};
     font-size: 3vh;
-    color: ${theme.blog.white};
+    color: ${theme.colors.white};
     text-decoration: none;
   }
 `;
 
-const H1AllPosts = styled.h1`
+const H1NavLink = styled.h1`
   display: flex;
   align-items: center;
   justify-content: center;
   width: 50%;
   font-size: 3vh;
-  color: ${theme.blog.primary};
-`;
 
-const H1NewPost = styled.h1`
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  width: 50%;
-`;
+  a {
+    color: ${theme.colors.primary};
+  }
 
-const DivCreate = styled.div`
-  height: 100vh;
-  background: ${theme.blog.secondary};
+  a:hover {
+    color: ${theme.colors.white};
+  }
 `;
 
 const UlArticles = styled.ul`
   display: flex;
+  flex-direction: column;
   align-items: center;
-  flex-direction: column-reverse;
   overflow-y: scroll;
   padding: 0;
+  /* Hide scrollbar for Chrome, Safari and Opera */
+  ::-webkit-scrollbar {
+    display: none;
+  }
+
+  /* Hide scrollbar for IE, Edge and Firefox */
+  -ms-overflow-style: none; /* IE and Edge */
+  scrollbar-width: none; /* Firefox */
 `;
 
 export type Blog = {
@@ -85,12 +96,12 @@ export const BlogComponent = () => {
     <DivContainer>
       <BlogContext.Provider value={context}>
         <NavWrapper>
-          <H1AllPosts>
-            <Link to={`${BASE_URL}AllPosts`}>All Posts</Link>
-          </H1AllPosts>
-          <H1NewPost>
-            <Link to={`${BASE_URL}NewPost`}>New Post</Link>
-          </H1NewPost>
+          <H1NavLink>
+            <Link to={`${BASE_URL}all-posts`}>All Posts</Link>
+          </H1NavLink>
+          <H1NavLink>
+            <Link to={`${BASE_URL}new-post`}>New Post</Link>
+          </H1NavLink>
         </NavWrapper>
         {context.blogs.map((blog) => (
           <Route
@@ -100,18 +111,21 @@ export const BlogComponent = () => {
             <Article blog={blog} fulltext={true} />
           </Route>
         ))}
-        <Route path={`${BASE_URL}NewPost`}>
+        <Route path={`${BASE_URL}new-post`}>
           <CreateArticle></CreateArticle>
         </Route>
-        <Route path={`${BASE_URL}AllPosts`}>
+        <Route path={`${BASE_URL}all-posts`}>
           <UlArticles>
-            {context.blogs.map((blog) => (
-              <Article
-                key={`${blog.author}/${blog.articleURL}`}
-                blog={blog}
-                fulltext={false}
-              />
-            ))}
+            {context.blogs
+              .slice(0)
+              .reverse()
+              .map((blog) => (
+                <Article
+                  key={`${blog.author}/${blog.articleURL}`}
+                  blog={blog}
+                  fulltext={false}
+                />
+              ))}
           </UlArticles>
         </Route>
         {context.blogs
@@ -142,9 +156,3 @@ export const BlogComponent = () => {
     </DivContainer>
   );
 };
-
-// searchbar
-// todo: pridavanie fotiek
-// share on fb, twitter, reddit, linkedinm, copyurl
-// hashtag
-// like

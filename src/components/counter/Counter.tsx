@@ -13,23 +13,19 @@ type Props = {
 };
 
 const DivContainer = styled.div`
-  margin: 0;
-  padding: 0;
   height: 100%;
   width: 100%;
   overflow: hidden;
   display: flex;
-  justify-content: center;
+  flex-direction: column;
+  justify-content: space-around;
   align-items: center;
 `;
 
 const DivButtons = styled.div`
   padding: 0 0 10% 0;
-  margin: 0;
-  position: absolute;
-  bottom: 0;
   left: calc(50% - 125px);
-  width: 250px;
+  width: 12rem;
   z-index: 1;
   display: flex;
   align-items: flex-end;
@@ -37,14 +33,9 @@ const DivButtons = styled.div`
 `;
 
 const DivCount = styled.div`
-  position: absolute;
-  left: 0;
-  padding: 0 0 5% 0;
-  margin: 0;
-  font: 2000% ${theme.global.fontFamily1};
-  color: ${theme.counter.nmbrClr};
+  font: 15rem ${theme.fonts.fontFamily1};
+  color: ${theme.colors.primaryFaded};
   opacity: 100%;
-  z-index: 0;
   width: 100%;
   display: flex;
   justify-content: center;
@@ -73,26 +64,13 @@ export default class Counter extends Component<Props, State> {
 
   render() {
     var { count } = this.state;
-    // console.log(
-    //   `isDesktop: ${this.props.isDesktop.valueOf}, chooseNumberPosition.font: ${this.chooseNumberPosition.font.valueOf}`
-    // );
     return (
       <DivContainer>
         <DivCount>{count}</DivCount>
 
         <DivButtons>
-          <Button
-            className="plus-btn"
-            onClick={this.plus}
-            text="+"
-            background="plus"
-          ></Button>
-          <Button
-            className="minus-btn"
-            onClick={this.minus}
-            text="-"
-            background="minus"
-          ></Button>
+          <Button text="+" onClick={this.plus}></Button>
+          <Button text="-" onClick={this.minus}></Button>
         </DivButtons>
       </DivContainer>
     );

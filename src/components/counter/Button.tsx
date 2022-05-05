@@ -3,45 +3,32 @@ import { theme } from "./../../theme";
 import styled from "styled-components";
 
 type Props = {
-  className: string;
   text: string;
   onClick: () => void;
-  background: string;
 };
 
 // styled-components definition
-type ButtonProps = { background: string };
-const ButtonStyled = styled.button<ButtonProps>`
-  width: 100px;
-  height: 100px;
+const ButtonStyled = styled.button`
+  width: 5rem;
+  height: 5rem;
   border-radius: 10px;
   border: none;
-  font: 3rem ${theme.global.fontFamily1};
-  font-weight: bolder;
-  color: ${theme.global.defaultClr};
-  background: {this.props.background};
+  font: 3rem ${theme.fonts.fontFamily1};
+  font-weight: 900;
+  color: ${theme.colors.primaryFaded};
+  background: ${theme.colors.white};
   cursor: pointer;
-  }
 
   :hover {
-    box-shadow: 0 7px 9px -9px ${theme.hackertyper.background},
-      inset 0 0 220px -120px ${theme.hackertyper.background};
-    cursor: pointer;
-  }
-
-  :active {
-    box-shadow: inset 0 0 200px -70px ${theme.hackertyper.background};
+    background: ${theme.colors.primaryFaded};
+    color: ${theme.colors.white};
   }
 `;
 
 export default class Button extends Component<Props> {
   render() {
     return (
-      <ButtonStyled
-        className={this.props.className}
-        onClick={this.props.onClick}
-        background={this.props.background}
-      >
+      <ButtonStyled onClick={this.props.onClick}>
         {this.props.text}
       </ButtonStyled>
     );

@@ -4,32 +4,40 @@ import { theme } from "../../theme";
 import Welcome from "./Welcome";
 import styled from "styled-components";
 
-//styled-components definition
 const DivContainer = styled.div`
-  display: flex;
   position: relative;
+  display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  padding: 2vh;
-  background-color: ${theme.hackertyper.background};
-  color: ${theme.hackertyper.primary};
-  font: ${theme.hackertyper.fontPrimary};
-  width: 80%;
-  height: 100%;
+  height: 95%;
+  width: 800px;
+  max-width: 80vw;
+  background-color: ${theme.colors.background};
+  color: ${theme.colors.primary};
+`;
+
+const DivFade = styled.div`
+  position: absolute;
+  background: ${theme.colors.fadeTop};
+  width: 100%;
+  height: 30px;
+  top: 3%;
+  z-index: 2;
 `;
 
 const DivTerminal = styled.div`
   position: absolute;
-  top: 0;
+  bottom: 5%;
   display: flex;
   flex-direction: column-reverse;
   white-space: pre;
   width: 100%;
-  max-height: 100%;
+  height: 92%;
+  word-wrap: break-word;
   overflow-y: scroll;
   overflow-x: hidden;
-  padding: 2vw;
+  font-family: ${theme.fonts.fontFamily2};
   ::-webkit-scrollbar {
     width: 0;
   }
@@ -42,36 +50,28 @@ const DivPopups = styled.div`
   align-items: center;
   width: 80%;
   height: 100%:
+  font: 2em ${theme.fonts.fontFamily2};
+
+  div {
+    display: flex;
+    text-align: center;
+    align-items: center;
+    height: 15vh;
+    width: 100%;
+    justify-content: center;
+    align-items: center;
+    background-color: ${theme.colors.grey}; 
+    }
 `;
 
 const DivPopDenied = styled.div`
-  position: absolute;
-  display: flex;
-  text-align: center;
-  align-items: center;
-  height: 15vh;
-  width: 100%;
-  justify-content: center;
-  align-items: center;
-  font: 2em ${theme.hackertyper.fontSecondary};
-  border: 0.5vh solid ${theme.hackertyper.denied};
-  color: ${theme.hackertyper.denied};
-  background-color: ${theme.hackertyper.popupBackground};
+  border: 0.5vh solid ${theme.colors.fail};
+  color: ${theme.colors.fail};s
 `;
 
 const DivPopGranted = styled.div`
-  position: absolute;
-  display: flex;
-  text-align: center;
-  align-items: center;
-  height: 15vh;
-  width: 100%;
-  justify-content: center;
-  align-items: center;
-  font: 2em ${theme.hackertyper.fontSecondary};
-  border: 0.5vh solid ${theme.hackertyper.granted};
-  color: ${theme.hackertyper.granted};
-  background-color: ${theme.hackertyper.popupBackground};
+  border: 0.5vh solid ${theme.colors.pass};
+  color: ${theme.colors.pass};
 `;
 
 type State = {
@@ -209,7 +209,10 @@ export default class Hackertyper extends Component<Props, State> {
         {isWelcome ? (
           <Welcome startGame={this.startGame}></Welcome>
         ) : (
-          <DivTerminal id="terminal">{this.state.code}</DivTerminal>
+          <>
+            <DivFade></DivFade>
+            <DivTerminal id="terminal">{this.state.code}</DivTerminal>
+          </>
         )}
         <DivPopups>
           {this.state.isDenied && (

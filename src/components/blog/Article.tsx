@@ -8,14 +8,14 @@ import styled from "styled-components";
 const DivArticle = styled.div`
   display: flex;
   flex-direction: column;
-  background: ${theme.blog.white};
+  background: ${theme.colors.white};
   padding-bottom: 3em;
   word-wrap: break-word;
   overflow: hidden;
   border-radius: 10px;
   height: 100%;
   margin: 10px;
-  width: 70vw;
+  max-width: 97.5%;
   padding: 15px;
   a {
     text-decoration: none;
@@ -43,20 +43,20 @@ const DivAuthorName = styled.div`
 `;
 
 const DivAuthor = styled.div`
-  color: ${theme.blog.secondaryTextColor};
+  color: ${theme.colors.secondary};
   font-size: 1.8vh;
   font-style: italic;
 `;
 
 const DivDate = styled.div`
   font-size: 1.2vh;
-  color: ${theme.blog.secondaryTextColor};
+  color: ${theme.colors.grey};
 `;
 
 const DivTitle = styled.div`
   font-size: 3vh;
   margin: 2vh 0;
-  color: ${theme.blog.primary};
+  color: ${theme.colors.primaryFaded};
 `;
 
 const DivBody = styled.div``;

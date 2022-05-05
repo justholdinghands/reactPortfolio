@@ -1,7 +1,35 @@
 import { Link, matchPath, useLocation } from "react-router-dom";
 import { Row } from "react-bootstrap";
+import { ThemeProvider, createTheme, styled } from "@mui/material/styles";
+import { theme } from "../../theme";
 import Tab from "@mui/material/Tab";
-import Tabs from "@mui/material/Tabs";
+import Tabs, { TabsProps } from "@mui/material/Tabs";
+
+const customTheme = createTheme({
+  palette: {
+    primary: {
+      light: `${theme.colors.primaryFaded}`,
+      main: `${theme.colors.secondary}`,
+      dark: `${theme.colors.primary}`,
+      contrastText: `${theme.colors.white}`,
+    },
+  },
+});
+
+const StyledTabs = styled(Tabs)<TabsProps>(({ theme }) => ({
+  paddingInline: 20,
+  color: theme.palette.primary.light,
+
+  "& .MuiTab-textColorPrimary": {
+    color: theme.palette.primary.dark,
+    "&:hover, &.Mui-selected": {
+      color: `${theme.palette.primary.contrastText}`,
+    },
+  },
+  "& .MuiTabs-indicator": {
+    background: theme.palette.primary.contrastText,
+  },
+}));
 
 function useRouteMatch(patterns: readonly string[]) {
   const { pathname } = useLocation();
@@ -18,16 +46,11 @@ function useRouteMatch(patterns: readonly string[]) {
 }
 
 function TabScrollerMenu() {
-  // You need to provide the routes in descendant order.
-  // This means that if you have nested routes like:
-  // users, users/new, users/edit.
-  // Then the order should be ['users/add', 'users/edit', 'users'].
   const routeMatch = useRouteMatch([
     "/counter",
     "/hackertyper",
     "/todo",
     "/tictactoe",
-    // "/memoryGame",
     "/blog",
     "/redux",
     "/chucknorris",
@@ -35,49 +58,54 @@ function TabScrollerMenu() {
   const currentTab = routeMatch?.path;
 
   return (
-    <div className="d-flex align-items-start justify-content-center">
-      <Tabs value={currentTab} variant={"scrollable"} scrollButtons={"auto"}>
-        <Tab label="Counter" value="/counter" to="/counter" component={Link} />
-        <Tab
-          label="HackerTyper"
-          value="/hackertyper"
-          to="/hackertyper"
-          component={Link}
-        />
-        <Tab label="TO-DO List" value="/todo" to="/todo" component={Link} />
-        <Tab
-          label="Tic-tac-toe"
-          value="/tictactoe"
-          to="/tictactoe"
-          component={Link}
-        />
-        {/* <Tab
-          label="Memory Game"
-          value="/memoryGame"
-          to="/memoryGame"
-          component={Link}
-        /> */}
-        <Tab
-          label="Blog App"
-          value="/blog"
-          to="/blog/AllPosts"
-          component={Link}
-        />
-        <Tab
-          label="Redux Counter"
-          value="/redux"
-          to="/redux"
-          component={Link}
-        />
-        <Tab
-          label="Joke Generator"
-          value="/chucknorris"
-          to="/chucknorris"
-          component={Link}
-        />
-      </Tabs>
-      <Row className="h-75"></Row>
-    </div>
+    <ThemeProvider theme={customTheme}>
+      <div className="d-flex align-items-start justify-content-center">
+        <StyledTabs
+          value={currentTab}
+          variant={"scrollable"}
+          scrollButtons={"auto"}
+        >
+          <Tab
+            label="Counter"
+            value="/counter"
+            to="/counter"
+            component={Link}
+          />
+          <Tab
+            label="HackerTyper"
+            value="/hackertyper"
+            to="/hackertyper"
+            component={Link}
+          />
+          <Tab label="TO-DO List" value="/todo" to="/todo" component={Link} />
+          <Tab
+            label="Tic-tac-toe"
+            value="/tictactoe"
+            to="/tictactoe"
+            component={Link}
+          />
+          <Tab
+            label="Blog App"
+            value="/blog/all-posts"
+            to="/blog/all-posts"
+            component={Link}
+          />
+          <Tab
+            label="Redux Counter"
+            value="/redux"
+            to="/redux"
+            component={Link}
+          />
+          <Tab
+            label="Joke Generator"
+            value="/chucknorris"
+            to="/chucknorris"
+            component={Link}
+          />
+        </StyledTabs>
+        <Row className="h-75"></Row>
+      </div>
+    </ThemeProvider>
   );
 }
 

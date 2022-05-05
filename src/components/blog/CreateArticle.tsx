@@ -8,10 +8,19 @@ import slugify from "react-slugify";
 import styled from "styled-components";
 
 const DivContainer = styled.div`
-  background: ${theme.blog.primary};
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  background: ${theme.colors.primaryFaded};
   border-radius: 10px;
-  color: ${theme.blog.white};
-  margin-top: 2em;
+  color: ${theme.colors.white};
+  width: 100%;
+  max-width: 90vw;
+  height: 100%;
+  margin-bottom: 1.5em;
+  overflow: hidden;
+
   Label {
     display: flex;
     flex-direction: column;
@@ -20,10 +29,6 @@ const DivContainer = styled.div`
   button {
     margin-top: 1em;
   }
-  padding: 3em;
-  overflow: hidden;
-  width: 70vw;
-  height: 80%;
 `;
 
 const P = styled.p`
@@ -34,6 +39,7 @@ const Form = styled.form`
   display: flex;
   flex-direction: column;
   justify-content: center;
+  width: 90%;
 `;
 
 const Label = styled.label`
@@ -44,11 +50,10 @@ const Input = styled.input<{
   valid: boolean;
 }>`
   height: 3vh;
-  border: ${(props) =>
-    props.valid ? "0" : theme.blog.errorColor + " 2px solid"};
+  border: ${(props) => (props.valid ? "0" : theme.colors.fail + " 2px solid")};
   :focus {
     outline: ${(props) =>
-      props.valid ? theme.blog.secondaryTextColor + " 2px solid" : "none"};
+      props.valid ? theme.colors.secondary + " 2px solid" : "none"};
   }
 `;
 
@@ -56,32 +61,31 @@ const Textarea = styled.textarea<{
   valid: boolean;
 }>`
   height: 10vh;
-  border: ${(props) =>
-    props.valid ? "0" : theme.blog.errorColor + " 2px solid"};
+  border: ${(props) => (props.valid ? "0" : theme.colors.fail + " 2px solid")};
   :focus {
     outline: ${(props) =>
-      props.valid ? theme.blog.secondaryTextColor + " 2px solid" : "none"};
+      props.valid ? theme.colors.secondary + " 2px solid" : "none"};
   }
 `;
 
 const Button = styled.button`
-  background: ${theme.blog.white};
-  color: ${theme.blog.primary};
+  background: ${theme.colors.white};
+  color: ${theme.colors.primaryFaded};
   padding: 0.5em;
   border-radius: 0.5em;
   border: none;
-  box-shadow: 0 3px 10px ${theme.blog.primary};
+  box-shadow: 0 3px 10px ${theme.colors.primaryFaded};
 
   :hover {
-    color: ${theme.blog.white};
-    background: ${theme.blog.primary};
+    color: ${theme.colors.white};
+    background: ${theme.colors.primaryFaded};
     box-shadow: none;
   }
 `;
 
 const PError = styled.p`
   font-size: 1.5vh;
-  color: ${theme.blog.errorColor};
+  color: ${theme.colors.fail};
 `;
 
 type errorTypes = {
@@ -172,7 +176,7 @@ export const CreateArticle = () => {
         date: new Date(),
       },
     ]);
-    history.push("/blog/AllPosts");
+    history.push("/blog/all-posts");
   };
 
   const changeAuthor = (e: React.ChangeEvent<HTMLInputElement>) => {

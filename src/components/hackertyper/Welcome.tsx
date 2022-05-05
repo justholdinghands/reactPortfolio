@@ -3,18 +3,31 @@ import { theme } from "../../theme";
 import styled from "styled-components";
 
 const DivWelcome = styled.div`
-  position: absolute;
   display: flex;
   flex-direction: column;
   justify-content: space-evenly;
   align-items: center;
-  width: 100%;
+  width: 800px;
+  max-width: 80vw;
+  max-height: 90%;
   height: 100%;
-  padding: 2vw;
+
+  div {
+    max-height: 40vh;
+    overflow: scroll;
+    /* Hide scrollbar for Chrome, Safari and Opera */
+    ::-webkit-scrollbar {
+      display: none;
+    }
+
+    /* Hide scrollbar for IE, Edge and Firefox */
+    -ms-overflow-style: none; /* IE and Edge */
+    scrollbar-width: none; /* Firefox */
+  }
 `;
 
 const H1 = styled.h1`
-  font: 6vw ${theme.hackertyper.fontSecondary};
+  font: 6vh ${theme.fonts.fontFamily2};
 `;
 
 const P = styled.p`
@@ -22,15 +35,16 @@ const P = styled.p`
 `;
 
 const Button = styled.button`
-  background-color: ${theme.hackertyper.background};
-  color: ${theme.hackertyper.primary};
-  border: 0.2rem solid ${theme.hackertyper.primary};
-  font: 2vw ${theme.hackertyper.fontSecondary};
+  background-color: ${theme.colors.background};
+  color: ${theme.colors.primary};
+  border: 0.2rem solid ${theme.colors.primary};
+  font: 2vh ${theme.fonts.fontFamily2};
   padding: 1em;
   z-index: 1;
+  width: 100%;
   :hover {
-    background-color: ${theme.hackertyper.primary};
-    color: ${theme.hackertyper.secondary};
+    background-color: ${theme.colors.primary};
+    color: ${theme.colors.secondary};
     cursor: pointer;
   }
 `;
@@ -43,8 +57,8 @@ export default class Welcome extends Component<Props> {
   render() {
     return (
       <DivWelcome id="welcome-container">
+        <H1>How To Use Hacker Typer</H1>
         <div>
-          <H1>How To Use Hacker Typer</H1>
           <P id="quick-start">{`Quick Start Instructions:
 Start typing on the keyboard to 'code'. For mobile, just tap on your screen.`}</P>
           <P>{`How to get access granted in hacker typer?

@@ -14,12 +14,12 @@ const ButtonPiece = styled.div<{
   align-items: center;
   height: 20vh;
   width: 20vw;
-  font: 2vw/0 ${theme.memoryGame.fontPrimary};
-  color: ${theme.memoryGame.primaryTextColor};
-  border: ${theme.memoryGame.background} 2px solid;
+  font: 2vw/0 ${theme.fonts.fontFamily2};
+  color: ${theme.colors.white};
+  border: ${theme.colors.background} 2px solid;
   border-radius: 5%;
   background: ${(props) =>
-    props.guessed ? theme.memoryGame.background : theme.memoryGame.notFlipped};
+    props.guessed ? theme.colors.background : theme.colors.primaryFaded};
 `;
 
 const Img = styled.img`

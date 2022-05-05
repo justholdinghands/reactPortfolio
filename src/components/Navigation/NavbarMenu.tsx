@@ -1,48 +1,52 @@
 import { Container, Nav, Navbar, Row } from "react-bootstrap";
 import { Link, NavLink } from "react-router-dom";
-import AppsIcon from "@mui/icons-material/Apps";
-import AttachFileIcon from "@mui/icons-material/AttachFile";
-import PhoneInTalkIcon from "@mui/icons-material/PhoneInTalk";
+import { theme } from "../../theme";
+import MessageIcon from "@mui/icons-material/Message";
+import styled from "styled-components";
+
+const StyledContainer = styled(Container)`
+  background: ${theme.colors.primaryFaded};
+  padding: 0;
+  a {
+    color: ${theme.colors.primary};
+    text-decoration: none;
+    display: flex;
+    align-items: center;
+    padding: 0 5px;
+    font-size: 1rem;
+
+    :hover {
+      color: ${theme.colors.white};
+    }
+
+    svg {
+      margin: 0 5px;
+    }
+  }
+`;
 
 function NavbarMenu() {
   return (
-    <Container fluid className="w-100 px-0">
-      <Row className="py-2 gx-0" style={{ background: "black" }}></Row>
+    <StyledContainer fluid>
+      <Row style={{ background: `${theme.colors.primaryFaded}` }}></Row>
       <Navbar
-        className="px-3 justify-content-between h-75"
+        className="px-3 justify-content-between h-75 align-center"
         collapseOnSelect
         expand="lg"
-        bg="dark"
-        variant="dark"
       >
         <Navbar.Brand>
-          <Link to="/" className="fs-3">
-            Me
+          <Link to="/hello" className="fs-3">
+            simaskova
           </Link>
         </Navbar.Brand>
         <Nav className="nav flex-row justify-content-around fs-3">
-          <NavLink to="/" className="d-flex flex-row">
-            <AppsIcon />
-            <Navbar.Collapse>My Work</Navbar.Collapse>
+          <NavLink to="/contacts" className="d-flex flex-row">
+            <MessageIcon />
+            <Navbar.Collapse>Contact</Navbar.Collapse>
           </NavLink>
-          <NavLink to="/" className="d-flex flex-row">
-            <AttachFileIcon />
-            <Navbar.Collapse>Resume</Navbar.Collapse>
-          </NavLink>
-          <NavLink to="/" className="d-flex flex-row">
-            <PhoneInTalkIcon />
-            <Navbar.Collapse>Contact Me</Navbar.Collapse>
-          </NavLink>
-
-          {/* <Nav.Link to="">
-            <Navbar.Collapse></Navbar.Collapse>
-          </Nav.Link>
-          <Nav.Link to="">
-            <Navbar.Collapse></Navbar.Collapse>
-          </Nav.Link> */}
         </Nav>
       </Navbar>
-    </Container>
+    </StyledContainer>
   );
 }
 

@@ -22,6 +22,12 @@ export const DivSetTable = styled.div`
   align-items: center;
   justify-content: space-between;
   width: 80%;
+  height: 20%;
+
+  @media (max-width: 768px) {
+    flex-direction: column;
+    width: 100%;
+  }
 `;
 
 export const DivTurn = styled.div`
@@ -29,8 +35,12 @@ export const DivTurn = styled.div`
   justify-content: center;
   align-items: center;
   width: 50%;
-  font: 5vh ${theme.tictactoe.fontPrimary};
-  color: ${theme.tictactoe.primary};
+  font: 5vh ${theme.fonts.fontFamily2};
+  color: ${theme.colors.white};
+
+  @media (max-width: 768px) {
+    width: 100%;
+  }
 `;
 
 export const DivResult = styled.div`
@@ -39,26 +49,22 @@ export const DivResult = styled.div`
   align-items: center;
   width: 50%;
   height: 20vh;
-  color: ${theme.tictactoe.primary};
+  color: ${theme.colors.white};
 `;
 
 export const ButtonNewGame = styled.button`
-  height: 4vh;
+  height: 5vh;
   width: fit-content;
   padding: 0 10px;
-  background-color: ${theme.tictactoe.tertiary};
-  color: ${theme.tictactoe.primary};
-  font: 1.5vh/0 ${theme.tictactoe.fontSecondary};
-  border: none;
-  ::-webkit-inner-spin-button {
-    -webkit-appearance: none;
-    margin: 0;
-  }
+  color: ${theme.colors.primary};
+  font: 1.5vh/0 ${theme.fonts.fontFamily3};
+  border: 2px solid ${theme.colors.primary};
   border-radius: 1vh;
+  background: ${theme.colors.background}
 
   :hover {
-    background-color: ${theme.tictactoe.primary};
-    color: ${theme.tictactoe.tertiary};
+    background-color: ${theme.colors.white};
+    color: ${theme.colors.primary};
   }
 `;
 
@@ -68,21 +74,25 @@ export const DivInput = styled.div`
   align-items: center;
   width: 50%;
   font-size: 3vh;
-  height: 20vh;
 `;
 
 export const InputBoardSize = styled.input`
   text-align: center;
   height: 5vh;
   width: 25%;
-  background-color: ${theme.tictactoe.secondary};
-  color: ${theme.tictactoe.primary};
+  background-color: ${theme.colors.primaryFaded};
+  color: ${theme.colors.white};
   border: none;
+  outline: none !important;
+
   ::-webkit-inner-spin-button {
     -webkit-appearance: none;
     margin: 0;
   }
   border-radius: 1vh;
+
+  :focus {
+  }
 `;
 
 export const TableGrid = styled.table`
@@ -100,6 +110,7 @@ export const Tr = styled.tr`
   height: 100%;
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(0, 1fr));
+  gap: 2px;
 `;
 
 export const Td = styled.td`
@@ -112,14 +123,14 @@ export const TBody = styled.tbody`
   width: 100%;
   max-height: 50vh;
   display: grid;
+  gap: 2px;
 `;
 
-// type DivBoxProps = { fontSize: string };
 export const DivBox = styled.div`
   position: relative;
-  background-color: ${theme.tictactoe.primary};
-  color: ${theme.tictactoe.secondary};
-  box-shadow: inset 2px 2px 2px 2px ${theme.tictactoe.fontPrimary};
+  background-color: ${theme.colors.white};
+  color: ${theme.colors.primary};
+  box-shadow: inset 2px 2px 2px 2px ${theme.fonts.fontFamily2};
   display: flex;
   justify-content: center;
   align-items: center;
@@ -130,7 +141,7 @@ export const DivBox = styled.div`
     padding: 0;
     margin: 0;
     position: absolute;
-    font-family: ${theme.tictactoe.fontPrimary};
+    font-family: ${theme.fonts.fontFamily2};
   }
 `;
 
