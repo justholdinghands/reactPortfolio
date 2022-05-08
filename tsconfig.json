@@ -1,24 +1,30 @@
-{
+{  
+  "include": [
+    "src/*"
+  ],
   "compilerOptions": {
-    "target": "ES2016",
+    "target": "es5",
     "declaration": false,
     "module": "esnext",
     "moduleResolution": "node",
-    "noImplicitAny": false,
-    "allowJs": false,
+    "noImplicitAny": true,
+    "noImplicitReturns": true,
+    "noImplicitThis": true,
+    "allowJs": true,
     "preserveConstEnums": true,
     "removeComments": true,
     "sourceMap": true,
     "esModuleInterop": true,
-    "typeRoots": [
-      "./node_modules/@types"
-    ],
+    "types": ["node"],
+    "typeRoots": [ "./node_modules/@types" ],
     "strictNullChecks": true,
+    "noUnusedParameters": false,
+    "noUnusedLocals": false,
     "keyofStringsOnly": true,
     "lib": [
-      "es2015",
-      "es2017",
-      "dom"
+      "dom",
+      "dom.iterable",
+      "esnext"
     ],
     "experimentalDecorators": true,
     "emitDecoratorMetadata": true,
@@ -31,8 +37,5 @@
     "resolveJsonModule": true,
     "isolatedModules": true,
     "noEmit": true
-  },
-  "include": [
-    "src"
-  ]
+  }
 }

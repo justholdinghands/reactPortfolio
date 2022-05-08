@@ -22,7 +22,7 @@ const topFive = 5;
 
 const H2 = styled.h2`
   text-align: center;
-  font: 3em ${theme.fonts.fontFamily7};
+  font: 3em ${theme.fonts.fontFamily3};
   color: ${theme.colors.primaryFaded};
 `;
 

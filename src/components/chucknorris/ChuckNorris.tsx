@@ -142,7 +142,7 @@ export const ImgRight = styled.img``;
 
 const H1 = styled.h1`
   text-align: center;
-  font: 5em ${theme.fonts.fontFamily7};
+  font: 5em ${theme.fonts.fontFamily3};
   color: ${theme.colors.secondary};
 `;
 

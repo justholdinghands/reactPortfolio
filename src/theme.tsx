@@ -15,11 +15,10 @@ export const theme = {
   fonts: {
     fontFamily1: "Roboto Slab",
     fontFamily2: "'Abel', sans-serif",
-    fontFamily3: "IBM Plex Mono",
+    fontFamily3: "'Smokum', cursive",
     fontFamily4: "'Press Start 2P', cursive",
     fontFamily5: "'IBM Plex Mono', monospace",
     fontFamily6: "'Special Elite', cursive",
-    fontFamily7: "'Smokum', cursive",
   },
   shadows: {
     shadow1: "inset 0 0 6px #8e54e984",
