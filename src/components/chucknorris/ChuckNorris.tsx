@@ -72,6 +72,7 @@ const UlCategories = styled.ul`
 export const DivAllJokes = styled.div`
   height: 95%;
   width: 80%;
+
   overflow-y: scroll;
   ::-webkit-scrollbar {
     display: none;

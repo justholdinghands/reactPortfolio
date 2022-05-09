@@ -14,6 +14,7 @@ const DivContainer = styled.div`
   flex-direction: column;
   align-items: center;
   justify-content: space-evenly;
+
   overflow-y: scroll;
   ::-webkit-scrollbar {
     display: none;

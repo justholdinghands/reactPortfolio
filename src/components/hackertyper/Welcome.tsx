@@ -14,6 +14,7 @@ const DivWelcome = styled.div`
 
   div {
     max-height: 40vh;
+
     overflow: scroll;
     /* Hide scrollbar for Chrome, Safari and Opera */
     ::-webkit-scrollbar {
