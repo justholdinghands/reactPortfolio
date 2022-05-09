@@ -1,7 +1,7 @@
 {
   "name": "simaskova-react-portfolio",
   "version": "0.1.0",
-  "homepage": "https://simaskova.github.io/portfolio/",
+  "homepage": "https://simaskova.github.io/reactPortfolio/",
   "private": true,
   "dependencies": {
     "@mui/icons-material": "^5.4.1",
@@ -35,8 +35,8 @@
     "start": "react-scripts start",
     "build": "react-scripts build",
     "predeploy": "npm run build",
-    "deploy": "gh-pages -d build -r git@github.com:simaskova/portfolio.git",
-    "test": "react-scripts test",
+    "deploy": "gh-pages -d build -r git@github.com:simaskova/reactPortfolio.git",
+    "test": "react-scripts test", 
     "eject": "react-scripts eject",
     "lint": "eslint \"{src,scripts}/**/*.{js,ts,tsx}\" --max-warnings 0",
     "lint:fix": "eslint \"{src,scripts}/**/*.{js,ts,tsx}\" --fix"

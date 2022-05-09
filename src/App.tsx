@@ -12,6 +12,7 @@ import Counter from "./components/counter/Counter";
 import Hackertyper from "./components/hackertyper/Hackertyper";
 import Hello from "./components/Hello";
 import NavbarMenu from "./components/Navigation/NavbarMenu";
+import NotFound from "./components/NotFound";
 import TabScrollerMenu from "./components/Navigation/TabScrollerMenu";
 import TicTacToe from "./components/tictactoe/tictactoe";
 import Todo from "./components/todo/Todo";
@@ -77,36 +78,38 @@ function App(props: {}) {
 
       <DivAppRow>
         <Switch>
-          <Route exact path="/hello">
+          <Route exact path="/">
             <Hello />
           </Route>
           <Route path="/counter">
-            <Counter></Counter>
+            <Counter />
           </Route>
           <Route path="/hackertyper">
-            <Hackertyper></Hackertyper>
+            <Hackertyper />
           </Route>
           <Route path="/todo">
-            <Todo></Todo>
+            <Todo />
           </Route>
           <Route path="/tictactoe">
-            <TicTacToe></TicTacToe>
+            <TicTacToe />
           </Route>
           <Route path="/blog">
-            <BlogComponent></BlogComponent>
+            <BlogComponent />
           </Route>
           <Route path="/redux">
             <Provider store={store}>
-              <ReduxCounter></ReduxCounter>
+              <ReduxCounter />
             </Provider>
           </Route>
           <Route path="/chucknorris">
-            <ChuckNorris></ChuckNorris>
+            <ChuckNorris />
           </Route>
           <Route exact path="/contacts">
             <Contacts />
           </Route>
-          <Route path="*">404 Component</Route>
+          <Route path="*">
+            <NotFound />
+          </Route>
         </Switch>
       </DivAppRow>
     </DivContainer>

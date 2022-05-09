@@ -35,7 +35,7 @@ function NavbarMenu() {
         expand="lg"
       >
         <Navbar.Brand>
-          <Link to="/hello" className="fs-3">
+          <Link to="/" className="fs-3">
             simaskova
           </Link>
         </Navbar.Brand>
