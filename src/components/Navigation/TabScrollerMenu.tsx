@@ -54,6 +54,7 @@ function TabScrollerMenu() {
     "/blog",
     "/redux",
     "/chucknorris",
+    "/",
   ]);
   const currentTab = routeMatch?.path;
 
@@ -67,7 +68,7 @@ function TabScrollerMenu() {
         >
           <Tab
             label="Counter"
-            value="/counter"
+            value={"/counter" || "/"}
             to="/counter"
             component={Link}
           />

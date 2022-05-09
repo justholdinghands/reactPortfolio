@@ -32,7 +32,7 @@ const DivContainer = styled.div`
 `;
 
 const P = styled.p`
-  font-size: 2.3vh;
+  font-size: 4vh;
 `;
 
 const Form = styled.form`

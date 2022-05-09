@@ -82,7 +82,7 @@ type State = {
   key: string;
   isDenied: boolean;
   isGranted: boolean;
-  altCnt: number;
+  ctrlCnt: number;
   clCnt: number;
 };
 
@@ -91,7 +91,7 @@ type Props = {
 };
 
 const keyCodes = {
-  ALT: 18,
+  CTRL: 17,
   CAPS: 20,
   ESC: 27,
   BACKSPACE: 8,
@@ -99,13 +99,13 @@ const keyCodes = {
 
 const pressXTimes = {
   pressCAPS: 2,
-  pressALT: 3,
+  pressctrl: 3,
 };
 
 const stepSize = 13;
 
 export default class Hackertyper extends Component<Props, State> {
-  constructor(props) {
+  constructor(props: Props) {
     super(props);
     this.state = {
       code: "",
@@ -115,7 +115,7 @@ export default class Hackertyper extends Component<Props, State> {
       key: "",
       isDenied: false,
       isGranted: false,
-      altCnt: 0,
+      ctrlCnt: 0,
       clCnt: 0,
     };
     this.startGame = this.startGame.bind(this);
@@ -125,22 +125,22 @@ export default class Hackertyper extends Component<Props, State> {
     document.addEventListener("keydown", this.pressKey);
   }
 
-  pressKey = (e) => {
+  pressKey = (e: { keyCode: number }) => {
     if (this.state.isWelcome === true) {
       this.setState({
         isWelcome: false,
       });
     }
 
-    if (e.keyCode === keyCodes.ALT) {
+    if (e.keyCode === keyCodes.CTRL) {
       this.setState((prevState) => ({
-        altCnt: prevState.altCnt + 1,
+        ctrlCnt: prevState.ctrlCnt + 1,
       }));
-      if (this.state.altCnt === pressXTimes.pressCAPS) {
+      if (this.state.ctrlCnt === pressXTimes.pressCAPS) {
         this.setState({
           isGranted: true,
           isDenied: false,
-          altCnt: 0,
+          ctrlCnt: 0,
           clCnt: 0,
         });
       }
@@ -148,24 +148,24 @@ export default class Hackertyper extends Component<Props, State> {
       this.setState((prevState) => ({
         clCnt: prevState.clCnt + 1,
       }));
-      if (this.state.clCnt === pressXTimes.pressALT) {
+      if (this.state.clCnt === pressXTimes.pressctrl) {
         this.setState({
           isDenied: true,
           isGranted: false,
           clCnt: 0,
-          altCnt: 0,
+          ctrlCnt: 0,
         });
       }
     } else if (e.keyCode === keyCodes.ESC) {
       this.setState({
         isDenied: false,
         isGranted: false,
-        altCnt: 0,
+        ctrlCnt: 0,
         clCnt: 0,
       });
     } else {
       this.setState({
-        altCnt: 0,
+        ctrlCnt: 0,
         clCnt: 0,
       });
     }
@@ -179,7 +179,7 @@ export default class Hackertyper extends Component<Props, State> {
           prevState.position - stepSize < 0 ? 0 : prevState.position - stepSize,
       }));
     } else if (
-      e.keyCode !== keyCodes.ALT &&
+      e.keyCode !== keyCodes.CTRL &&
       e.keyCode !== keyCodes.CAPS &&
       e.keyCode !== keyCodes.ESC &&
       !this.state.isDenied &&

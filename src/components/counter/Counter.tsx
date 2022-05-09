@@ -15,7 +15,6 @@ type Props = {
 const DivContainer = styled.div`
   height: 100%;
   width: 100%;
-  overflow: hidden;
   display: flex;
   flex-direction: column;
   justify-content: space-around;
@@ -24,9 +23,7 @@ const DivContainer = styled.div`
 
 const DivButtons = styled.div`
   padding: 0 0 10% 0;
-  left: calc(50% - 125px);
   width: 12rem;
-  z-index: 1;
   display: flex;
   align-items: flex-end;
   justify-content: space-between;
@@ -37,13 +34,11 @@ const DivCount = styled.div`
   color: ${theme.colors.primaryFaded};
   opacity: 100%;
   width: 100%;
-  display: flex;
-  justify-content: center;
-  align-items: center;
+  text-align: center;
 `;
 
 export default class Counter extends Component<Props, State> {
-  constructor(props) {
+  constructor(props: Props) {
     super(props);
     this.state = {
       count: 0,

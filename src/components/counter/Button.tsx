@@ -7,7 +7,6 @@ type Props = {
   onClick: () => void;
 };
 
-// styled-components definition
 const ButtonStyled = styled.button`
   width: 5rem;
   height: 5rem;

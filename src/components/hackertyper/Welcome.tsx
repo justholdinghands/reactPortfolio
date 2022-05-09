@@ -62,11 +62,10 @@ export default class Welcome extends Component<Props> {
           <P id="quick-start">{`Quick Start Instructions:
 Start typing on the keyboard to 'code'. For mobile, just tap on your screen.`}</P>
           <P>{`How to get access granted in hacker typer?
-Hit ALT 3 times for "Access Granted"
-
-How to get access denied in hacker typer?
-Hit CAPS LOCK 3 for "Access Denied"
-How can I clear access granted or access denied?
+Hit CTRL 3 times for "Access Granted"`}</P>
+          <P>{`How to get access denied in hacker typer?
+Hit CAPS LOCK 3 for "Access Denied"`}</P>
+          <P>{`How can I clear access granted or access denied?
 Hit ESCAPE to clear "Access Denied/Granted"`}</P>
         </div>
         <Button id="start-btn" onClick={this.props.startGame}>

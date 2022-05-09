@@ -7,6 +7,7 @@ import styled from "styled-components";
 import useLocalStorage from "use-local-storage";
 
 const DivContainer = styled.div`
+  position: relative;
   width: 100%;
   height: 100%;
   display: flex;
@@ -22,6 +23,7 @@ const DivContainer = styled.div`
 `;
 
 const NavWrapper = styled.nav`
+  top: 0;
   display: flex;
   flex-direction: row;
   justify-content: space-between;
@@ -60,6 +62,7 @@ const UlArticles = styled.ul`
   align-items: center;
   overflow-y: scroll;
   padding: 0;
+  width: 100%;
   /* Hide scrollbar for Chrome, Safari and Opera */
   ::-webkit-scrollbar {
     display: none;

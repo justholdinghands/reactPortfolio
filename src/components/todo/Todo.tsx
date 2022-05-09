@@ -165,7 +165,7 @@ const UlFiltered = styled.ul`
 
 const LiFiltered = styled.li``;
 
-const ButtonFiltered = styled.button<{ selected: string }>`
+const ButtonFiltered = styled.button<{ selected: boolean }>`
   border: 0;
   margin: 0.5rem;
   padding: 0.5rem;
@@ -217,7 +217,7 @@ type Task = {
 };
 
 export default class Todo extends Component<Props, State> {
-  constructor(props) {
+  constructor(props: Props) {
     super(props);
     this.state = {
       tasks: [],
@@ -252,8 +252,8 @@ export default class Todo extends Component<Props, State> {
     });
   }
 
-  addTask(event) {
-    this.setState({ value: event.target.value });
+  addTask(event: React.FormEvent<HTMLInputElement>) {
+    this.setState({ value: event.currentTarget.value });
   }
 
   isChecked(i: number) {
@@ -389,7 +389,7 @@ export default class Todo extends Component<Props, State> {
           <LiFiltered>
             <ButtonFiltered
               selected={
-                !this.state.isActive && !this.state.isCompleted ? "true" : ""
+                !this.state.isActive && !this.state.isCompleted ? true : false
               }
               onClick={this.showAll}
             >
@@ -398,7 +398,7 @@ export default class Todo extends Component<Props, State> {
           </LiFiltered>
           <LiFiltered>
             <ButtonFiltered
-              selected={this.state.isActive ? "true" : ""}
+              selected={this.state.isActive ? true : false}
               onClick={this.showActive}
             >
               Active
@@ -406,7 +406,7 @@ export default class Todo extends Component<Props, State> {
           </LiFiltered>
           <LiFiltered>
             <ButtonFiltered
-              selected={this.state.isCompleted ? "true" : ""}
+              selected={this.state.isCompleted ? true : false}
               onClick={this.showInactive}
             >
               Completed
