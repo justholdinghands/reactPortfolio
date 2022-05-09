@@ -10,14 +10,10 @@ const DivArticle = styled.div`
   flex-direction: column;
   background: ${theme.colors.white};
   word-wrap: break-word;
-  overflow-y: scroll;
-  ::-webkit-scrollbar {
-    display: none;
-  }
-  -ms-overflow-style: none;
-  scrollbar-width: none;
   border-radius: 10px;
   width: 90%;
+  height: 100%;
+  min-height: 30vh;
   padding: 15px;
   padding-bottom: 3em;
   margin-bottom: 2em;
@@ -63,7 +59,14 @@ const DivTitle = styled.div`
   color: ${theme.colors.primaryFaded};
 `;
 
-const DivBody = styled.div``;
+const DivBody = styled.div`
+  overflow-y: hidden;
+  ::-webkit-scrollbar {
+    display: none;
+  }
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+`;
 
 type Props = {
   blog: Blog;
@@ -118,7 +121,10 @@ export const Article = (props: Props) => {
           <DivTitle>{props.blog.title}</DivTitle>
         </Link>
       )}
-      <DivBody dangerouslySetInnerHTML={createMarkup()}></DivBody>
+      <DivBody
+        dangerouslySetInnerHTML={createMarkup()}
+        style={{ overflowY: props.fulltext ? "scroll" : "hidden" }}
+      ></DivBody>
     </DivArticle>
   );
 };

@@ -62,6 +62,7 @@ const UlArticles = styled.ul`
   align-items: center;
   overflow-y: scroll;
   padding: 0;
+  height: 80%;
   width: 100%;
   /* Hide scrollbar for Chrome, Safari and Opera */
   ::-webkit-scrollbar {
