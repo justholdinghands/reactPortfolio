@@ -1,3 +1,4 @@
+import { Link } from "react-router-dom";
 import { VscArrowRight } from "react-icons/vsc";
 import { theme } from "../theme";
 import styled from "styled-components";
@@ -40,10 +41,10 @@ function Hello() {
       <h1>Hello, I&apos;m Ema :) </h1>
       <p>
         Have a look at some of my work{" "}
-        <a href="/counter">
+        <Link to="/counter">
           here
           <VscArrowRight />
-        </a>
+        </Link>
       </p>
     </DivContainer>
   );

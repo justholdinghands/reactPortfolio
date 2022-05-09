@@ -1,3 +1,4 @@
+import { Link } from "react-router-dom";
 import { RiArrowGoBackLine } from "react-icons/ri";
 import { theme } from "../theme";
 import styled from "styled-components";
@@ -38,9 +39,9 @@ function NotFound() {
     <DivContainer>
       <h1>Oops, that didn&apos;t work :( </h1>
       <p>
-        <a href="/portfolio">
+        <Link to="/">
           Go back <RiArrowGoBackLine />
-        </a>
+        </Link>
       </p>
     </DivContainer>
   );
