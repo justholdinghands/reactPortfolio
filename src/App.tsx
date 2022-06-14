@@ -1,40 +1,43 @@
-import { BlogComponent } from "./components/blog/Blog";
-import { ChuckNorris } from "./components/chucknorris/ChuckNorris";
+import { BlogComponent } from "./pages/blog/Blog";
+import { ChuckNorris } from "./pages/chucknorris/ChuckNorris";
 import { Provider } from "react-redux";
-import { ReduxCounter } from "./components/reduxCounter/ReduxCounter";
+import { ReduxCounter } from "./pages/reduxCounter/ReduxCounter";
 import { Route, BrowserRouter as Router, Switch } from "react-router-dom";
-import { store } from "./components/reduxCounter/store";
+import { store } from "./pages/reduxCounter/store";
 import { theme } from "./theme";
 import { useEffect, useState } from "react";
 import { withRouter } from "react-router";
 import Contacts from "./components/Contacts";
-import Counter from "./components/counter/Counter";
-import Hackertyper from "./components/hackertyper/Hackertyper";
+import Counter from "./pages/counter/Counter";
+import Hackertyper from "./pages/hackertyper/Hackertyper";
 import Hello from "./components/Hello";
 import NavbarMenu from "./components/Navigation/NavbarMenu";
 import NotFound from "./components/NotFound";
 import TabScrollerMenu from "./components/Navigation/TabScrollerMenu";
-import TicTacToe from "./components/tictactoe/tictactoe";
-import Todo from "./components/todo/Todo";
+import TicTacToe from "./pages/tictactoe/tictactoe";
+import Todo from "./pages/todo/Todo";
 import styled from "styled-components";
 
 export const MAX_APP_WIDTH = "853px";
 
 const DivContainer = styled.div`
+  position: absolute;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  height: 100vh;
-  width: 100vw;
+  height: 100%;
+  width: 100%;
   z-index: 1;
   background: ${theme.colors.globalBg};
   overflow: hidden;
 `;
 
 const DivNavbar = styled.div`
-  position: relative;
-  height: 20%;
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 15%;
   width: 100%;
 `;
 
@@ -42,7 +45,9 @@ const DivAppRow = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
-  height: 80%;
+  position: absolute;
+  bottom: 0;
+  height: 85%;
   width: 100%;
   max-width: 853px;
 `;

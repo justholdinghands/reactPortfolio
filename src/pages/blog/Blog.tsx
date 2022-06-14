@@ -13,7 +13,7 @@ const DivContainer = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
-  justify-content: space-evenly;
+  justify-content: space-between;
 
   overflow-y: scroll;
   ::-webkit-scrollbar {
@@ -34,7 +34,6 @@ const NavWrapper = styled.nav`
   font-family: ${theme.fonts.fontFamily2};
 
   a {
-    font-family: ${theme.fonts.fontFamily2};
     font-size: 3vh;
     color: ${theme.colors.white};
     text-decoration: none;
@@ -95,6 +94,29 @@ const useValue = () => {
 
 export const BlogContext = genericContextBuilder(useValue);
 
+const DivNoBlogsWrapper = styled.div`
+  color: ${theme.colors.white};
+  text-align: center;
+  font-size: 2rem;
+  font-family: ${theme.fonts.fontFamily2};
+  height: 60%;
+
+  b {
+    color: ${theme.colors.secondary};
+  }
+`;
+
+const NoBlogs = () => {
+  return (
+    <DivNoBlogsWrapper>
+      <p>Nothing here :( </p>
+      <p>
+        Click on <b>New Post</b> to create a blog post
+      </p>
+    </DivNoBlogsWrapper>
+  );
+};
+
 export const BlogComponent = () => {
   const context = useValue();
   return (
@@ -120,18 +142,22 @@ export const BlogComponent = () => {
           <CreateArticle></CreateArticle>
         </Route>
         <Route path={`${BASE_URL}all-posts`}>
-          <UlArticles>
-            {context.blogs
-              .slice(0)
-              .reverse()
-              .map((blog) => (
-                <Article
-                  key={`${blog.author}/${blog.articleURL}`}
-                  blog={blog}
-                  fulltext={false}
-                />
-              ))}
-          </UlArticles>
+          {context.blogs.length === 0 ? (
+            <NoBlogs />
+          ) : (
+            <UlArticles>
+              {context.blogs
+                .slice(0)
+                .reverse()
+                .map((blog) => (
+                  <Article
+                    key={`${blog.author}/${blog.articleURL}`}
+                    blog={blog}
+                    fulltext={false}
+                  />
+                ))}
+            </UlArticles>
+          )}
         </Route>
         {context.blogs
           .filter(

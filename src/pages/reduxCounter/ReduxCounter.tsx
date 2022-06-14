@@ -21,21 +21,29 @@ const DivContainer = styled.div`
 `;
 
 const DivButtons = styled.div`
-  width: 80%;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  flex-wrap: wrap;
+  display: grid;
+  width: 50%;
+
+  @media (min-width: 768px) {
+    grid-template-columns: repeat(5, minmax(3rem, 1fr));
+    grid-auto-rows: 4rem;
+  }
+
+  @media (max-width: 768px) {
+    min-width: 200px;
+    max-width: 90vw;
+    grid-template-columns: repeat(3, minmax(3rem, 1fr));
+    grid-auto-rows: 4rem;
+  }
 `;
 
 const Button = styled.button`
-  width: 8vh;
-  height: 8vh;
   font-size: 3.5vh;
   background: ${theme.colors.primaryFaded};
   color: ${theme.colors.white};
-  margin: 1px;
+  margin: 2px;
   border: none;
+  width: -webkit-fill-available;
   :hover {
     background: ${theme.colors.white};
     color: ${theme.colors.grey};
@@ -46,6 +54,10 @@ const ResetButton = styled(Button)`
   background: ${theme.colors.white};
   color: ${theme.colors.primary};
 
+  @media (max-width: 768px) {
+    grid-column: 1 / 4;
+  }
+
   :hover {
     background: ${theme.colors.white};
     color: ${theme.colors.primary};
@@ -54,9 +66,8 @@ const ResetButton = styled(Button)`
 
 const DivCount = styled.div`
   width: fit-content;
-  min-width: 200px;
-  max-width: 90vw;
-  height: 200px;
+  width: 50%;
+  height: 12rem;
   overflow: scroll;
   ::-webkit-scrollbar {
     display: none;
@@ -94,7 +105,7 @@ export const ReduxCounter = () => {
           x<sup>x</sup>
         </Button>
         <Button onClick={() => dispatch(power(1 / 2))}>&#8730;x</Button>
-        <ResetButton onClick={() => dispatch(clear())}>
+        <ResetButton className="reset" onClick={() => dispatch(clear())}>
           <div>C</div>
         </ResetButton>
       </DivButtons>

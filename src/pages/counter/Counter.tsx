@@ -1,5 +1,5 @@
 import { Component } from "react";
-import { theme } from "./../../theme";
+import { theme } from "../../theme";
 import Button from "./Button";
 import styled from "styled-components";
 
@@ -26,7 +26,7 @@ const DivButtons = styled.div`
   width: 12rem;
   display: flex;
   align-items: flex-end;
-  justify-content: space-between;
+  justify-content: space-evenly;
 `;
 
 const DivCount = styled.div`

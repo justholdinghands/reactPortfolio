@@ -1,5 +1,5 @@
 import { Component } from "react";
-import { theme } from "./../../theme";
+import { theme } from "../../theme";
 import styled from "styled-components";
 
 type Props = {

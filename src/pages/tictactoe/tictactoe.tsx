@@ -7,7 +7,7 @@ import styled from "styled-components";
 const MAX_NUMBER = 20;
 const MIN_NUMBER = 2;
 
-export const DivContainer = styled.div`
+const DivContainer = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -16,7 +16,7 @@ export const DivContainer = styled.div`
   height: 80vh;
 `;
 
-export const DivSetTable = styled.div`
+const DivSetTable = styled.div`
   display: flex;
   flex-direction: row;
   align-items: center;
@@ -30,7 +30,7 @@ export const DivSetTable = styled.div`
   }
 `;
 
-export const DivTurn = styled.div`
+const DivTurn = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
@@ -43,7 +43,7 @@ export const DivTurn = styled.div`
   }
 `;
 
-export const DivResult = styled.div`
+const DivResult = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
@@ -52,12 +52,12 @@ export const DivResult = styled.div`
   color: ${theme.colors.white};
 `;
 
-export const ButtonNewGame = styled.button`
+const ButtonNewGame = styled.button`
   height: 5vh;
   width: fit-content;
   padding: 0 10px;
   color: ${theme.colors.primary};
-  font: 1.5vh/0 ${theme.fonts.fontFamily3};
+  font: 1.5vh/0 ${theme.fonts.fontFamily2};
   border: 2px solid ${theme.colors.primary};
   border-radius: 1vh;
   background: ${theme.colors.background}
@@ -68,7 +68,7 @@ export const ButtonNewGame = styled.button`
   }
 `;
 
-export const DivInput = styled.div`
+const DivInput = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
@@ -76,7 +76,7 @@ export const DivInput = styled.div`
   font-size: 3vh;
 `;
 
-export const InputBoardSize = styled.input`
+const InputBoardSize = styled.input`
   text-align: center;
   height: 5vh;
   width: 25%;
@@ -95,7 +95,7 @@ export const InputBoardSize = styled.input`
   }
 `;
 
-export const TableGrid = styled.table`
+const TableGrid = styled.table`
   margin: 0 0 5vh 0;
   height: 50vh;
   width: 80%;
@@ -106,19 +106,19 @@ export const TableGrid = styled.table`
   overflow: hidden;
 `;
 
-export const Tr = styled.tr`
+const Tr = styled.tr`
   height: 100%;
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(0, 1fr));
   gap: 2px;
 `;
 
-export const Td = styled.td`
+const Td = styled.td`
   heigth: 100%;
   display: grid;
 `;
 
-export const TBody = styled.tbody`
+const TBody = styled.tbody`
   height: 100%;
   width: 100%;
   max-height: 50vh;
@@ -126,7 +126,7 @@ export const TBody = styled.tbody`
   gap: 2px;
 `;
 
-export const DivBox = styled.div`
+const DivBox = styled.div`
   position: relative;
   background-color: ${theme.colors.white};
   color: ${theme.colors.primary};
@@ -145,8 +145,8 @@ export const DivBox = styled.div`
   }
 `;
 
-export const PLAYER_X = "X" as const;
-export const PLAYER_O = "O" as const;
+const PLAYER_X = "X" as const;
+const PLAYER_O = "O" as const;
 export type BoardValues = typeof PLAYER_X | typeof PLAYER_O | null;
 export const maxDynamicSize = 5;
 export const winningLine = 5;
